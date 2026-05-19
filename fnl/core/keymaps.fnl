@@ -1,10 +1,4 @@
-;; TODO: move macros to a separate module
-(macro cmd [str] (.. ":" str :<CR>))
-
-(macro map [modes lhs rhs opts]
-  (when (= opts.silent nil) (set opts.silent true))
-  (let [modelist (icollect [mode (string.gmatch modes ".")] mode)]
-    `(vim.keymap.set ,modelist ,lhs ,rhs ,opts)))
+(import-macros {: cmd : map} :helpers)
 
 (let [g vim.g]
   (set g.mapleader " ")

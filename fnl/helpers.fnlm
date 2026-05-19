@@ -1,0 +1,11 @@
+(fn cmd [command]
+  "create a command string in form of \":~{command}<CR>\""
+  (.. ":" command :<CR>))
+
+(fn map [modes lhs rhs opts]
+  "define a silent by default mapping. modes are defined as a string of mode chars"
+  (when (= opts.silent nil) (set opts.silent true))
+  (let [modelist (icollect [mode (string.gmatch modes ".")] mode)]
+    `(vim.keymap.set ,modelist ,lhs ,rhs ,opts)))
+
+{: cmd : map}
