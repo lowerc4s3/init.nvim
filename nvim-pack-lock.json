@@ -12,6 +12,11 @@
       "rev": "ac0177c5549df7abba7a19554c18a7765386c894",
       "src": "https://github.com/Olical/nfnl"
     },
+    "ts-enable.nvim": {
+      "rev": "b99a87126722ee9e16b604bd5f2786f2c47d23ad",
+      "src": "https://github.com/VonHeikemen/ts-enable.nvim",
+      "version": "'v2.x'"
+    },
     "vim-repeat": {
       "rev": "65846025c15494983dafe5e3b46c8f88ab2e9635",
       "src": "https://github.com/tpope/vim-repeat"
