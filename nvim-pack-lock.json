@@ -8,6 +8,10 @@
       "rev": "c375ea503646fe8393593b5fb8a40406eaa437b2",
       "src": "https://github.com/nvim-mini/mini.surround"
     },
+    "neotab.nvim": {
+      "rev": "e99d3e28c5a2066d2d368dfe4ef3827c8d75d337",
+      "src": "https://github.com/kawre/neotab.nvim"
+    },
     "nfnl": {
       "rev": "ac0177c5549df7abba7a19554c18a7765386c894",
       "src": "https://github.com/Olical/nfnl"

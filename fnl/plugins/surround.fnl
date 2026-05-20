@@ -1,4 +1,5 @@
-{1 :nvim-mini/mini.surround
+{; surround text with delimeters
+ 1 :nvim-mini/mini.surround
  :opts {:mappings {:add :gs
                    :delete :gsd
                    :replace :gsr

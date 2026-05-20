@@ -1,6 +1,7 @@
 (import-macros {: map : plug} :macros)
 
-{:src "https://codeberg.org/andyg/leap.nvim"
+{; search labels navigation
+ :src "https://codeberg.org/andyg/leap.nvim"
  :dependencies :tpope/vim-repeat
  :config (fn []
            (map :nxo :s (plug :leap))
