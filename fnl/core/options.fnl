@@ -35,3 +35,6 @@
   (set o.laststatus 2) ; 2 - statusline in each window, 3 - global statusline
   ;; hide search count message and "search hit BOTTOM, continuing at TOP"
   (o.shortmess:append {:S true :s true}))
+
+(let [ui2 (require :vim._core.ui2)]
+  (ui2.enable {:enable true :msg {:target :msg}}))
