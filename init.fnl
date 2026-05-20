@@ -23,3 +23,4 @@
     (tset vim.g (.. :loaded_ plugin) 1)))
 
 (require :core)
+(require :pack)

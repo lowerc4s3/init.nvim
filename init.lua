@@ -7,4 +7,5 @@ do
     vim.g[("loaded_" .. plugin)] = 1
   end
 end
-return require("core")
+require("core")
+return require("pack")

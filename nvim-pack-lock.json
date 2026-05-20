@@ -1,8 +1,20 @@
 {
   "plugins": {
+    "leap.nvim": {
+      "rev": "940bc5e716a8cde63bd47e1b13f30fd9075ec0c8",
+      "src": "https://codeberg.org/andyg/leap.nvim"
+    },
     "nfnl": {
       "rev": "ac0177c5549df7abba7a19554c18a7765386c894",
       "src": "https://github.com/Olical/nfnl"
+    },
+    "vim-repeat": {
+      "rev": "65846025c15494983dafe5e3b46c8f88ab2e9635",
+      "src": "https://github.com/tpope/vim-repeat"
+    },
+    "zpack.nvim": {
+      "rev": "228f76f686b4d47fab570c0bf4120ce7b6988aaa",
+      "src": "https://github.com/zuqini/zpack.nvim"
     }
   }
 }
