@@ -1,4 +1,4 @@
-(import-macros {: map} :helpers)
+(import-macros {: map} :macros)
 
 (macro nv [name val]
   "set neovide option (desugars into vim.g.neovide_%name = val)"

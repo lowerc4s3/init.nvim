@@ -1,4 +1,4 @@
-(import-macros {: cmd : map} :helpers)
+(import-macros {: cmd : map} :macros)
 
 (let [g vim.g]
   (set g.mapleader " ")
