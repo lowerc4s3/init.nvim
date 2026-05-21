@@ -29,4 +29,5 @@
               (map :n :<Leader>fw #(pick.grep {: grepprg}) {:desc "live grep"})
               (map :n :<Leader>fb pick.buffers {:desc "switch buffer"})
               (map :n "<Leader>," pick.buffers {:desc "switch buffer"})
-              (map :n :<Leader>fr pick.oldfiles {:desc "open recent file"})))}
+              (map :n :<Leader>fr pick.oldfiles {:desc "open recent file"})
+              (map :n :<Leader>fh pick.helptags {:desc "search helptags"})))}

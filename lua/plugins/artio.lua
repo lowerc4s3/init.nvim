@@ -22,6 +22,7 @@ local function _2_()
   vim.keymap.set({"n"}, "<Leader>fw", _5_, {desc = "live grep", silent = true})
   vim.keymap.set({"n"}, "<Leader>fb", pick.buffers, {desc = "switch buffer", silent = true})
   vim.keymap.set({"n"}, "<Leader>,", pick.buffers, {desc = "switch buffer", silent = true})
-  return vim.keymap.set({"n"}, "<Leader>fr", pick.oldfiles, {desc = "open recent file", silent = true})
+  vim.keymap.set({"n"}, "<Leader>fr", pick.oldfiles, {desc = "open recent file", silent = true})
+  return vim.keymap.set({"n"}, "<Leader>fh", pick.helptags, {desc = "search helptags", silent = true})
 end
 return {src = "https://codeberg.org/comfysage/artio.nvim", dependencies = "nvim-mini/mini.icons", config = _2_}

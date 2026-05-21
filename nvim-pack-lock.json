@@ -37,6 +37,10 @@
       "rev": "65846025c15494983dafe5e3b46c8f88ab2e9635",
       "src": "https://github.com/tpope/vim-repeat"
     },
+    "which-key.nvim": {
+      "rev": "3aab2147e74890957785941f0c1ad87d0a44c15a",
+      "src": "https://github.com/folke/which-key.nvim"
+    },
     "zpack.nvim": {
       "rev": "228f76f686b4d47fab570c0bf4120ce7b6988aaa",
       "src": "https://github.com/zuqini/zpack.nvim"

@@ -4,8 +4,8 @@ do
   g.mapleader = " "
   g.maplocalleader = ","
 end
-vim.keymap.set({"n", "v"}, "<Space>", "<Nop>", {desc = "disable leader key mapping", silent = true})
-vim.keymap.set({"n"}, "<Esc>", ":nohlsearch<CR>", {desc = "disable search hl", silent = true})
+vim.keymap.set({"n", "v"}, "<Space>", "<Nop>", {silent = true})
+vim.keymap.set({"n"}, "<Esc>", "<Cmd>nohlsearch<CR>", {desc = "disable search hl", silent = true})
 vim.keymap.set({"n"}, "<C-h>", "<C-w>h", {desc = "move to the left window", silent = true})
 vim.keymap.set({"n"}, "<C-j>", "<C-w>j", {desc = "move to the lower window", silent = true})
 vim.keymap.set({"n"}, "<C-k>", "<C-w>k", {desc = "move to the upper window", silent = true})

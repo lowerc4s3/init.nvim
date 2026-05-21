@@ -29,6 +29,7 @@ do
   o.termguicolors = true
   o.cursorline = true
   o.title = true
+  o.winborder = "none"
   o.guicursor:prepend({"a:Cursor"})
   o.ruler = false
   o.showmode = false

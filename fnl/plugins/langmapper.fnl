@@ -3,4 +3,4 @@
 {; support cyrillic mappings
  :src (gh :Wansmer/langmapper.nvim)
  :priority 1000
- :opts {}}
+ :opts {:custom_desc #:langmapped}}

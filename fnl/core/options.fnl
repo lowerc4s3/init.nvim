@@ -27,6 +27,7 @@
   (set o.termguicolors true)
   (set o.cursorline true) ; hl current line
   (set o.title true)
+  (set o.winborder :none)
   (o.guicursor:prepend ["a:Cursor"]) ; force cursor hl in all modes
   ;;; modeline
   (set o.ruler false) ; hide cursor position

@@ -4,7 +4,7 @@
   (set g.mapleader " ")
   (set g.maplocalleader ","))
 
-(map :nv :<Space> :<Nop> {:desc "disable leader key mapping"})
+(map :nv :<Space> :<Nop>)
 (map :n :<Esc> (cmd :nohlsearch) {:desc "disable search hl"})
 
 (map :n :<C-h> :<C-w>h {:desc "move to the left window"})
