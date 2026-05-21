@@ -1,4 +1,4 @@
-(import-macros {: map : cmd} :macros)
+(import-macros {: map : cmd} :lib.macros)
 (local autocmd vim.api.nvim_create_autocmd)
 
 (autocmd :FileType

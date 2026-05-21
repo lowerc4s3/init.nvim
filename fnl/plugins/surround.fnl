@@ -1,4 +1,4 @@
-(import-macros {: gh} :macros)
+(import-macros {: gh} :lib.macros)
 
 {; surround text with delimeters
  :src (gh :nvim-mini/mini.surround)

@@ -1,4 +1,4 @@
-(import-macros {: map : plug} :macros)
+(import-macros {: map : plug} :lib.macros)
 
 {; search labels navigation
  :src "https://codeberg.org/andyg/leap.nvim"

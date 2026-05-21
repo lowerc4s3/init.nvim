@@ -1,4 +1,4 @@
-(import-macros {: gh} :macros)
+(import-macros {: gh} :lib.macros)
 
 ;; enable lua module loader
 (vim.loader.enable)

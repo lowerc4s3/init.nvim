@@ -1,4 +1,4 @@
-(import-macros {: gh} :macros)
+(import-macros {: gh} :lib.macros)
 
 {; simplify treesitter features management
  ; (install parsers, enable syntax hl, etc)

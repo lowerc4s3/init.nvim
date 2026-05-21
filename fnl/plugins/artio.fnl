@@ -1,4 +1,4 @@
-(import-macros {: map : plug : cb} :macros)
+(import-macros {: map : plug : cb} :lib.macros)
 (local {: autoload} (require :nfnl.module))
 
 {; ui2 fuzzy picker 

@@ -1,4 +1,4 @@
-(import-macros {: gh} :macros)
+(import-macros {: gh} :lib.macros)
 (macro expand-glyphs [glyph-tbl]
   (collect [pattern glyph (pairs glyph-tbl)]
     (values pattern {: glyph})))
