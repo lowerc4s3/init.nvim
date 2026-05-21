@@ -1,8 +1,10 @@
+(import-macros {: gh} :macros)
+
 ;; enable lua module loader
 (vim.loader.enable)
 
 ;; bootstrap fennel support
-(vim.pack.add ["https://github.com/Olical/nfnl"])
+(vim.pack.add [(gh :Olical/nfnl)])
 
 ;; disable unused builtin plugins
 (let [builtins [:gzip

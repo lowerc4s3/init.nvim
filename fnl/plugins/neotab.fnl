@@ -1,4 +1,6 @@
+(import-macros {: gh} :macros)
+
 {; navigate within delimeters with tab
- 1 :kawre/neotab.nvim
+ :src (gh :kawre/neotab.nvim)
  :event :InsertEnter
  :opts {}}

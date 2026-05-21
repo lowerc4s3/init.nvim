@@ -1,2 +1,2 @@
 -- [nfnl] fnl/plugins/nfnl.fnl
-return {"Olical/nfnl"}
+return {src = "https://github.com/Olical/nfnl"}

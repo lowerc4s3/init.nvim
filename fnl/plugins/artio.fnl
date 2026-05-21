@@ -1,8 +1,8 @@
-(import-macros {: map : plug} :macros)
+(import-macros {: map : plug : cb} :macros)
 (local {: autoload} (require :nfnl.module))
 
 {; ui2 fuzzy picker 
- :src "https://codeberg.org/comfysage/artio.nvim"
+ :src (cb :comfysage/artio.nvim)
  :dependencies :nvim-mini/mini.icons
  :config #(let [artio (require :artio)]
             (artio.setup {:opts {:bottom false :shrink false :marker "*"}

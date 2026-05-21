@@ -18,4 +18,12 @@
   (let [modelist (icollect [mode (string.gmatch modes ".")] mode)]
     `(vim.keymap.set ,modelist ,lhs ,rhs ,optlist)))
 
-{: cmd : map : plug}
+(fn gh [name]
+  "make a github source link"
+  (.. "https://github.com/" name))
+
+(fn cb [name]
+  "make a codeberg source link"
+  (.. "https://codeberg.org/" name))
+
+{: cmd : map : plug : gh : cb}
