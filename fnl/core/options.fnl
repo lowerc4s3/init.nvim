@@ -1,3 +1,7 @@
+(import-macros {: reqfn} :lib.macros)
+
+((reqfn :vim._core.ui2 :enable) {:enable true :msg {:target :msg}})
+
 (let [o vim.opt]
   ;;; editor
   (set o.expandtab true)
@@ -21,7 +25,6 @@
   (set o.sidescrolloff 8)
   (set o.foldlevel 999) ; don't fold automatically
   (set o.wrap false)
-  (set o.spelllang "en_us,ru")
   (o.sessionoptions:prepend :globals)
   ;;; ui
   (set o.termguicolors true)
@@ -36,12 +39,11 @@
   (set o.laststatus 2) ; 2 - statusline in each window, 3 - global statusline
   ;; hide search count message and "search hit BOTTOM, continuing at TOP"
   (o.shortmess:append {:S true :s true})
+  ;;; language
+  (set o.spelllang "en_us,ru")
   (let [esc #(vim.fn.escape $1 ";,.\"|\\]")
         en (esc "`qwertyuiop[]asdfghjkl;'zxcvbnm")
         ru (esc "ёйцукенгшщзхъфывапролджэячсмить")
         en-caps (esc "~QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>")
         ru-caps (esc "ËЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ")]
     (set o.langmap (.. ru-caps ";" en-caps "," ru ";" en))))
-
-(let [ui2 (require :vim._core.ui2)]
-  (ui2.enable {:enable true :msg {:target :msg}}))
