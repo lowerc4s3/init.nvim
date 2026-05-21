@@ -20,6 +20,10 @@
       "rev": "c375ea503646fe8393593b5fb8a40406eaa437b2",
       "src": "https://github.com/nvim-mini/mini.surround"
     },
+    "minibuffer.nvim": {
+      "rev": "ecec4fa9c0c1cb767b5c83c5351e252725dd582a",
+      "src": "https://github.com/simifalaye/minibuffer.nvim"
+    },
     "neotab.nvim": {
       "rev": "e99d3e28c5a2066d2d368dfe4ef3827c8d75d337",
       "src": "https://github.com/kawre/neotab.nvim"
