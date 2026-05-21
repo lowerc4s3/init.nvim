@@ -34,7 +34,13 @@
   (set o.showcmd false) ; hide visual mode selection
   (set o.laststatus 2) ; 2 - statusline in each window, 3 - global statusline
   ;; hide search count message and "search hit BOTTOM, continuing at TOP"
-  (o.shortmess:append {:S true :s true}))
+  (o.shortmess:append {:S true :s true})
+  (let [esc #(vim.fn.escape $1 ";,.\"|\\]")
+        en (esc "`qwertyuiop[]asdfghjkl;'zxcvbnm")
+        ru (esc "ёйцукенгшщзхъфывапролджэячсмить")
+        en-caps (esc "~QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>")
+        ru-caps (esc "ËЙЦУКЕНГШЩЗХЪФЫВАПРОЛДЖЭЯЧСМИТЬБЮ")]
+    (set o.langmap (.. ru-caps ";" en-caps "," ru ";" en))))
 
 (let [ui2 (require :vim._core.ui2)]
   (ui2.enable {:enable true :msg {:target :msg}}))

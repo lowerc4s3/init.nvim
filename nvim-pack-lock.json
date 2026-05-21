@@ -4,6 +4,10 @@
       "rev": "0b08d6862afe685fd78963808d022d7c15c89546",
       "src": "https://codeberg.org/comfysage/artio.nvim"
     },
+    "langmapper.nvim": {
+      "rev": "49462fd9f4f33cf8cfbaa779ba07d3c0b255cc06",
+      "src": "https://github.com/Wansmer/langmapper.nvim"
+    },
     "leap.nvim": {
       "rev": "940bc5e716a8cde63bd47e1b13f30fd9075ec0c8",
       "src": "https://codeberg.org/andyg/leap.nvim"
