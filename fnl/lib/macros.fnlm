@@ -1,0 +1,33 @@
+(lambda assoc [tbl k v] (set (. tbl k) v) tbl)
+
+(lambda cmd [command]
+  "create a command string in form of \":%command<CR>\""
+  (.. :<Cmd> command :<CR>))
+
+(lambda plug [name]
+  "create a <Plug>(%name) keymap string"
+  (.. "<Plug>(" name ")"))
+
+(lambda map [modes lhs rhs ?opts]
+  "define a mapping. modes are defined as a string of mode chars.
+  if `opts` or `opts.silent` are nil, then silent mapping is inferred"
+  (local opts (case ?opts
+                nil {:silent true}
+                {:silent nil} (assoc ?opts :silent true)
+                _ ?opts))
+  (let [modelist (icollect [mode (string.gmatch modes ".")] mode)]
+    `(vim.keymap.set ,modelist ,lhs ,rhs ,opts)))
+
+(lambda gh [name]
+  "make a github source link"
+  (.. "https://github.com/" name))
+
+(lambda cb [name]
+  "make a codeberg source link"
+  (.. "https://codeberg.org/" name))
+
+(lambda reqfn [module func]
+  "return a module's function. this is equivalent to (. (require %module) %func)"
+  `(. (require ,module) ,func))
+
+{: cmd : map : plug : gh : cb : reqfn}
