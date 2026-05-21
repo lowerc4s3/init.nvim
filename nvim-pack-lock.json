@@ -1,8 +1,16 @@
 {
   "plugins": {
+    "artio.nvim": {
+      "rev": "0b08d6862afe685fd78963808d022d7c15c89546",
+      "src": "https://codeberg.org/comfysage/artio.nvim"
+    },
     "leap.nvim": {
       "rev": "940bc5e716a8cde63bd47e1b13f30fd9075ec0c8",
       "src": "https://codeberg.org/andyg/leap.nvim"
+    },
+    "mini.icons": {
+      "rev": "520995f1d75da0e4cc901ee95080b1ff2bc46b94",
+      "src": "https://github.com/nvim-mini/mini.icons"
     },
     "mini.surround": {
       "rev": "c375ea503646fe8393593b5fb8a40406eaa437b2",
