@@ -26,3 +26,4 @@
 
 (require :core)
 (require :pack)
+(require :lsp)

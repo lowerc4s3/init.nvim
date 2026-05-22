@@ -37,4 +37,5 @@
                        :Space :SPC
                        :Tab :TAB
                        :Esc :ESC}}
-        :spec [{1 :<Leader>f :group :find}]}}
+        :spec [{1 :<Leader>f :group :find}
+               {1 :<Leader>g :group :git}]}}

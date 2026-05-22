@@ -8,4 +8,5 @@ do
   end
 end
 require("core")
-return require("pack")
+require("pack")
+return require("lsp")
