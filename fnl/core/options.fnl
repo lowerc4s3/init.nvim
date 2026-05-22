@@ -1,6 +1,6 @@
-(import-macros {: $} :lib.macros)
+(import-macros {: !} :lib.macros)
 
-($ (require :vim._core.ui2) :enable {:msg {:target :msg}})
+(! (require :vim._core.ui2) :enable {:msg {:target :msg}})
 
 (let [o vim.opt]
   ;;; editor
@@ -41,7 +41,7 @@
   (o.shortmess:append {:S true :s true})
   ;;; language
   (set o.spelllang "en_us,ru")
-  (let [esc #(vim.fn.escape $1 ";,.\"|\\]")
+  (let [esc #(vim.fn.escape $ ";,.\"|\\]")
         en (esc "`qwertyuiop[]asdfghjkl;'zxcvbnm")
         ru (esc "ёйцукенгшщзхъфывапролджэячсмить")
         en-caps (esc "~QWERTYUIOP{}ASDFGHJKL:\"ZXCVBNM<>")

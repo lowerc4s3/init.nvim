@@ -9,9 +9,9 @@
  :opts (let [col-menu (autoload :colorful-menu)
              icons (autoload :mini.icons)
              neotab (autoload :neotab)
-             col-text #(col-menu.blink_components_text $1)
-             col-hl #(col-menu.blink_components_highlight $1)
-             get-kind-icon #(.. " " (icons.get :lsp $1.kind) $1.icon_gap)]
+             col-text #(col-menu.blink_components_text $)
+             col-hl #(col-menu.blink_components_highlight $)
+             get-kind-icon #(.. " " (icons.get :lsp $.kind) $.icon_gap)]
          {:signature {:enabled true}
           :appearance {:nerd_font_variant :normal}
           :completion {:documentation {:auto_show true}
@@ -28,11 +28,11 @@
                    :<C-b> [:scroll_documentation_up :fallback]
                    :<C-f> [:scroll_documentation_down :fallback]
                    :<C-e> [:cancel :fallback]
-                   :<Tab> [#(if ($1.is_visible) ($1.select_next)
-                                ($1.snippet_active) ($1.accept)
+                   :<Tab> [#(if ($.is_visible) ($.select_next)
+                                ($.snippet_active) ($.accept)
                                 (neotab.tabout))]
-                   :<S-Tab> [#(if ($1.is_visible) ($1.select_prev)
-                                  ($1.snippet_active) ($1.snippet_backward)
+                   :<S-Tab> [#(if ($.is_visible) ($.select_prev)
+                                  ($.snippet_active) ($.snippet_backward)
                                   (neotab.tabreverse))]}
           :cmdline {:completion {:menu {:auto_show true}
                                  :list {:selection {:preselect false

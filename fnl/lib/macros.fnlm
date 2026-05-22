@@ -38,9 +38,9 @@
   "make a codeberg source link"
   (.. "https://codeberg.org/" name))
 
-(lambda $ [table fun ...]
+(lambda ! [table fun ...]
   "looks up a function in a table and calls it with provided args.
   acts like a `:` operator but doesn't pass a table as first argument"
   `((. ,table ,fun) ,...))
 
-{: cmd : map : plug : gh : cb : specmap : $}
+{: cmd : map : plug : gh : cb : specmap : !}
