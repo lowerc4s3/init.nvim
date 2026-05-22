@@ -1,4 +1,4 @@
-(import-macros {: gh : reqcall} :lib.macros)
+(import-macros {: gh} :lib.macros)
 (local {: autoload} (require :nfnl.module))
 
 {; completion engine

@@ -1,6 +1,6 @@
-(import-macros {: gh : setup} :lib.macros)
+(import-macros {: gh : $} :lib.macros)
 
 ;; bootstrap zpack (lazy.nvim inspired vim.pack wrapper)
 (vim.pack.add [(gh :zuqini/zpack.nvim)])
 
-(setup :zpack)
+($ (require :zpack) :setup)

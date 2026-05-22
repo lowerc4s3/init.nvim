@@ -1,5 +1,5 @@
 -- [nfnl] fnl/core/options.fnl
-require("vim._core.ui2").enable({enable = true, msg = {target = "msg"}})
+require("vim._core.ui2").enable({msg = {target = "msg"}})
 local o = vim.opt
 o.expandtab = true
 o.smarttab = true

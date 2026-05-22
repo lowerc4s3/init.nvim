@@ -38,16 +38,9 @@
   "make a codeberg source link"
   (.. "https://codeberg.org/" name))
 
-(lambda reqfn [module func]
-  "return a module's function. this is equivalent to (. (require %module) %func)"
-  `(. (require ,module) ,func))
+(lambda $ [table fun ...]
+  "looks up a function in a table and calls it with provided args.
+  acts like a `:` operator but doesn't pass a table as first argument"
+  `((. ,table ,fun) ,...))
 
-(lambda reqcall [module func ...]
-  "call a module's function"
-  `(,(reqfn module func) ,...))
-
-(lambda setup [module ?opts]
-  "setup a module with opts if provided"
-  `(,(reqfn module :setup) ,?opts))
-
-{: cmd : map : plug : gh : cb : reqfn : setup : reqcall : specmap}
+{: cmd : map : plug : gh : cb : specmap : $}

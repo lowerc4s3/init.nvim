@@ -1,6 +1,6 @@
-(import-macros {: reqfn} :lib.macros)
+(import-macros {: $} :lib.macros)
 
-((reqfn :vim._core.ui2 :enable) {:enable true :msg {:target :msg}})
+($ (require :vim._core.ui2) :enable {:msg {:target :msg}})
 
 (let [o vim.opt]
   ;;; editor
