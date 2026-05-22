@@ -3,4 +3,6 @@
 {; navigate within delimeters with tab
  :src (gh :kawre/neotab.nvim)
  :event :InsertEnter
- :opts {}}
+ :opts {; mappings are handled by blink
+        :tabkey ""
+        :reverse_key ""}}

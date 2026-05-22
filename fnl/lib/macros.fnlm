@@ -30,8 +30,12 @@
   "return a module's function. this is equivalent to (. (require %module) %func)"
   `(. (require ,module) ,func))
 
+(lambda reqcall [module func ...]
+  "call a module's function"
+  `(,(reqfn module func) ,...))
+
 (lambda setup [module ?opts]
   "setup a module with opts if provided"
   `(,(reqfn module :setup) ,?opts))
 
-{: cmd : map : plug : gh : cb : reqfn : setup}
+{: cmd : map : plug : gh : cb : reqfn : setup : reqcall}

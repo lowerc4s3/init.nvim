@@ -1,8 +1,24 @@
 (import-macros {: gh} :lib.macros)
 
+(macro glyphs [table]
+  (collect [pattern glyph (pairs table)]
+    (values pattern {: glyph})))
+
 {; icons provider
  :src (gh :nvim-mini/mini.icons)
- :opts {:file {:LICENSE {:glyph "󰗑"}
-               :LICENSE.md {:glyph "󰗑"}
-               :LICENSE.txt {:glyph "󰗑"}}
-        :filetype {:typst {:glyph ""}}}}
+ :opts {:file (glyphs {:LICENSE "" :LICENSE.md "" :LICENSE.txt ""})
+        :filetype (glyphs {:typst ""})
+        :lsp (glyphs {:constant "π"
+                      :function "λ"
+                      :method "λ"
+                      :value "α"
+                      :variable "󰆦"
+                      :field "󰆦"
+                      :text "¶"
+                      :string "󰉾"
+                      :keyword "󰏢"
+                      :struct "󱡠"
+                      :class "󱡠"
+                      :typeparameter "*"
+                      :snippet "󰆏"
+                      :color "󰌁"})}}

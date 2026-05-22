@@ -1,0 +1,44 @@
+-- [nfnl] fnl/plugins/blink.fnl
+local _local_1_ = require("nfnl.module")
+local autoload = _local_1_.autoload
+local _2_
+do
+  local col_menu = autoload("colorful-menu")
+  local icons = autoload("mini.icons")
+  local neotab = autoload("neotab")
+  local col_text
+  local function _3_(_241)
+    return col_menu.blink_components_text(_241)
+  end
+  col_text = _3_
+  local col_hl
+  local function _4_(_241)
+    return col_menu.blink_components_highlight(_241)
+  end
+  col_hl = _4_
+  local get_kind_icon
+  local function _5_(_241)
+    return (" " .. icons.get("lsp", _241.kind) .. _241.icon_gap)
+  end
+  get_kind_icon = _5_
+  local function _6_(_241)
+    if _241.is_visible() then
+      return _241.select_next()
+    elseif _241.snippet_active() then
+      return _241.accept()
+    else
+      return neotab.tabout()
+    end
+  end
+  local function _8_(_241)
+    if _241.is_visible() then
+      return _241.select_prev()
+    elseif _241.snippet_active() then
+      return _241.snippet_backward()
+    else
+      return neotab.tabreverse()
+    end
+  end
+  _2_ = {signature = {enabled = true}, appearance = {nerd_font_variant = "normal"}, completion = {documentation = {auto_show = true}, ghost_text = {enabled = false}, menu = {draw = {columns = {{"kind_icon"}, {"label", gap = 1}}, components = {label = {text = col_text, highlight = col_hl}, kind_icon = {text = get_kind_icon}}}}}, sources = {default = {"snippets", "lsp", "buffer"}}, keymap = {preset = "none", ["<CR>"] = {"select_and_accept", "fallback"}, ["<C-b>"] = {"scroll_documentation_up", "fallback"}, ["<C-f>"] = {"scroll_documentation_down", "fallback"}, ["<C-e>"] = {"cancel", "fallback"}, ["<Tab>"] = {_6_}, ["<S-Tab>"] = {_8_}}, cmdline = {completion = {menu = {auto_show = true}}, keymap = {["<CR>"] = {"accept_and_enter", "fallback"}}}}
+end
+return {src = "https://github.com/saghen/blink.cmp", dependencies = {src = "https://github.com/xzbdmw/colorful-menu.nvim"}, version = "v1", event = {"InsertEnter", "CmdLineEnter"}, opts = _2_}

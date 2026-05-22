@@ -4,6 +4,15 @@
       "rev": "0b08d6862afe685fd78963808d022d7c15c89546",
       "src": "https://codeberg.org/comfysage/artio.nvim"
     },
+    "blink.cmp": {
+      "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
+      "src": "https://github.com/saghen/blink.cmp",
+      "version": "'v1'"
+    },
+    "colorful-menu.nvim": {
+      "rev": "13f9b7eaa9cd2901b4f8915cfb2483c3be4c8c20",
+      "src": "https://github.com/xzbdmw/colorful-menu.nvim"
+    },
     "langmapper.nvim": {
       "rev": "49462fd9f4f33cf8cfbaa779ba07d3c0b255cc06",
       "src": "https://github.com/Wansmer/langmapper.nvim"
