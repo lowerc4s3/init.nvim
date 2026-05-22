@@ -8,6 +8,9 @@
   "create a <Plug>(%name) keymap string"
   (.. "<Plug>(" name ")"))
 
+(lambda mkmodes [modes]
+  (icollect [mode (string.gmatch modes ".")] mode))
+
 (lambda map [modes lhs rhs ?opts]
   "define a mapping. modes are defined as a string of mode chars.
   if `opts` or `opts.silent` are nil, then silent mapping is inferred"
@@ -15,8 +18,17 @@
                 nil {:silent true}
                 {:silent nil} (assoc ?opts :silent true)
                 _ ?opts))
-  (let [modelist (icollect [mode (string.gmatch modes ".")] mode)]
-    `(vim.keymap.set ,modelist ,lhs ,rhs ,opts)))
+  `(vim.keymap.set ,(mkmodes modes) ,lhs ,rhs ,opts))
+
+(lambda specmap [modes lhs rhs ?opts]
+  (local opts (case ?opts
+                nil {:silent true}
+                {:silent nil} (assoc ?opts :silent true)
+                _ ?opts))
+  (tset opts 1 lhs)
+  (tset opts 2 rhs)
+  (set opts.modes modes)
+  opts)
 
 (lambda gh [name]
   "make a github source link"
@@ -38,4 +50,4 @@
   "setup a module with opts if provided"
   `(,(reqfn module :setup) ,?opts))
 
-{: cmd : map : plug : gh : cb : reqfn : setup : reqcall}
+{: cmd : map : plug : gh : cb : reqfn : setup : reqcall : specmap}

@@ -13,6 +13,10 @@
       "rev": "13f9b7eaa9cd2901b4f8915cfb2483c3be4c8c20",
       "src": "https://github.com/xzbdmw/colorful-menu.nvim"
     },
+    "diffview.nvim": {
+      "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
+      "src": "https://github.com/sindrets/diffview.nvim"
+    },
     "langmapper.nvim": {
       "rev": "49462fd9f4f33cf8cfbaa779ba07d3c0b255cc06",
       "src": "https://github.com/Wansmer/langmapper.nvim"
@@ -32,6 +36,10 @@
     "minibuffer.nvim": {
       "rev": "ecec4fa9c0c1cb767b5c83c5351e252725dd582a",
       "src": "https://github.com/simifalaye/minibuffer.nvim"
+    },
+    "neogit": {
+      "rev": "99326a1310fb2d616b455d2fd16d01bf00682f06",
+      "src": "https://github.com/NeogitOrg/neogit"
     },
     "neotab.nvim": {
       "rev": "e99d3e28c5a2066d2d368dfe4ef3827c8d75d337",
