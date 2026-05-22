@@ -16,7 +16,7 @@
           :appearance {:nerd_font_variant :normal}
           :completion {:documentation {:auto_show true}
                        :ghost_text {:enabled false}
-                       ; :list {:selection {:preselect false :auto_insert true}}
+                       :list {:selection {:preselect false :auto_insert true}}
                        :menu {:draw {:columns [{1 :kind_icon}
                                                {1 :label :gap 1}]
                                      :components {:label {:text col-text
@@ -34,5 +34,7 @@
                    :<S-Tab> [#(if ($1.is_visible) ($1.select_prev)
                                   ($1.snippet_active) ($1.snippet_backward)
                                   (neotab.tabreverse))]}
-          :cmdline {:completion {:menu {:auto_show true}}
+          :cmdline {:completion {:menu {:auto_show true}
+                                 :list {:selection {:preselect false
+                                                    :auto_insert true}}}
                     :keymap {:<CR> [:accept_and_enter :fallback]}}})}
