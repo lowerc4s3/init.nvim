@@ -17,6 +17,7 @@
                             :windows false
                             :nav false}}
         :show_help false
+        :show_keys false
         :delay #(or (and $1.plugin 0) 200)
         :filter #(and $1.desc (not= 1 ($1.desc:find :langmapped 1 true)))
         :win {:no_overlap false}

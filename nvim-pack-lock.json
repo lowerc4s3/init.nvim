@@ -32,6 +32,10 @@
       "rev": "ac0177c5549df7abba7a19554c18a7765386c894",
       "src": "https://github.com/Olical/nfnl"
     },
+    "parinfer-rust": {
+      "rev": "845bfbb9916687cba5b6bae088c9eab70dbb83a3",
+      "src": "https://github.com/eraserhd/parinfer-rust"
+    },
     "ts-enable.nvim": {
       "rev": "b99a87126722ee9e16b604bd5f2786f2c47d23ad",
       "src": "https://github.com/VonHeikemen/ts-enable.nvim",
