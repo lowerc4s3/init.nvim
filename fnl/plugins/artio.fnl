@@ -4,21 +4,23 @@
 {; ui2 fuzzy picker 
  :src (cb :comfysage/artio.nvim)
  :dependencies :nvim-mini/mini.icons
- :config #(let [artio (require :artio)]
-            (artio.setup {:opts {:bottom false :shrink false :marker "*"}
-                          :mappings {:<C-j> :down
-                                     :<C-n> :down
-                                     :<C-k> :up
-                                     :<C-p> :up
-                                     :<Enter> :accept
-                                     :<Tab> :accept
-                                     :<C-m> :mark
-                                     :<Esc> :cancel
-                                     :<C-g> :togglelive
-                                     :<C-l> :togglepreview
-                                     :<C-s> :split
-                                     :<C-v> :vsplit
-                                     :<C-t> :tabnew}})
+ :opts {:opts {:bottom false :shrink false :marker "*"}
+        :mappings {:<C-j> :down
+                   :<C-n> :down
+                   :<C-k> :up
+                   :<C-p> :up
+                   :<Enter> :accept
+                   :<Tab> :accept
+                   :<C-m> :mark
+                   :<Esc> :cancel
+                   :<C-g> :togglelive
+                   :<C-l> :togglepreview
+                   :<C-s> :split
+                   :<C-v> :vsplit
+                   :<C-t> :tabnew}}
+ :config #(let [artio (require :artio)
+                opts $2]
+            (artio.setup opts)
             (set vim.ui.select artio.select)
             (let [pick (autoload :artio.builtins)
                   findprg "fd --full-path --absolute-path --type f --color=never --"
