@@ -3,8 +3,6 @@
 {; keymap cheatsheet
  :src (gh :folke/which-key.nvim)
  :dependencies {:src (gh :simifalaye/minibuffer.nvim)}
- :config (fn [_ opts]
-           (! (require :which-key) :setup opts))
  :opts {:plugins {:marks false
                   :registers false
                   :presets {:operators false

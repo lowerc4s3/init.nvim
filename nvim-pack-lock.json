@@ -13,6 +13,10 @@
       "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
       "src": "https://github.com/sindrets/diffview.nvim"
     },
+    "fzf-lua": {
+      "rev": "71b45a044c4ef6ecb1910880ef642d5a0e1c02e9",
+      "src": "https://github.com/ibhagwan/fzf-lua"
+    },
     "langmapper.nvim": {
       "rev": "49462fd9f4f33cf8cfbaa779ba07d3c0b255cc06",
       "src": "https://github.com/Wansmer/langmapper.nvim"
@@ -20,10 +24,6 @@
     "leap.nvim": {
       "rev": "940bc5e716a8cde63bd47e1b13f30fd9075ec0c8",
       "src": "https://codeberg.org/andyg/leap.nvim"
-    },
-    "mini.fuzzy": {
-      "rev": "2c0e7809e0c51dccb335d01f02d4f6b2b4d6fcdc",
-      "src": "https://github.com/nvim-mini/mini.fuzzy"
     },
     "mini.icons": {
       "rev": "520995f1d75da0e4cc901ee95080b1ff2bc46b94",
@@ -56,10 +56,6 @@
     "parinfer-rust": {
       "rev": "845bfbb9916687cba5b6bae088c9eab70dbb83a3",
       "src": "https://github.com/eraserhd/parinfer-rust"
-    },
-    "refer.nvim": {
-      "rev": "d12dd85202bcf7e275881b220cb40a81d7a4c2da",
-      "src": "https://github.com/juniorsundar/refer.nvim"
     },
     "ts-enable.nvim": {
       "rev": "b99a87126722ee9e16b604bd5f2786f2c47d23ad",
