@@ -4,6 +4,7 @@
 {; ui2 fuzzy picker 
  :src (cb :comfysage/artio.nvim)
  :dependencies :nvim-mini/mini.icons
+ :enabled false
  :opts {:opts {:bottom false :shrink false :marker "*"}
         :mappings {:<C-j> :down
                    :<C-n> :down

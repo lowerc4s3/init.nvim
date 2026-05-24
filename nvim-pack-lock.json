@@ -1,9 +1,5 @@
 {
   "plugins": {
-    "artio.nvim": {
-      "rev": "0b08d6862afe685fd78963808d022d7c15c89546",
-      "src": "https://codeberg.org/comfysage/artio.nvim"
-    },
     "blink.cmp": {
       "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
       "src": "https://github.com/saghen/blink.cmp",
@@ -24,6 +20,10 @@
     "leap.nvim": {
       "rev": "940bc5e716a8cde63bd47e1b13f30fd9075ec0c8",
       "src": "https://codeberg.org/andyg/leap.nvim"
+    },
+    "mini.fuzzy": {
+      "rev": "2c0e7809e0c51dccb335d01f02d4f6b2b4d6fcdc",
+      "src": "https://github.com/nvim-mini/mini.fuzzy"
     },
     "mini.icons": {
       "rev": "520995f1d75da0e4cc901ee95080b1ff2bc46b94",
@@ -56,6 +56,10 @@
     "parinfer-rust": {
       "rev": "845bfbb9916687cba5b6bae088c9eab70dbb83a3",
       "src": "https://github.com/eraserhd/parinfer-rust"
+    },
+    "refer.nvim": {
+      "rev": "d12dd85202bcf7e275881b220cb40a81d7a4c2da",
+      "src": "https://github.com/juniorsundar/refer.nvim"
     },
     "ts-enable.nvim": {
       "rev": "b99a87126722ee9e16b604bd5f2786f2c47d23ad",
