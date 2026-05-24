@@ -5,7 +5,6 @@ local _2_
 do
   local col_menu = autoload("colorful-menu")
   local icons = autoload("mini.icons")
-  local neotab = autoload("neotab")
   local col_text
   local function _3_(_241)
     return col_menu.blink_components_text(_241)
@@ -27,18 +26,28 @@ do
     elseif _241.snippet_active() then
       return _241.accept()
     else
-      return neotab.tabout()
+      return nil
     end
   end
-  local function _8_(_241)
+  local function _8_()
+    local key_2_auto = vim.api.nvim_replace_termcodes("<Plug>(neotab-out)", true, true, true)
+    vim.api.nvim_feedkeys(key_2_auto, "i", false)
+    return true
+  end
+  local function _9_(_241)
     if _241.is_visible() then
       return _241.select_prev()
     elseif _241.snippet_active() then
       return _241.snippet_backward()
     else
-      return neotab.tabreverse()
+      return nil
     end
   end
-  _2_ = {signature = {enabled = true}, appearance = {nerd_font_variant = "normal"}, completion = {documentation = {auto_show = true}, ghost_text = {enabled = false}, list = {selection = {auto_insert = true, preselect = false}}, menu = {draw = {columns = {{"kind_icon"}, {"label", gap = 1}}, components = {label = {text = col_text, highlight = col_hl}, kind_icon = {text = get_kind_icon}}}}}, sources = {default = {"snippets", "lsp", "buffer"}}, keymap = {preset = "none", ["<CR>"] = {"select_and_accept", "fallback"}, ["<C-b>"] = {"scroll_documentation_up", "fallback"}, ["<C-f>"] = {"scroll_documentation_down", "fallback"}, ["<C-e>"] = {"cancel", "fallback"}, ["<Tab>"] = {_6_}, ["<S-Tab>"] = {_8_}}, cmdline = {completion = {menu = {auto_show = true}, list = {selection = {auto_insert = true, preselect = false}}}, keymap = {["<CR>"] = {"accept_and_enter", "fallback"}}}}
+  local function _11_()
+    local key_2_auto = vim.api.nvim_replace_termcodes("<Plug>(neotab-reverse)", true, true, true)
+    vim.api.nvim_feedkeys(key_2_auto, "i", false)
+    return true
+  end
+  _2_ = {signature = {enabled = true}, appearance = {nerd_font_variant = "normal"}, completion = {documentation = {auto_show = true}, ghost_text = {enabled = false}, list = {selection = {auto_insert = true, preselect = false}}, menu = {draw = {columns = {{"kind_icon"}, {"label", gap = 1}}, components = {label = {text = col_text, highlight = col_hl}, kind_icon = {text = get_kind_icon}}}}}, sources = {default = {"snippets", "lsp", "buffer"}}, keymap = {preset = "none", ["<CR>"] = {"select_and_accept", "fallback"}, ["<C-b>"] = {"scroll_documentation_up", "fallback"}, ["<C-f>"] = {"scroll_documentation_down", "fallback"}, ["<C-e>"] = {"cancel", "fallback"}, ["<Tab>"] = {_6_, _8_}, ["<S-Tab>"] = {_9_, _11_}}, cmdline = {completion = {menu = {auto_show = true}, list = {selection = {auto_insert = true, preselect = false}}}, keymap = {["<CR>"] = {"accept_and_enter", "fallback"}}}}
 end
-return {src = "https://github.com/saghen/blink.cmp", dependencies = {src = "https://github.com/xzbdmw/colorful-menu.nvim"}, version = "v1", event = {"InsertEnter", "CmdLineEnter"}, opts = _2_}
+return {src = "https://github.com/saghen/blink.cmp", dependencies = {{src = "https://github.com/xzbdmw/colorful-menu.nvim"}, {src = "https://github.com/kawre/neotab.nvim"}}, version = "v1", event = {"InsertEnter", "CmdLineEnter"}, opts = _2_}
