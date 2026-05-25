@@ -15,4 +15,9 @@ local function _2_(bufnr)
     return nil
   end
 end
-return {src = "https://github.com/stevearc/conform.nvim", event = "BufWritePre", cmd = "ConformInfo", keys = {{"<Leader>cf", _1_, modes = "n", silent = true}}, opts = {formatters_by_ft = {fennel = {"fnlfmt"}}, default_format_opts = {lsp_format = "fallback"}, format_on_save = _2_}}
+local function _5_(_, opts)
+  require("conform").setup(opts)
+  vim.opt.formatexpr = "v:lua.require'conform'.formatexpr()"
+  return nil
+end
+return {src = "https://github.com/stevearc/conform.nvim", keys = {{"<Leader>cf", _1_, modes = "n", silent = true}}, opts = {formatters_by_ft = {fennel = {"fnlfmt"}}, default_format_opts = {lsp_format = "fallback"}, format_on_save = _2_}, config = _5_, lazy = false}
