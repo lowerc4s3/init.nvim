@@ -14,8 +14,8 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "diffview.nvim": {
-      "rev": "4516612fe98ff56ae0415a259ff6361a89419b0a",
-      "src": "https://github.com/sindrets/diffview.nvim"
+      "rev": "e4871fdf697057e036690d6ad9ebba334711cfb6",
+      "src": "https://github.com/dlyongemallo/diffview.nvim"
     },
     "fzf-lua": {
       "rev": "71b45a044c4ef6ecb1910880ef642d5a0e1c02e9",

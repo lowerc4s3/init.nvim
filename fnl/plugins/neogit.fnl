@@ -2,7 +2,7 @@
 
 ;; magit flavored git client
 {:src (gh :NeogitOrg/neogit)
- :dependencies {:src (gh :sindrets/diffview.nvim)}
+ :dependencies {:src (gh :dlyongemallo/diffview.nvim)}
  :cmd :Neogit
  :config #(! (require :which-key) :add [{1 :<Leader>g :group :git}])
  :keys [(specmap :n :<Leader>gg (cmd :Neogit) {:desc "open neogit tab"})
