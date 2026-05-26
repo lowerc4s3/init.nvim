@@ -4,19 +4,21 @@
   (collect [pattern glyph (pairs table)]
     (values pattern {: glyph})))
 
-{; icons provider
- :src (gh :nvim-mini/mini.icons)
- :opts {:file (glyphs {:LICENSE "" :LICENSE.md "" :LICENSE.txt ""})
+;; icons provider
+{:src (gh :nvim-mini/mini.icons)
+ :opts {:file (glyphs {:LICENSE ""
+                       :LICENSE.md ""
+                       :LICENSE.txt ""})
         :filetype (glyphs {:typst ""})
-        :lsp (glyphs {:constant "π"
-                      :function "λ"
-                      :method "λ"
+        :lsp (glyphs {:constant "󰏿"
+                      :function "󰘧"
+                      :method "󰘧"
                       :value "α"
                       :variable "󰆦"
                       :field "󰆦"
-                      :text "¶"
+                      :text "󱌯"
                       :string "󰉾"
-                      :keyword "󰏢"
+                      :keyword "󰒠"
                       :struct "󱡠"
                       :class "󱡠"
                       :typeparameter "*"

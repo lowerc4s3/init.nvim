@@ -1,5 +1,9 @@
 (import-macros {: map} :lib.macros)
 
+(local autocmd vim.api.nvim_create_autocmd)
+(local augroup vim.api.nvim_create_augroup)
+(local autocmd-clear vim.api.nvim_clear_autocmds)
+
 (let [s vim.diagnostic.severity
       opts {:severity_sort true
             :signs {:text {s.ERROR ""
@@ -12,10 +16,6 @@
                             s.WARN :DiagnosticSignWarn}}}]
   (vim.diagnostic.config opts))
 
-(local autocmd vim.api.nvim_create_autocmd)
-(local augroup vim.api.nvim_create_augroup)
-(local autocmd-clear vim.api.nvim_clear_autocmds)
-
 (fn setup-word-ref-hl [buffer]
   (let [group (augroup :WordLspHighlight {:clear false})
         lsp vim.lsp.buf]
@@ -27,7 +27,7 @@
              {:group (augroup :WordLspDetach {:clear true})
               :callback (fn [{: buf}]
                           (lsp.clear_references)
-                          (autocmd-clear {:group :WordLspHighlight :buffer buf}))})))
+                          (autocmd-clear {:buffer buf :group :WordLspHighlight}))})))
 
 (fn on-attach [{: buf :data {: client_id}}]
   (let [client (vim.lsp.get_client_by_id client_id)

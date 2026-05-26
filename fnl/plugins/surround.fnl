@@ -1,7 +1,7 @@
 (import-macros {: gh} :lib.macros)
 
-{; surround text with delimeters
- :src (gh :nvim-mini/mini.surround)
+;; surround text with delimeters
+{:src (gh :nvim-mini/mini.surround)
  :opts {:mappings {:add :gs
                    :delete :gsd
                    :replace :gsr

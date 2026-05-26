@@ -8,8 +8,8 @@
      (vim.api.nvim_feedkeys key# :i false)
      true))
 
-{; completion engine
- :src (gh :saghen/blink.cmp)
+;; completion engine
+{:src (gh :saghen/blink.cmp)
  :dependencies [{:src (gh :xzbdmw/colorful-menu.nvim)}
                 {:src (gh :kawre/neotab.nvim)}]
  :version :v1
@@ -23,7 +23,8 @@
           :appearance {:nerd_font_variant :normal}
           :completion {:documentation {:auto_show true}
                        :ghost_text {:enabled false}
-                       :list {:selection {:preselect false :auto_insert true}}
+                       :list {:selection {:preselect false
+                                          :auto_insert true}}
                        :menu {:draw {:columns [{1 :kind_icon}
                                                {1 :label :gap 1}]
                                      :components {:label {:text col-text

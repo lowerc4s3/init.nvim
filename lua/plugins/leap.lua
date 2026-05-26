@@ -5,4 +5,4 @@ local function _1_()
   vim.keymap.set({"x", "o"}, "ar", "<Plug>(leap-remote-text-object)", {silent = true})
   return vim.keymap.set({"x", "o"}, "ir", "<Plug>(leap-remote-inner-text-object)", {silent = true})
 end
-return {src = "https://codeberg.org/andyg/leap.nvim", dependencies = "tpope/vim-repeat", config = _1_}
+return {src = "https://codeberg.org/andyg/leap.nvim", dependencies = "tpope/vim-repeat", config = _1_, lazy = false}

@@ -1,7 +1,7 @@
 (import-macros {: gh : !} :lib.macros)
 
-{; keymap cheatsheet
- :src (gh :folke/which-key.nvim)
+;; keymap cheatsheet
+{:src (gh :folke/which-key.nvim)
  :dependencies {:src (gh :simifalaye/minibuffer.nvim)}
  :opts {:plugins {:marks false
                   :registers false

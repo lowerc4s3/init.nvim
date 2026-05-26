@@ -1,8 +1,9 @@
 (import-macros {: map : plug : cb} :lib.macros)
 
-{; search labels navigation
- :src (cb :andyg/leap.nvim)
+;; search labels navigation
+{:src (cb :andyg/leap.nvim)
  :dependencies :tpope/vim-repeat
+ :lazy false
  :config (fn []
            (map :nxo :s (plug :leap))
            (map :n :S (plug :leap-from-window))

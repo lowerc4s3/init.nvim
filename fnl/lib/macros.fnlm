@@ -1,4 +1,6 @@
-(lambda assoc [tbl k v] (set (. tbl k) v) tbl)
+(lambda assoc [tbl k v]
+  (tset tbl k v)
+  tbl)
 
 (lambda cmd [command]
   "create a command string in form of \":%command<CR>\""
@@ -8,27 +10,30 @@
   "create a <Plug>(%name) keymap string"
   (.. "<Plug>(" name ")"))
 
-(lambda mkmodes [modes]
+(lambda split-mode-str [modes]
   (icollect [mode (string.gmatch modes ".")] mode))
+
+(lambda merge-opts-with-default [?opts]
+  (case ?opts
+    nil {:silent true}
+    {:silent nil} (assoc ?opts :silent true)
+    _ ?opts))
 
 (lambda map [modes lhs rhs ?opts]
   "define a mapping. modes are defined as a string of mode chars.
   if `opts` or `opts.silent` are nil, then silent mapping is inferred"
-  (local opts (case ?opts
-                nil {:silent true}
-                {:silent nil} (assoc ?opts :silent true)
-                _ ?opts))
-  `(vim.keymap.set ,(mkmodes modes) ,lhs ,rhs ,opts))
+  (let [opts (merge-opts-with-default ?opts)]
+    `(vim.keymap.set ,(split-mode-str modes) ,lhs ,rhs ,opts)))
 
 (lambda specmap [modes lhs rhs ?opts]
-  (local opts (case ?opts
-                nil {:silent true}
-                {:silent nil} (assoc ?opts :silent true)
-                _ ?opts))
-  (tset opts 1 lhs)
-  (tset opts 2 rhs)
-  (set opts.modes modes)
-  opts)
+  "define a mapping for `keys` field in the plugin spec.
+  modes are defined as a string of mode chars.
+  if `opts` or `opts.silent` are nil, then silent mapping is inferred"
+  (let [opts (merge-opts-with-default ?opts)]
+    (tset opts 1 lhs)
+    (tset opts 2 rhs)
+    (set opts.modes modes)
+    opts))
 
 (lambda gh [name]
   "make a github source link"
@@ -43,4 +48,10 @@
   acts like a `:` operator but doesn't pass a table as first argument"
   `((. ,table ,fun) ,...))
 
-{: cmd : map : plug : gh : cb : specmap : !}
+{: cmd
+ : map
+ : plug
+ : gh
+ : cb
+ : specmap
+ : !}

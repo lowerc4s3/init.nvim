@@ -32,8 +32,12 @@
   (let [prefix (if (vim.fn.has :macunix) :<D- :<C-S-)]
     (.. prefix key ">")))
 
-(map :n (mod :n) #(vim.uv.spawn :neovide {:detached true} (fn []))
+(map :n
+     (mod :n)
+     #(vim.uv.spawn :neovide {:detached true} (fn []))
      {:desc "spawn new instance"})
 
-(map :nvsxoilct (mod :v) #(vim.api.nvim_paste (vim.fn.getreg "+") true -1)
+(map :nvsxoilct
+     (mod :v)
+     #(vim.api.nvim_paste (vim.fn.getreg "+") true -1)
      {:desc "paste from system clipboard"})
