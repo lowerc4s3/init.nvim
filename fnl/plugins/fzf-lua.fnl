@@ -9,7 +9,8 @@
  :lazy false
  :opts {1 [:ivy :borderless :hide]
         :fzf_colors true
-        :ui_select true}
+        :ui_select true
+        :defaults {:file_icons true}}
  :config (fn [_ opts]
            (! (require :fzf-lua) :setup opts)
            (! (require :which-key) :add [{1 :<Leader>s :group :search}
