@@ -25,4 +25,5 @@
         (specmap :n :<Leader>ss (fzf :builtin) {:desc "select picker"})
         (specmap :n :<Leader>hh (fzf :helptags) {:desc :helptags})
         (specmap :n :<Leader>hk (fzf :keymaps) {:desc :keymaps})
-        (specmap :b :<Leader>ho (fzf :nvim_options) {:desc :options})]}
+        (specmap :n :<Leader>ho (fzf :nvim_options) {:desc :options})
+        (specmap :n :<Leader>hH (fzf :highlights) {:desc :highlights})]}
