@@ -6,6 +6,7 @@
 
 (let [s vim.diagnostic.severity
       opts {:severity_sort true
+            :virtual_text true
             :signs {:text {s.ERROR ""
                            s.WARN ""
                            s.HINT ""

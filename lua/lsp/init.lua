@@ -4,7 +4,7 @@ local augroup = vim.api.nvim_create_augroup
 local autocmd_clear = vim.api.nvim_clear_autocmds
 do
   local s = vim.diagnostic.severity
-  local opts = {severity_sort = true, signs = {text = {[s.ERROR] = "\238\170\135", [s.WARN] = "\238\169\172", [s.HINT] = "\238\169\161", [s.INFO] = "\238\169\180"}, numhl = {[s.ERROR] = "DiagnosticSignError", [s.WARN] = "DiagnosticSignWarn", [s.HINT] = "DiagnosticSignHint", [s.WARN] = "DiagnosticSignWarn"}}}
+  local opts = {severity_sort = true, virtual_text = true, signs = {text = {[s.ERROR] = "\238\170\135", [s.WARN] = "\238\169\172", [s.HINT] = "\238\169\161", [s.INFO] = "\238\169\180"}, numhl = {[s.ERROR] = "DiagnosticSignError", [s.WARN] = "DiagnosticSignWarn", [s.HINT] = "DiagnosticSignHint", [s.WARN] = "DiagnosticSignWarn"}}}
   vim.diagnostic.config(opts)
 end
 local function setup_word_ref_hl(buffer)
