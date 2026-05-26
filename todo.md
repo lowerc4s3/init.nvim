@@ -24,3 +24,6 @@
 - [ ] terminal
 - [ ] project management
 - [ ] session management
+
+# other
+- [ ] replace zpack with vim.pack + lz.n

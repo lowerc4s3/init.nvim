@@ -37,6 +37,7 @@ opt.ruler = false
 opt.showmode = false
 opt.showcmd = false
 opt.laststatus = 2
+opt.signcolumn = "yes"
 opt.shortmess:append({S = true}, "s", true)
 opt.spelllang = "en_us,ru"
 local esc

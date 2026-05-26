@@ -41,6 +41,7 @@
 (set opt.showmode false) ; hide current mode indicator (--INSERT--)
 (set opt.showcmd false) ; hide visual mode selection
 (set opt.laststatus 2) ; 2 - statusline in each window, 3 - global statusline
+(set opt.signcolumn :yes) ; always show signcolumn
 (opt.shortmess:append {:S true} ; do not show search count message
                      :s true) ; don't give "search hit BOTTOM, continuing at TOP"
 
