@@ -4,8 +4,8 @@
 (macro tabout [rhs]
   "for some reason neotab doesn't trigger when using lua api
   in blink keymap so we need to use the plug api instead"
-  `(let [key# (vim.api.nvim_replace_termcodes ,rhs true true true)]
-     (vim.api.nvim_feedkeys key# :i false)
+  `(do
+     (vim.api.nvim_feedkeys (vim.keycode ,rhs) :i false)
      true))
 
 ;; completion engine
@@ -23,8 +23,7 @@
           :appearance {:nerd_font_variant :normal}
           :completion {:documentation {:auto_show true}
                        :ghost_text {:enabled false}
-                       :list {:selection {:preselect false
-                                          :auto_insert true}}
+                       :list {:selection {:preselect false :auto_insert true}}
                        :menu {:draw {:columns [{1 :kind_icon}
                                                {1 :label :gap 1}]
                                      :components {:label {:text col-text

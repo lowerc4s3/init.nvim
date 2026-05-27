@@ -30,8 +30,7 @@ do
     end
   end
   local function _8_()
-    local key_2_auto = vim.api.nvim_replace_termcodes("<Plug>(neotab-out)", true, true, true)
-    vim.api.nvim_feedkeys(key_2_auto, "i", false)
+    vim.api.nvim_feedkeys(vim.keycode("<Plug>(neotab-out)"), "i", false)
     return true
   end
   local function _9_(_241)
@@ -44,8 +43,7 @@ do
     end
   end
   local function _11_()
-    local key_2_auto = vim.api.nvim_replace_termcodes("<Plug>(neotab-reverse)", true, true, true)
-    vim.api.nvim_feedkeys(key_2_auto, "i", false)
+    vim.api.nvim_feedkeys(vim.keycode("<Plug>(neotab-reverse)"), "i", false)
     return true
   end
   _2_ = {signature = {enabled = true}, appearance = {nerd_font_variant = "normal"}, completion = {documentation = {auto_show = true}, ghost_text = {enabled = false}, list = {selection = {auto_insert = true, preselect = false}}, menu = {draw = {columns = {{"kind_icon"}, {"label", gap = 1}}, components = {label = {text = col_text, highlight = col_hl}, kind_icon = {text = get_kind_icon}}}}}, sources = {default = {"snippets", "lsp", "buffer"}}, keymap = {preset = "none", ["<CR>"] = {"select_and_accept", "fallback"}, ["<C-b>"] = {"scroll_documentation_up", "fallback"}, ["<C-f>"] = {"scroll_documentation_down", "fallback"}, ["<C-e>"] = {"cancel", "fallback"}, ["<Tab>"] = {_6_, _8_}, ["<S-Tab>"] = {_9_, _11_}}, cmdline = {completion = {menu = {auto_show = true}, list = {selection = {auto_insert = true, preselect = false}}}, keymap = {["<CR>"] = {"accept_and_enter", "fallback"}}}}
