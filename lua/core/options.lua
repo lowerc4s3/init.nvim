@@ -4,6 +4,7 @@ do
   local ui = require("vim._core.ui2")
   ui.enable({msg = {target = "msg"}})
 end
+vim.cmd.colorscheme("catppuccin")
 opt.expandtab = true
 opt.smarttab = true
 opt.autoindent = true
@@ -32,6 +33,7 @@ opt.termguicolors = true
 opt.cursorline = true
 opt.title = true
 opt.winborder = "none"
+opt.cmdheight = 0
 opt.guicursor:prepend({"a:Cursor"})
 opt.ruler = false
 opt.showmode = false

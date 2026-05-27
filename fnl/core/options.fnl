@@ -3,6 +3,8 @@
 (let [ui (require :vim._core.ui2)]
   (ui.enable {:msg {:target :msg}}))
 
+(vim.cmd.colorscheme :catppuccin)
+
 ;;; editor
 (set opt.expandtab true)
 (set opt.smarttab true) ; indent by shiftwidth
@@ -34,6 +36,7 @@
 (set opt.cursorline true) ; hl current line
 (set opt.title true)
 (set opt.winborder :none)
+(set opt.cmdheight 0)
 (opt.guicursor:prepend ["a:Cursor"]) ; force cursor hl in all modes
 
 ;;; modeline
