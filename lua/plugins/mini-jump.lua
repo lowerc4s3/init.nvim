@@ -3,4 +3,4 @@ local function _1_()
   require("mini.jump").setup()
   return vim.api.nvim_set_hl(0, "MiniJump", {link = "Search"})
 end
-return {src = "https://github.com/nvim-mini/mini.jump", config = _1_}
+return {src = "https://github.com/nvim-mini/mini.jump", config = _1_, enabled = false}

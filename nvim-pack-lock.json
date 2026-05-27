@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "bento.nvim": {
+      "rev": "3b529fb1ff417fe0ab5759a712372a6a64152271",
+      "src": "https://github.com/serhez/bento.nvim"
+    },
     "blink.cmp": {
       "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
       "src": "https://github.com/saghen/blink.cmp",
@@ -32,10 +36,6 @@
     "mini.icons": {
       "rev": "520995f1d75da0e4cc901ee95080b1ff2bc46b94",
       "src": "https://github.com/nvim-mini/mini.icons"
-    },
-    "mini.jump": {
-      "rev": "a0bb5dedc981a47826fc95498583b192c69353df",
-      "src": "https://github.com/nvim-mini/mini.jump"
     },
     "mini.surround": {
       "rev": "c375ea503646fe8393593b5fb8a40406eaa437b2",
