@@ -25,6 +25,10 @@
       "rev": "71b45a044c4ef6ecb1910880ef642d5a0e1c02e9",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
+    "gitsigns.nvim": {
+      "rev": "dd3f588bacbeb041be6facf1742e42097f62165d",
+      "src": "https://github.com/lewis6991/gitsigns.nvim"
+    },
     "langmapper.nvim": {
       "rev": "49462fd9f4f33cf8cfbaa779ba07d3c0b255cc06",
       "src": "https://github.com/Wansmer/langmapper.nvim"
