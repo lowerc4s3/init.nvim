@@ -1,40 +1,47 @@
 -- [nfnl] fnl/core/options.fnl
 local opt = vim.opt
-do
-  local ui = require("vim._core.ui2")
-  ui.enable({msg = {target = "msg"}})
-end
 vim.cmd.colorscheme("catppuccin")
 opt.expandtab = true
 opt.smarttab = true
 opt.autoindent = true
+opt.smartindent = true
 do
   local spaces = 4
   opt.tabstop = spaces
   opt.softtabstop = spaces
   opt.shiftwidth = spaces
 end
-opt.splitright = true
-opt.splitbelow = true
-opt.number = true
-opt.relativenumber = true
-opt.clipboard = "unnamedplus"
-opt.mouse = "a"
 opt.ignorecase = true
 opt.smartcase = true
-opt.updatetime = 5000
+opt.virtualedit = {"block"}
+opt.splitright = true
+opt.splitbelow = true
+opt.mouse = "a"
+opt.clipboard = "unnamedplus"
 opt.timeoutlen = 1000
-opt.scrolloff = 8
-opt.sidescrolloff = 8
-opt.foldlevel = 999
-opt.wrap = false
+opt.swapfile = false
+opt.updatetime = 5000
+opt.undofile = true
 opt.sessionoptions:prepend("globals")
 opt.termguicolors = true
+opt.number = true
+opt.relativenumber = true
+opt.scrolloff = 8
+opt.sidescrolloff = 8
 opt.cursorline = true
 opt.title = true
 opt.winborder = "none"
-opt.cmdheight = 0
+opt.completeopt = {"menu", "menuone", "popup", "noselect"}
+opt.conceallevel = 2
+opt.wrap = false
+opt.linebreak = true
+opt.foldlevel = 999
 opt.guicursor:prepend({"a:Cursor"})
+do
+  local ui = require("vim._core.ui2")
+  ui.enable({msg = {target = "msg"}})
+end
+opt.cmdheight = 0
 opt.ruler = false
 opt.showmode = false
 opt.showcmd = false
