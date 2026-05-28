@@ -6,6 +6,10 @@ do
 end
 vim.keymap.set({"n", "v"}, "<Space>", "<Nop>", {silent = true})
 vim.keymap.set({"n"}, "<Esc>", "<Cmd>nohlsearch<CR>", {desc = "disable search hl", silent = true})
+vim.keymap.set({"n"}, "gl", "$", {desc = "to the end of the line", silent = true})
+vim.keymap.set({"n"}, "gh", "^", {desc = "to the first non-blank character of the line", silent = true})
+vim.keymap.set({"v"}, "<", "<gv", {silent = true})
+vim.keymap.set({"v"}, ">", ">gv", {silent = true})
 vim.keymap.set({"n"}, "<C-h>", "<C-w>h", {desc = "move to the left window", silent = true})
 vim.keymap.set({"n"}, "<C-j>", "<C-w>j", {desc = "move to the lower window", silent = true})
 vim.keymap.set({"n"}, "<C-k>", "<C-w>k", {desc = "move to the upper window", silent = true})
