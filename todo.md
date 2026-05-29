@@ -27,3 +27,4 @@
 
 # other
 - [ ] replace zpack with vim.pack + lz.n
+- [ ] restucture config based on features

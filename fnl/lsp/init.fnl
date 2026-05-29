@@ -9,7 +9,7 @@
             :virtual_text true
             :signs {:text {s.ERROR ""
                            s.WARN ""
-                           s.HINT ""
+                           s.HINT ""
                            s.INFO ""}
                     :numhl {s.ERROR :DiagnosticSignError
                             s.WARN :DiagnosticSignWarn

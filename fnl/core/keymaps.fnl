@@ -4,12 +4,12 @@
   (set g.mapleader " ")
   (set g.maplocalleader ","))
 
-(map :nv :<Space> :<Nop>)
+(map :nvo :<Space> :<Nop>)
 (map :n :<Esc> (cmd :nohlsearch) {:desc "disable search hl"})
 
 ;; helix like $ and ^ shortcuts
-(map :n :gl "$" {:desc "to the end of the line"})
-(map :n :gh "^" {:desc "to the first non-blank character of the line"})
+(map :nvo :gl "$" {:desc "to the end of the line"})
+(map :nvo :gh "^" {:desc "to the first non-blank character of the line"})
 
 ;; don't leave visual mode when indenting
 (map :v "<" :<gv)
