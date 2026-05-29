@@ -3,7 +3,7 @@
 - [ ] autopairs
 - [ ] ts textobjects
 - [ ] keymaps
-- [ ] file manager
+- [x] file manager
 
 ## coding
 - [ ] typst/latex/markdown support
@@ -12,10 +12,10 @@
 
 ## ui
 - [ ] theme
-- [ ] modeline
+- [x] modeline
 - [ ] prettier quickfix
 - [ ] action anims (tiny-glimmer.nvim)
-- [ ] gitsigns
+- [x] gitsigns
 - [ ] lightbulb
 - [ ] inline diagnostics
 - [ ] code action ui
