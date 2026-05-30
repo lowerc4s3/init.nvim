@@ -9,4 +9,6 @@ do
 end
 require("core")
 require("pack")
-return require("lsp")
+require("lsp")
+vim.cmd.colorscheme("oxocarbon")
+return require("highlights")

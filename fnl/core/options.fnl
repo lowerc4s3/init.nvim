@@ -1,7 +1,5 @@
 (local opt vim.opt)
 
-(vim.cmd.colorscheme :catppuccin)
-
 ;;; identation
 (set opt.expandtab true)
 (set opt.smarttab true) ; indent by shiftwidth

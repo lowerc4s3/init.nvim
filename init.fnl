@@ -27,3 +27,6 @@
 (require :core)
 (require :pack)
 (require :lsp)
+
+(vim.cmd.colorscheme :oxocarbon)
+(require :highlights)

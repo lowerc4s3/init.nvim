@@ -1,6 +1,5 @@
 -- [nfnl] fnl/core/options.fnl
 local opt = vim.opt
-vim.cmd.colorscheme("catppuccin")
 opt.expandtab = true
 opt.smarttab = true
 opt.autoindent = true
