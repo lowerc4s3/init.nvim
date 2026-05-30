@@ -26,6 +26,7 @@
                        :list {:selection {:preselect false :auto_insert true}}
                        :menu {:draw {:columns [{1 :kind_icon}
                                                {1 :label :gap 1}]
+                                     :padding 0
                                      :components {:label {:text col-text
                                                           :highlight col-hl}
                                                   :kind_icon {:text get-kind-icon}}}}}

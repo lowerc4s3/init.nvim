@@ -1,5 +1,5 @@
 -- [nfnl] fnl/core/neovide.fnl
-vim.opt.linespace = 13
+vim.opt.linespace = 11
 do
   local pad = 10
   vim.g["neovide_padding_top"] = pad
