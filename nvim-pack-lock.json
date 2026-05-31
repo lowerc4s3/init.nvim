@@ -18,11 +18,11 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "diffview.nvim": {
-      "rev": "e4871fdf697057e036690d6ad9ebba334711cfb6",
+      "rev": "06685829495ac5d7367a0693ef02ef0d6b97fda0",
       "src": "https://github.com/dlyongemallo/diffview.nvim"
     },
     "fzf-lua": {
-      "rev": "71b45a044c4ef6ecb1910880ef642d5a0e1c02e9",
+      "rev": "e3a71496027f2e3c4a60340170c04d66053d5c4c",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gitsigns.nvim": {
@@ -34,7 +34,7 @@
       "src": "https://github.com/Wansmer/langmapper.nvim"
     },
     "leap.nvim": {
-      "rev": "940bc5e716a8cde63bd47e1b13f30fd9075ec0c8",
+      "rev": "59d70b1bdf8e76e0637e6ebcc150fb6767f67fc5",
       "src": "https://codeberg.org/andyg/leap.nvim"
     },
     "mini.icons": {
@@ -42,7 +42,7 @@
       "src": "https://github.com/nvim-mini/mini.icons"
     },
     "mini.surround": {
-      "rev": "c375ea503646fe8393593b5fb8a40406eaa437b2",
+      "rev": "d12d8e6ea8e4d9d3e6fb0e3ff11c84fcce2299ac",
       "src": "https://github.com/nvim-mini/mini.surround"
     },
     "minibuffer.nvim": {
@@ -66,7 +66,7 @@
       "src": "https://github.com/kosayoda/nvim-lightbulb"
     },
     "nvim-lspconfig": {
-      "rev": "a4ed4e761c400849e8c9f8bda33e5083f890268c",
+      "rev": "9573948c38bfabeec353ae7dd7d3ffec4c506a6b",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "oil.nvim": {
@@ -74,7 +74,7 @@
       "src": "https://github.com/stevearc/oil.nvim"
     },
     "oxocarbon.nvim": {
-      "rev": "a7ba74849a00546a311f8c146320b433900393e7",
+      "rev": "320ff0fc5b0fcdd914c3bdbcc7b59d97f7a53ab1",
       "src": "https://github.com/nyoom-engineering/oxocarbon.nvim"
     },
     "parinfer-rust": {
@@ -86,7 +86,7 @@
       "src": "https://github.com/sschleemilch/slimline.nvim"
     },
     "ts-enable.nvim": {
-      "rev": "b99a87126722ee9e16b604bd5f2786f2c47d23ad",
+      "rev": "caa312e0b1b1b2e99943792526d64445dcf74d48",
       "src": "https://github.com/VonHeikemen/ts-enable.nvim",
       "version": "'v2.x'"
     },
@@ -99,7 +99,7 @@
       "src": "https://github.com/folke/which-key.nvim"
     },
     "zpack.nvim": {
-      "rev": "228f76f686b4d47fab570c0bf4120ce7b6988aaa",
+      "rev": "d52f0ddf85cf8fe74952f7825d3f9ea5f31b2968",
       "src": "https://github.com/zuqini/zpack.nvim"
     }
   }
