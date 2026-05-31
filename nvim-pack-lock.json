@@ -1,8 +1,9 @@
 {
   "plugins": {
     "bento.nvim": {
-      "rev": "3b529fb1ff417fe0ab5759a712372a6a64152271",
-      "src": "https://github.com/serhez/bento.nvim"
+      "rev": "83d5d182a6d46af612386d582875e1079299ba11",
+      "src": "https://github.com/lowerc4s3/bento.nvim",
+      "version": "'v2/bugfix'"
     },
     "blink.cmp": {
       "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
