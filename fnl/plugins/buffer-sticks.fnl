@@ -4,6 +4,7 @@
   (collect [hi target (pairs tbl)]
     (values hi {:link target})))
 
+;; buffer indicator and picker
 {:src (gh :ahkohd/buffer-sticks.nvim)
  :lazy false
  :keys (specmap :n :<Tab> #(_G.BufferSticks.jump) {:desc "Jump to buffer"})

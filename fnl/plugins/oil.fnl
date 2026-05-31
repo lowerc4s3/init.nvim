@@ -1,5 +1,6 @@
 (import-macros {: gh : specmap : cmd} :lib.macros)
 
+;; editable file explorer
 {:src (gh :stevearc/oil.nvim)
  :dependencies {:src (gh :nvim-mini/mini.icons)}
  :lazy false

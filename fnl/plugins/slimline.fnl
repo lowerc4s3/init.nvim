@@ -1,5 +1,6 @@
 (import-macros {: gh} :lib.macros)
 
+;; statusline
 {:src (gh :sschleemilch/slimline.nvim)
  :dependencies {:src (gh :nvim-mini/mini.icons)}
  :opts {:style :fg
