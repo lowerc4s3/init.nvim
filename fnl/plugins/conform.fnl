@@ -15,4 +15,4 @@
                               {:timeout_ms 500})))}
  :config (fn [_ opts]
            (! (require :conform) :setup opts)
-           (set vim.opt.formatexpr "v:lua.require'conform'.formatexpr()"))}
+           (set vim.o.formatexpr "v:lua.require'conform'.formatexpr()"))}
