@@ -1,14 +1,13 @@
 {
   "plugins": {
-    "bento.nvim": {
-      "rev": "83d5d182a6d46af612386d582875e1079299ba11",
-      "src": "https://github.com/lowerc4s3/bento.nvim",
-      "version": "'v2/bugfix'"
-    },
     "blink.cmp": {
       "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
       "src": "https://github.com/saghen/blink.cmp",
       "version": "'v1'"
+    },
+    "buffer-sticks.nvim": {
+      "rev": "aa15783b2b997d43bd6046ec96a614dfcc78afa7",
+      "src": "https://github.com/ahkohd/buffer-sticks.nvim"
     },
     "colorful-menu.nvim": {
       "rev": "13f9b7eaa9cd2901b4f8915cfb2483c3be4c8c20",
