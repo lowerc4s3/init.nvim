@@ -1,7 +1,6 @@
 -- [nfnl] after/ftplugin/fennel.fnl
-local opt = vim.opt
 local width = 2
-opt.shiftwidth = width
-opt.tabstop = width
-opt.softtabstop = width
+vim.bo.shiftwidth = width
+vim.bo.tabstop = width
+vim.bo.softtabstop = width
 return nil

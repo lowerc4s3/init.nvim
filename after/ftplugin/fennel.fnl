@@ -1,6 +1,4 @@
-(local opt vim.opt)
-
 (let [width 2]
-  (set opt.shiftwidth width)
-  (set opt.tabstop width)
-  (set opt.softtabstop width))
+  (set vim.bo.shiftwidth width)
+  (set vim.bo.tabstop width)
+  (set vim.bo.softtabstop width))
