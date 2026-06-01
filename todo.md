@@ -22,8 +22,7 @@
 
 # misc
 - [ ] terminal
-- [ ] project management
-- [ ] session management
+- [x] project management
 
 # other
 - [ ] replace zpack with vim.pack + lz.n
