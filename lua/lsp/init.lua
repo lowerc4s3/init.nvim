@@ -23,9 +23,9 @@ local function on_attach(_3_)
   local buf = _3_.buf
   local _arg_4_ = _3_.data
   local client_id = _arg_4_.client_id
-  local client = vim.lsp.get_client_by_id(client_id)
+  local _3fclient = vim.lsp.get_client_by_id(client_id)
   local doc_hl = "textDocument/documentHighlight"
-  if (client and client:supports_method(doc_hl, buf)) then
+  if (_3fclient and _3fclient:supports_method(doc_hl, buf)) then
     return setup_word_ref_hl(buf)
   else
     return nil

@@ -31,9 +31,9 @@
                           (autocmd-clear {:buffer buf :group :WordLspHighlight}))})))
 
 (fn on-attach [{: buf :data {: client_id}}]
-  (let [client (vim.lsp.get_client_by_id client_id)
+  (let [?client (vim.lsp.get_client_by_id client_id)
         doc-hl :textDocument/documentHighlight]
-    (when (and client (client:supports_method doc-hl buf))
+    (when (and ?client (?client:supports_method doc-hl buf))
       (setup-word-ref-hl buf))))
 
 (autocmd :LspAttach {:group (augroup :LspAttachGroup {:clear true})
