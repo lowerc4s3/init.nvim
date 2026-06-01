@@ -1,13 +1,17 @@
+(local {: str?} (require :lib.core))
+
 (lambda assoc [tbl k v]
   (tset tbl k v)
   tbl)
 
-(lambda cmd [command]
+(lambda cmd [name]
   "create a command string in form of \":%command<CR>\""
-  (.. :<Cmd> command :<CR>))
+  (assert-compile (str? name) "expected string for name")
+  (.. "<Cmd>" name "<CR>"))
 
 (lambda plug [name]
   "create a <Plug>(%name) keymap string"
+  (assert-compile (str? name) "expected string for name")
   (.. "<Plug>(" name ")"))
 
 (lambda split-mode-str [modes]
@@ -22,6 +26,9 @@
 (lambda map [modes lhs rhs ?opts]
   "define a mapping. modes are defined as a string of mode chars.
   if `opts` or `opts.silent` are nil, then silent mapping is inferred"
+  (assert-compile (str? modes) "expected string for modes")
+  (assert-compile (or (not ?opts) (table? ?opts))
+                  "expected table or nil for ?opts")
   (let [opts (merge-opts-with-default ?opts)]
     `(vim.keymap.set ,(split-mode-str modes) ,lhs ,rhs ,opts)))
 
@@ -29,23 +36,38 @@
   "define a mapping for `keys` field in the plugin spec.
   modes are defined as a string of mode chars.
   if `opts` or `opts.silent` are nil, then silent mapping is inferred"
-  (let [opts (merge-opts-with-default ?opts)]
-    (tset opts 1 lhs)
-    (tset opts 2 rhs)
-    (set opts.modes modes)
-    opts))
+  (assert-compile (str? modes) "expected string for modes")
+  (assert-compile (or (not ?opts) (table? ?opts))
+                  "expected table or nil for ?opts")
+  (doto (merge-opts-with-default ?opts)
+    (tset 1 lhs)
+    (tset 2 rhs)
+    (tset :mode modes)))
 
-(lambda gh [name]
+(lambda gh [repo-name]
   "make a github source link"
-  (.. "https://github.com/" name))
+  (assert-compile (str? repo-name) "expected string for repo-name")
+  (.. "https://github.com/" repo-name))
 
-(lambda cb [name]
+(lambda cb [repo-name]
   "make a codeberg source link"
-  (.. "https://codeberg.org/" name))
+  (assert-compile (str? repo-name) "expected string for repo-name")
+  (.. "https://codeberg.org/" repo-name))
+
+(fn tx [& args]
+  "mixed sequential and associative tables at compile time.
+  macro by olical on github"
+  (let [to-merge (when (table? (. args (length args)))
+                   (table.remove args))]
+    (when to-merge
+      (each [key value (pairs to-merge)]
+        (tset args key value)))
+    args))
 
 {: cmd
  : map
  : plug
  : gh
  : cb
- : specmap}
+ : specmap
+ : tx}
