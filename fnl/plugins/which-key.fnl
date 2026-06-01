@@ -1,4 +1,4 @@
-(import-macros {: gh : !} :lib.macros)
+(import-macros {: gh} :lib.macros)
 
 ;; keymap cheatsheet
 {:src (gh :folke/which-key.nvim)

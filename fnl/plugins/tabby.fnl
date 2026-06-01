@@ -1,4 +1,4 @@
-(import-macros {: gh : !} :lib.macros)
+(import-macros {: gh} :lib.macros)
 
 (fn render [line]
   (let [tabs (line.tabs)

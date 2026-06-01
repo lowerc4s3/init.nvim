@@ -1,4 +1,4 @@
-(import-macros {: gh : specmap : cmd : !} :lib.macros)
+(import-macros {: gh : specmap : cmd} :lib.macros)
 
 (macro fzf [command]
   (assert-compile (sym? command) "expected symbol for a command")
@@ -18,9 +18,9 @@
                           :ctrl-Q #(_G.FzfLua.actions.file_sel_to_qf $...)
                           :alt-Q #(_G.FzfLua.actions.file_sel_to_ll $...)}}}
  :config (fn [_ opts]
-           (! (require :fzf-lua) :setup opts)
-           (! (require :which-key) :add [{1 :<Leader>s :group :search}
-                                         {1 :<Leader>h :group :help}]))
+           ((. (require :fzf-lua) :setup) opts)
+           ((. (require :which-key) :add) [{1 :<Leader>s :group :search}
+                                           {1 :<Leader>h :group :help}]))
  :keys [(specmap :n :<Leader><Leader> (fzf files) {:desc "open cwd file"})
         (specmap :n "<Leader>," (fzf buffers) {:desc "switch buffer"})
         (specmap :n "<Leader>'" (fzf resume) {:desc "resume last search"})
