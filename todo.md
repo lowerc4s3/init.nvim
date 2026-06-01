@@ -11,7 +11,7 @@
 - [ ] dap
 
 ## ui
-- [ ] theme
+- [x] theme
 - [x] modeline
 - [ ] prettier quickfix
 - [ ] action anims (tiny-glimmer.nvim)
