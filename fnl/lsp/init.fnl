@@ -1,12 +1,12 @@
-(import-macros {: map} :lib.macros)
-
 (local autocmd vim.api.nvim_create_autocmd)
 (local augroup vim.api.nvim_create_augroup)
 (local autocmd-clear vim.api.nvim_clear_autocmds)
 
 (let [s vim.diagnostic.severity
       opts {:severity_sort true
-            :virtual_text true
+            :virtual_lines {:current_line true}
+            :virtual_text {:virt_text_pos :eol_right_align
+                           :current_line false}
             :signs {:text {s.ERROR ""
                            s.WARN ""
                            s.HINT ""
