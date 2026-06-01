@@ -15,7 +15,6 @@
                                :move_down :<C-j>}
                         :title "/"}}
         :winblend 100
-        :preview {:enabled false}
         :filter {:names ["^$"]} ; hide unnamed buffers
         :highlights (link-hi {:active :Normal
                               :list_selected "@function"

@@ -85,6 +85,10 @@
       "rev": "845bfbb9916687cba5b6bae088c9eab70dbb83a3",
       "src": "https://github.com/eraserhd/parinfer-rust"
     },
+    "project.nvim": {
+      "rev": "124f2a5015fad619a57a650fab3c2eef73a4a089",
+      "src": "https://github.com/DrKJeff16/project.nvim"
+    },
     "slimline.nvim": {
       "rev": "6e1387e69e222957ff87e5ddc61470d4e04ac683",
       "src": "https://github.com/sschleemilch/slimline.nvim"
