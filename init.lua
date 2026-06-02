@@ -8,7 +8,15 @@ do
   end
 end
 require("core")
-require("pack")
+if vim.g.neovide then
+  require("neovide")
+else
+end
+require("build-hooks")
+require("initial")
+require("ui")
+require("editor")
+require("navigation")
 require("lsp")
-vim.cmd.colorscheme("oxocarbon")
+require("code")
 return require("highlights")

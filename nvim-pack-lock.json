@@ -18,11 +18,11 @@
       "src": "https://github.com/stevearc/conform.nvim"
     },
     "diffview.nvim": {
-      "rev": "06685829495ac5d7367a0693ef02ef0d6b97fda0",
+      "rev": "1ff9593c4286b78bc42fffbb7b7220173904d963",
       "src": "https://github.com/dlyongemallo/diffview.nvim"
     },
     "fzf-lua": {
-      "rev": "e3a71496027f2e3c4a60340170c04d66053d5c4c",
+      "rev": "d340ade20dfe4ef87e6f9a63b9905be91965b5dc",
       "src": "https://github.com/ibhagwan/fzf-lua"
     },
     "gitsigns.nvim": {
@@ -82,7 +82,7 @@
       "src": "https://github.com/nyoom-engineering/oxocarbon.nvim"
     },
     "parinfer-rust": {
-      "rev": "845bfbb9916687cba5b6bae088c9eab70dbb83a3",
+      "rev": "7f13acea20f03228f72156cec4fa4e49f0d5d1e5",
       "src": "https://github.com/eraserhd/parinfer-rust"
     },
     "project.nvim": {

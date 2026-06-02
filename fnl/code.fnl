@@ -2,7 +2,9 @@
 (local {: autocmd} (require :lib.nvim))
 (local {: autoload} (require :nfnl.module))
 
-(vim.pack.add [(gh :lewis6991/gitsigns.nvim)
+(vim.pack.add [(gh :Olical/nfnl)
+               (gh :eraserhd/parinfer-rust)
+               (gh :lewis6991/gitsigns.nvim)
                (gh :dlyongemallo/diffview.nvim)
                (gh :NeogitOrg/neogit)
                (gh :stevearc/conform.nvim)])

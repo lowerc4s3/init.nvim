@@ -5,6 +5,7 @@ local augroup = _local_1_.augroup
 local auclear = _local_1_.auclear
 local lsp = vim.lsp
 local diagnostic = vim.diagnostic
+vim.pack.add({"https://github.com/neovim/nvim-lspconfig"})
 do
   local s = diagnostic.severity
   local opts = {severity_sort = true, virtual_lines = {current_line = true}, virtual_text = {virt_text_pos = "eol_right_align", current_line = false}, signs = {text = {[s.ERROR] = "\238\170\135", [s.WARN] = "\238\169\172", [s.HINT] = "\239\144\128", [s.INFO] = "\238\169\180"}, numhl = {[s.ERROR] = "DiagnosticSignError", [s.WARN] = "DiagnosticSignWarn", [s.HINT] = "DiagnosticSignHint", [s.WARN] = "DiagnosticSignWarn"}}}

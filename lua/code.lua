@@ -3,7 +3,7 @@ local _local_1_ = require("lib.nvim")
 local autocmd = _local_1_.autocmd
 local _local_2_ = require("nfnl.module")
 local autoload = _local_2_.autoload
-vim.pack.add({"https://github.com/lewis6991/gitsigns.nvim", "https://github.com/dlyongemallo/diffview.nvim", "https://github.com/NeogitOrg/neogit", "https://github.com/stevearc/conform.nvim"})
+vim.pack.add({"https://github.com/Olical/nfnl", "https://github.com/eraserhd/parinfer-rust", "https://github.com/lewis6991/gitsigns.nvim", "https://github.com/dlyongemallo/diffview.nvim", "https://github.com/NeogitOrg/neogit", "https://github.com/stevearc/conform.nvim"})
 do
   local neogit = require("neogit")
   local opts = {disable_hint = true}

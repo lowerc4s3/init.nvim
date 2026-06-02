@@ -1,5 +1,8 @@
+(import-macros {: gh} :lib.macros)
 (local {: autocmd : augroup : auclear} (require :lib.nvim))
 (local {: lsp : diagnostic} vim)
+
+(vim.pack.add [(gh :neovim/nvim-lspconfig)])
 
 (let [s diagnostic.severity
       opts {:severity_sort true

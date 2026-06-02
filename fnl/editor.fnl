@@ -6,7 +6,7 @@
                (gh :nvim-mini/mini.jump)
                (gh :nvim-mini/mini.surround)
                (gh :kawre/neotab.nvim)
-               (gh :VonHeikemen/ts-enable.nvim)])
+               {:src (gh :VonHeikemen/ts-enable.nvim) :version :v2.x}])
 
 ((. (require :mini.jump) :setup))
 (hi :MiniJump {:link :CurSearch})

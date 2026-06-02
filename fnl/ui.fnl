@@ -6,6 +6,8 @@
                (gh :folke/which-key.nvim)
                (gh :nanozuki/tabby.nvim)])
 
+(vim.cmd.colorscheme :oxocarbon)
+
 ;;;
 ;;; mini.icons
 ;;;

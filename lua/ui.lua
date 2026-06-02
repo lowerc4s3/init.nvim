@@ -1,5 +1,6 @@
 -- [nfnl] fnl/ui.fnl
 vim.pack.add({"https://github.com/nyoom-engineering/oxocarbon.nvim", "https://github.com/nvim-mini/mini.icons", "https://github.com/sschleemilch/slimline.nvim", "https://github.com/folke/which-key.nvim", "https://github.com/nanozuki/tabby.nvim"})
+vim.cmd.colorscheme("oxocarbon")
 do
   local mini_icons = require("mini.icons")
   local opts = {file = {LICENSE = {glyph = "\239\146\149"}, ["LICENSE.md"] = {glyph = "\239\146\149"}, ["LICENSE.txt"] = {glyph = "\239\146\149"}}, filetype = {typst = {glyph = "\239\141\191"}}, lsp = {class = {glyph = "\243\177\161\160"}, color = {glyph = "\243\176\140\129"}, constant = {glyph = "\243\176\143\191"}, field = {glyph = "\243\176\134\166"}, ["function"] = {glyph = "\243\176\152\167"}, keyword = {glyph = "\243\176\146\160"}, method = {glyph = "\243\176\152\167"}, snippet = {glyph = "\243\176\134\143"}, string = {glyph = "\243\176\137\190"}, struct = {glyph = "\243\177\161\160"}, text = {glyph = "\243\177\140\175"}, typeparameter = {glyph = "*"}, value = {glyph = "\206\177"}, variable = {glyph = "\243\176\134\166"}}}

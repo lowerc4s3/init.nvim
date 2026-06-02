@@ -33,18 +33,18 @@
   (fzf.setup opts))
 
 (let [fzf _G.FzfLua]
-  (map :n :<Leader><Leader> (fzf.files) {:desc "open cwd file"})
-  (map :n "<Leader>," (fzf.buffers) {:desc "switch buffer"})
-  (map :n "<Leader>'" (fzf.resume) {:desc "resume last search"})
-  (map :n :<Leader>sf (fzf.files) {:desc "cwd file"})
-  (map :n :<Leader>sb (fzf.buffers) {:desc :buffer})
-  (map :n :<Leader>sw (fzf.live_grep) {:desc "live grep"})
-  (map :n :<Leader>sr (fzf.history) {:desc "recent file"})
-  (map :n :<Leader>ss (fzf.builtin) {:desc "select picker"})
-  (map :n :<Leader>hh (fzf.helptags) {:desc :helptags})
-  (map :n :<Leader>hk (fzf.keymaps) {:desc :keymaps})
-  (map :n :<Leader>ho (fzf.nvim_options) {:desc :options})
-  (map :n :<Leader>hH (fzf.highlights) {:desc :highlights}))
+  (map :n :<Leader><Leader> fzf.files {:desc "open cwd file"})
+  (map :n "<Leader>," fzf.buffers {:desc "switch buffer"})
+  (map :n "<Leader>'" fzf.resume {:desc "resume last search"})
+  (map :n :<Leader>sf fzf.files {:desc "cwd file"})
+  (map :n :<Leader>sb fzf.buffers {:desc :buffer})
+  (map :n :<Leader>sw fzf.live_grep {:desc "live grep"})
+  (map :n :<Leader>sr fzf.history {:desc "recent file"})
+  (map :n :<Leader>ss fzf.builtin {:desc "select picker"})
+  (map :n :<Leader>hh fzf.helptags {:desc :helptags})
+  (map :n :<Leader>hk fzf.keymaps {:desc :keymaps})
+  (map :n :<Leader>ho fzf.nvim_options {:desc :options})
+  (map :n :<Leader>hH fzf.highlights {:desc :highlights}))
 
 ;;;
 ;;; buffer-sticks
