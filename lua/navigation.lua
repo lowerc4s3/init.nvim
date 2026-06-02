@@ -45,6 +45,9 @@ local function _4_()
   return _G.BufferSticks.jump()
 end
 vim.keymap.set({"n"}, "<Tab>", _4_, {desc = "jump to buffer", silent = true})
-local project = require("project")
-local opts = {fzf_lua = {enabled = true, show = "names"}, scope_chdir = "tab", lsp = {enabled = false}}
-return project.setup(opts)
+do
+  local project = require("project")
+  local opts = {fzf_lua = {enabled = true, show = "names"}, scope_chdir = "tab", lsp = {enabled = false}}
+  project.setup(opts)
+end
+return vim.keymap.set({"n"}, "<Leader>sp", "<Cmd>Project fzf-lua<CR>", {desc = "project", silent = true})

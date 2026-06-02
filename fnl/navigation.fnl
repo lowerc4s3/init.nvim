@@ -82,3 +82,5 @@
             :scope_chdir :tab
             :lsp {:enabled false}}]
   (project.setup opts))
+
+(map :n :<Leader>sp (cmd "Project fzf-lua") {:desc "project"})
