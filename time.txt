@@ -1,0 +1,828 @@
+--- Startup times for process: Primary (or UI client) ---
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.001  000.001: --- NVIM STARTING ---
+000.187  000.186: event init
+000.388  000.201: early init
+000.962  000.574: locale set
+001.030  000.069: init first window
+001.746  000.716: inits 1
+001.763  000.017: window checked
+001.771  000.008: parsing arguments
+002.743  000.073  000.073: require('vim._core.shared')
+002.864  000.008  000.008: require('string.buffer')
+002.915  000.085  000.078: require('vim.inspect')
+002.991  000.061  000.061: require('vim._core.options')
+002.994  000.246  000.100: require('vim._core.editor')
+003.066  000.071  000.071: require('vim._core.system')
+003.068  000.459  000.069: require('vim._init_packages')
+003.071  000.841: init lua interpreter
+008.371  005.300: nvim_ui_attach
+008.865  000.494: nvim_set_client_info
+008.869  000.004: --- NVIM STARTED ---
+
+--- Startup times for process: Embedded ---
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.001  000.001: --- NVIM STARTING ---
+000.151  000.150: event init
+000.325  000.173: early init
+000.893  000.569: locale set
+000.968  000.075: init first window
+001.608  000.640: inits 1
+001.631  000.024: window checked
+001.641  000.010: parsing arguments
+002.481  000.074  000.074: require('vim._core.shared')
+002.602  000.006  000.006: require('string.buffer')
+002.643  000.074  000.067: require('vim.inspect')
+002.715  000.060  000.060: require('vim._core.options')
+002.718  000.231  000.097: require('vim._core.editor')
+002.792  000.073  000.073: require('vim._core.system')
+002.795  000.446  000.067: require('vim._init_packages')
+002.797  000.710: init lua interpreter
+005.378  002.581: expanding arguments
+005.418  000.040: inits 2
+005.792  000.374: init highlight
+005.794  000.002: waiting for UI
+006.045  000.251: done waiting for UI
+006.052  000.007: clear screen
+006.316  000.021  000.021: require('vim.keymap')
+007.761  000.336  000.336: sourcing nvim_exec2()
+007.815  000.009  000.009: require('vim._core.log')
+011.801  005.739  005.373: require('vim._core.defaults')
+011.807  000.016: init default mappings & autocommands
+012.940  000.101  000.101: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/ftplugin.vim
+013.091  000.044  000.044: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/indent.vim
+013.615  000.125  000.125: require('vim.fs')
+013.976  000.355  000.355: require('vim.uri')
+013.997  000.558  000.078: require('vim.loader')
+014.800  000.199  000.199: require('vim._async')
+014.815  000.794  000.595: require('vim.pack')
+014.934  000.006  000.006: require('vim.F')
+016.955  000.722  000.722: require('core.keymaps')
+019.374  000.520  000.520: require('vim._core.ui2')
+019.884  000.469  000.469: require('vim._core.ui2.cmdline')
+020.307  000.418  000.418: require('vim._core.ui2.messages')
+020.680  003.716  002.309: require('core.options')
+020.995  000.310  000.310: require('core.autocmd')
+021.005  005.073  000.325: require('core')
+022.866  000.380  000.380: require('zpack.api')
+022.881  000.942  000.562: require('zpack')
+023.151  000.262  000.262: require('zpack.state')
+023.423  000.268  000.268: require('zpack.validate')
+024.442  000.757  000.757: require('zpack.utils')
+024.463  001.034  000.277: require('zpack.deprecation')
+024.695  000.228  000.228: require('zpack.import')
+025.402  000.281  000.281: require('nfnl.module')
+025.414  000.524  000.244: require('plugins.blink')
+025.817  000.254  000.254: require('plugins.buffer-sticks')
+026.013  000.176  000.176: require('plugins.conform')
+026.344  000.206  000.206: require('plugins.fzf-lua')
+026.725  000.233  000.233: require('plugins.gitsigns')
+026.899  000.161  000.161: require('plugins.langmapper')
+027.205  000.179  000.179: require('plugins.leap')
+027.417  000.157  000.157: require('plugins.lightbulb')
+027.760  000.208  000.208: require('plugins.lspconfig')
+027.967  000.185  000.185: require('plugins.mini-icons')
+028.264  000.238  000.238: require('plugins.mini-jump')
+028.503  000.225  000.225: require('plugins.neogit')
+029.041  000.358  000.358: require('plugins.neotab')
+029.448  000.347  000.347: require('plugins.nfnl')
+029.740  000.269  000.269: require('plugins.oil')
+030.004  000.228  000.228: require('plugins.oxocarbon')
+030.171  000.157  000.157: require('plugins.parinfer')
+030.476  000.196  000.196: require('plugins.project')
+030.669  000.173  000.173: require('plugins.slimline')
+030.854  000.165  000.165: require('plugins.surround')
+031.031  000.168  000.168: require('plugins.tabby')
+031.200  000.160  000.160: require('plugins.treesitter')
+031.455  000.189  000.189: require('plugins.which-key')
+031.738  000.261  000.261: require('zpack.hooks')
+031.979  000.221  000.221: require('zpack.merge')
+032.813  000.227  000.227: require('zpack.keymap')
+032.818  000.478  000.251: require('zpack.plugin_loader')
+033.024  000.204  000.204: require('zpack.lazy_trigger.refire')
+033.028  000.863  000.180: require('zpack.lazy_trigger.event')
+033.260  000.229  000.229: require('zpack.lazy_trigger.ft')
+033.487  000.225  000.225: require('zpack.lazy_trigger.cmd')
+033.718  000.227  000.227: require('zpack.lazy_trigger.keys')
+033.725  001.743  000.198: require('zpack.lazy')
+035.397  000.236  000.236: require('zpack.registration')
+037.896  000.668  000.668: require('zpack.module_loader')
+038.635  000.729  000.729: require('zpack.startup')
+055.434  000.203  000.203: require('langmapper.config')
+055.644  000.203  000.203: require('langmapper.helpers')
+055.651  000.710  000.305: require('langmapper.utils')
+055.658  003.244  002.534: require('langmapper')
+058.605  000.158  000.158: require('buffer-sticks.config')
+058.752  000.143  000.143: require('buffer-sticks.state')
+059.091  000.152  000.152: require('buffer-sticks.buffers')
+059.095  000.339  000.188: require('buffer-sticks.window')
+059.379  000.136  000.136: require('buffer-sticks.fuzzy')
+059.383  000.287  000.150: require('buffer-sticks.render')
+059.556  000.171  000.171: require('buffer-sticks.highlights')
+059.848  000.141  000.141: require('buffer-sticks.preview')
+059.852  000.293  000.152: require('buffer-sticks.list')
+059.855  001.598  000.207: require('buffer-sticks')
+060.448  000.271  000.271: require('conform')
+062.148  001.663  001.663: require('mini.icons')
+065.757  000.195  000.195: require('vim.func')
+065.982  000.179  000.179: require('vim.func._memoize')
+066.003  001.341  000.967: require('fzf-lua.utils')
+066.362  000.154  000.154: require('fzf-lua.lib.base64')
+066.679  000.313  000.313: require('fzf-lua.lib.serpent')
+066.686  000.680  000.213: require('fzf-lua.libuv')
+066.696  002.591  000.569: require('fzf-lua.path')
+067.227  000.266  000.266: require('fzf-lua.actions')
+067.746  000.219  000.219: require('fzf-lua.class')
+067.775  000.544  000.325: require('fzf-lua.devicons')
+068.426  000.233  000.233: require('fzf-lua.previewer')
+069.031  001.254  001.020: require('fzf-lua.defaults')
+069.044  002.346  000.282: require('fzf-lua.config')
+069.361  000.040  000.040: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/fzf-lua/autoload/fzf_lua.vim
+069.369  000.213  000.172: sourcing nvim_exec2() called at /Users/lowerc4s3/projects/nuuvim/init.lua:0
+070.625  000.424  000.424: require('fzf-lua.win')
+071.172  000.261  000.261: require('fzf-lua.fzf')
+071.442  000.266  000.266: require('fzf-lua.shell')
+071.466  000.836  000.309: require('fzf-lua.core')
+071.758  000.278  000.278: require('fzf-lua.make_entry')
+071.843  008.957  002.269: require('fzf-lua')
+073.970  000.196  000.196: require('fzf-lua.ctx')
+074.160  000.186  000.186: require('fzf-lua.providers.ui_select')
+074.363  000.196  000.196: require('vim.ui')
+074.535  000.169  000.169: require('which-key')
+075.480  000.360  000.360: require('mini.jump')
+077.617  000.396  000.396: require('oil')
+078.040  000.417  000.417: require('oil.ringbuf')
+078.388  000.344  000.344: require('oil.config')
+080.455  001.752  001.752: require('vim.filetype')
+081.306  000.155  000.155: require('oil.log')
+081.343  000.391  000.236: require('oil.fs')
+081.649  000.126  000.126: require('oil.constants')
+081.690  000.345  000.219: require('oil.util')
+082.191  000.126  000.126: require('project.extensions')
+082.439  000.245  000.245: require('project.util')
+082.693  000.250  000.250: require('project.config.defaults')
+082.778  000.857  000.236: require('project.config')
+082.783  001.012  000.155: require('project')
+083.669  000.211  000.211: require('project.util.globtopattern')
+085.217  000.225  000.225: require('project.util.path')
+086.183  000.338  000.338: require('project.util.log')
+086.460  000.266  000.266: require('project.commands')
+086.756  000.269  000.269: require('project.core')
+087.185  000.375  000.375: require('project.util.history')
+089.622  000.360  000.360: require('project.extensions.fzf-lua')
+090.253  000.211  000.211: require('slimline.highlights')
+090.267  000.492  000.281: require('slimline')
+091.025  000.538  000.538: require('vim.diagnostic')
+091.030  000.760  000.222: require('slimline.defaults')
+091.233  000.169  000.169: require('slimline.components.mode')
+091.465  000.161  000.161: require('slimline.components.recording')
+091.626  000.155  000.155: require('slimline.components.path')
+091.786  000.155  000.155: require('slimline.components.git')
+091.995  000.204  000.204: require('slimline.components.diagnostics')
+092.159  000.158  000.158: require('slimline.components.filetype_lsp')
+092.313  000.148  000.148: require('slimline.components.selectioncount')
+092.466  000.148  000.148: require('slimline.components.searchcount')
+092.613  000.142  000.142: require('slimline.components.progress')
+093.088  000.426  000.426: require('mini.surround')
+096.531  000.291  000.291: require('tabby.module.highlight')
+096.539  000.616  000.325: require('tabby.module.builder')
+097.006  000.211  000.211: require('tabby.module.api')
+097.393  000.194  000.194: require('tabby.feature.tab_jumper')
+097.408  000.398  000.203: require('tabby.feature.tabs')
+097.586  000.175  000.175: require('tabby.feature.wins')
+097.790  000.202  000.202: require('tabby.feature.bufs')
+097.794  001.253  000.266: require('tabby.feature.lines')
+098.443  000.290  000.290: require('tabby.module.file_name_resolver')
+098.479  000.503  000.213: require('tabby.feature.win_name')
+098.491  000.695  000.192: require('tabby.feature.tab_name')
+098.683  000.190  000.190: require('tabby.feature.win_picker')
+098.695  003.281  000.527: require('tabby.tabline')
+098.743  000.020  000.020: sourcing nvim_exec2() called at /Users/lowerc4s3/projects/nuuvim/init.lua:0
+099.065  000.229  000.229: require('ts-enable')
+099.427  000.293  000.293: require('which-key.config')
+103.277  000.340  000.340: require('zpack.commands')
+103.359  082.352  039.782: require('pack')
+105.173  000.859  000.859: require('vim.lsp.protocol')
+105.225  001.171  000.312: require('vim.lsp.log')
+106.126  000.896  000.896: require('vim.lsp.util')
+107.416  000.433  000.433: require('vim.lsp.sync')
+107.473  001.334  000.901: require('vim.lsp._changetracking')
+107.997  000.193  000.193: require('vim.lsp._transport')
+108.007  000.007  000.007: require('vim._core.stringbuffer')
+108.062  000.586  000.386: require('vim.lsp.rpc')
+108.171  004.447  000.461: require('vim.lsp')
+109.031  005.468  001.021: require('lsp.servers')
+109.034  005.672  000.203: require('lsp')
+109.845  000.165  000.165: require('oxocarbon.colorutils')
+111.301  001.885  001.720: require('oxocarbon')
+111.305  001.950  000.065: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/oxocarbon.nvim/colors/oxocarbon.lua
+111.681  000.219  000.219: require('highlights')
+111.684  098.377  001.754: sourcing /Users/lowerc4s3/.config/nuuvim/init.lua
+111.705  001.377: sourcing vimrc file(s)
+112.332  000.219  000.219: sourcing nvim_exec2() called at /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/filetype.lua:0
+112.337  000.315  000.096: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/filetype.lua
+112.766  000.099  000.099: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/syntax/synload.vim
+112.874  000.425  000.327: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/syntax/syntax.vim
+113.682  000.068  000.068: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/which-key.nvim/plugin/which-key.lua
+114.122  000.154  000.154: require('minibuffer')
+114.539  000.148  000.148: require('minibuffer.util')
+114.556  000.430  000.282: require('minibuffer.core')
+114.598  000.694  000.110: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/minibuffer.nvim/plugin/minibuffer.lua
+114.924  000.095  000.095: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/ts-enable.nvim/plugin/ts-enable.lua
+115.265  000.075  000.075: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/tabby.nvim/plugin/tabby.vim
+115.947  000.351  000.351: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/parinfer-rust/plugin/parinfer.vim
+116.327  000.096  000.096: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/nvim-lspconfig/plugin/lspconfig.lua
+117.168  000.618  000.618: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/leap.nvim/plugin/init.lua
+117.801  000.235  000.235: require('gitsigns')
+118.361  000.425  000.425: require('gitsigns.highlight')
+118.557  000.178  000.178: require('gitsigns.debug.log')
+118.938  000.175  000.175: require('gitsigns.util')
+118.949  000.389  000.214: require('gitsigns.config')
+119.530  000.151  000.151: require('gitsigns.debounce')
+119.544  002.085  000.707: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/gitsigns.nvim/plugin/gitsigns.lua
+119.925  000.084  000.084: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/fzf-lua/plugin/fzf-lua.lua
+120.236  000.061  000.061: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/conform.nvim/plugin/conform.lua
+121.398  000.043  000.043: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/gzip.vim
+121.475  000.015  000.015: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/matchit.vim
+121.696  000.165  000.165: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/matchparen.vim
+121.786  000.026  000.026: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/netrwPlugin.vim
+122.004  000.161  000.161: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/rplugin.vim
+122.081  000.015  000.015: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/tarPlugin.vim
+122.160  000.020  000.020: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/tutor.vim
+122.232  000.015  000.015: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/zipPlugin.vim
+122.373  000.079  000.079: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/editorconfig.lua
+122.505  000.068  000.068: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/man.lua
+122.705  000.130  000.130: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/net.lua
+122.851  000.068  000.068: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/osc52.lua
+123.010  000.098  000.098: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/shada.lua
+123.133  000.051  000.051: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/spellfile.lua
+123.233  005.609: loading rtp plugins
+123.548  000.314: loading packages
+123.561  000.013: loading after plugins
+123.574  000.014: inits 3
+124.798  001.224: reading ShaDa
+124.928  000.129: opening buffers
+128.419  003.492: BufEnter autocommands
+128.427  000.007: editing files in windows
+128.461  000.034: --- NVIM STARTED ---
+
+--- Startup times for process: Primary (or UI client) ---
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.001  000.001: --- NVIM STARTING ---
+000.162  000.161: event init
+000.358  000.196: early init
+000.936  000.578: locale set
+001.007  000.071: init first window
+001.636  000.629: inits 1
+001.650  000.014: window checked
+001.658  000.008: parsing arguments
+002.437  000.068  000.068: require('vim._core.shared')
+002.551  000.006  000.006: require('string.buffer')
+002.591  000.070  000.064: require('vim.inspect')
+002.665  000.064  000.064: require('vim._core.options')
+002.667  000.226  000.092: require('vim._core.editor')
+002.745  000.076  000.076: require('vim._core.system')
+002.746  000.430  000.061: require('vim._init_packages')
+002.749  000.661: init lua interpreter
+007.089  004.340: nvim_ui_attach
+007.467  000.379: nvim_set_client_info
+007.472  000.004: --- NVIM STARTED ---
+
+--- Startup times for process: Embedded ---
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.001  000.001: --- NVIM STARTING ---
+000.161  000.161: event init
+000.350  000.189: early init
+000.906  000.555: locale set
+000.985  000.079: init first window
+001.595  000.610: inits 1
+001.618  000.023: window checked
+001.626  000.008: parsing arguments
+002.374  000.075  000.075: require('vim._core.shared')
+002.491  000.007  000.007: require('string.buffer')
+002.534  000.076  000.070: require('vim.inspect')
+002.604  000.060  000.060: require('vim._core.options')
+002.607  000.228  000.092: require('vim._core.editor')
+002.675  000.067  000.067: require('vim._core.system')
+002.678  000.438  000.068: require('vim._init_packages')
+002.680  000.616: init lua interpreter
+005.316  002.636: expanding arguments
+005.361  000.044: inits 2
+005.718  000.358: init highlight
+005.720  000.002: waiting for UI
+005.975  000.254: done waiting for UI
+005.982  000.007: clear screen
+006.255  000.025  000.025: require('vim.keymap')
+007.646  000.239  000.239: sourcing nvim_exec2()
+007.703  000.010  000.010: require('vim._core.log')
+011.863  005.870  005.596: require('vim._core.defaults')
+011.872  000.020: init default mappings & autocommands
+014.495  000.676  000.676: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/ftplugin.vim
+015.925  000.181  000.181: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/indent.vim
+017.219  000.248  000.248: require('vim.fs')
+017.671  000.441  000.441: require('vim.uri')
+017.703  000.833  000.144: require('vim.loader')
+018.739  000.265  000.265: require('vim._async')
+018.758  001.023  000.758: require('vim.pack')
+018.901  000.009  000.009: require('vim.F')
+020.599  000.477  000.477: require('core.keymaps')
+021.022  000.054  000.054: require('vim._core.ui2')
+021.308  000.265  000.265: require('vim._core.ui2.cmdline')
+021.662  000.350  000.350: require('vim._core.ui2.messages')
+021.963  001.356  000.688: require('core.options')
+022.336  000.369  000.369: require('core.autocmd')
+022.343  002.473  000.270: require('core')
+024.708  000.341  000.341: require('zpack.api')
+024.720  001.341  001.000: require('zpack')
+024.969  000.240  000.240: require('zpack.state')
+025.229  000.256  000.256: require('zpack.validate')
+026.310  000.744  000.744: require('zpack.utils')
+026.328  001.093  000.349: require('zpack.deprecation')
+026.643  000.310  000.310: require('zpack.import')
+027.401  000.310  000.310: require('nfnl.module')
+027.411  000.529  000.219: require('plugins.blink')
+027.906  000.352  000.352: require('plugins.buffer-sticks')
+028.173  000.201  000.201: require('plugins.conform')
+028.440  000.207  000.207: require('plugins.fzf-lua')
+028.668  000.165  000.165: require('plugins.gitsigns')
+028.882  000.169  000.169: require('plugins.langmapper')
+029.092  000.155  000.155: require('plugins.leap')
+029.605  000.332  000.332: require('plugins.lightbulb')
+029.864  000.182  000.182: require('plugins.lspconfig')
+030.073  000.168  000.168: require('plugins.mini-icons')
+030.323  000.205  000.205: require('plugins.mini-jump')
+030.556  000.212  000.212: require('plugins.neogit')
+030.927  000.170  000.170: require('plugins.neotab')
+031.191  000.199  000.199: require('plugins.nfnl')
+031.366  000.164  000.164: require('plugins.oil')
+031.651  000.172  000.172: require('plugins.oxocarbon')
+031.841  000.172  000.172: require('plugins.parinfer')
+032.079  000.171  000.171: require('plugins.project')
+032.259  000.163  000.163: require('plugins.slimline')
+032.495  000.178  000.178: require('plugins.surround')
+032.758  000.232  000.232: require('plugins.tabby')
+032.968  000.191  000.191: require('plugins.treesitter')
+033.410  000.383  000.383: require('plugins.which-key')
+033.706  000.251  000.251: require('zpack.hooks')
+033.969  000.239  000.239: require('zpack.merge')
+034.877  000.180  000.180: require('zpack.keymap')
+034.887  000.399  000.219: require('zpack.plugin_loader')
+035.144  000.255  000.255: require('zpack.lazy_trigger.refire')
+035.151  000.934  000.280: require('zpack.lazy_trigger.event')
+035.406  000.252  000.252: require('zpack.lazy_trigger.ft')
+035.812  000.402  000.402: require('zpack.lazy_trigger.cmd')
+036.261  000.444  000.444: require('zpack.lazy_trigger.keys')
+036.271  002.299  000.265: require('zpack.lazy')
+039.693  000.422  000.422: require('zpack.registration')
+042.218  000.457  000.457: require('zpack.module_loader')
+042.489  000.263  000.263: require('zpack.startup')
+058.471  000.168  000.168: require('langmapper.config')
+058.631  000.153  000.153: require('langmapper.helpers')
+058.644  000.647  000.327: require('langmapper.utils')
+058.651  003.326  002.678: require('langmapper')
+061.614  000.206  000.206: require('buffer-sticks.config')
+061.773  000.154  000.154: require('buffer-sticks.state')
+062.052  000.135  000.135: require('buffer-sticks.buffers')
+062.056  000.280  000.145: require('buffer-sticks.window')
+062.494  000.213  000.213: require('buffer-sticks.fuzzy')
+062.498  000.440  000.227: require('buffer-sticks.render')
+062.673  000.173  000.173: require('buffer-sticks.highlights')
+063.021  000.202  000.202: require('buffer-sticks.preview')
+063.026  000.350  000.148: require('buffer-sticks.list')
+063.030  001.827  000.223: require('buffer-sticks')
+063.733  000.268  000.268: require('conform')
+065.826  002.043  002.043: require('mini.icons')
+068.309  000.161  000.161: require('vim.func')
+068.499  000.148  000.148: require('vim.func._memoize')
+068.522  001.131  000.822: require('fzf-lua.utils')
+068.943  000.181  000.181: require('fzf-lua.lib.base64')
+069.210  000.264  000.264: require('fzf-lua.lib.serpent')
+069.217  000.693  000.248: require('fzf-lua.libuv')
+069.227  002.298  000.474: require('fzf-lua.path')
+069.846  000.314  000.314: require('fzf-lua.actions')
+070.195  000.138  000.138: require('fzf-lua.class')
+070.271  000.421  000.283: require('fzf-lua.devicons')
+070.891  000.202  000.202: require('fzf-lua.previewer')
+071.268  000.994  000.792: require('fzf-lua.defaults')
+071.280  002.051  000.321: require('fzf-lua.config')
+071.550  000.032  000.032: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/fzf-lua/autoload/fzf_lua.vim
+071.557  000.168  000.136: sourcing nvim_exec2() called at /Users/lowerc4s3/projects/nuuvim/init.lua:0
+072.546  000.321  000.321: require('fzf-lua.win')
+073.000  000.192  000.192: require('fzf-lua.fzf')
+073.280  000.276  000.276: require('fzf-lua.shell')
+073.335  000.785  000.317: require('fzf-lua.core')
+073.608  000.262  000.262: require('fzf-lua.make_entry')
+073.622  007.147  001.263: require('fzf-lua')
+075.544  000.194  000.194: require('fzf-lua.ctx')
+075.736  000.188  000.188: require('fzf-lua.providers.ui_select')
+075.942  000.201  000.201: require('vim.ui')
+076.103  000.157  000.157: require('which-key')
+077.026  000.334  000.334: require('mini.jump')
+079.145  000.444  000.444: require('oil')
+079.427  000.275  000.275: require('oil.ringbuf')
+079.845  000.415  000.415: require('oil.config')
+082.355  002.243  002.243: require('vim.filetype')
+083.360  000.194  000.194: require('oil.log')
+083.397  000.533  000.339: require('oil.fs')
+083.721  000.124  000.124: require('oil.constants')
+083.735  000.336  000.212: require('oil.util')
+084.295  000.117  000.117: require('project.extensions')
+084.460  000.163  000.163: require('project.util')
+084.634  000.171  000.171: require('project.config.defaults')
+084.711  000.679  000.228: require('project.config')
+084.715  000.856  000.177: require('project')
+085.396  000.159  000.159: require('project.util.globtopattern')
+086.989  000.261  000.261: require('project.util.path')
+087.809  000.331  000.331: require('project.util.log')
+088.081  000.265  000.265: require('project.commands')
+088.356  000.252  000.252: require('project.core')
+089.910  001.441  001.441: require('project.util.history')
+091.582  000.317  000.317: require('project.extensions.fzf-lua')
+092.136  000.182  000.182: require('slimline.highlights')
+092.151  000.423  000.241: require('slimline')
+092.857  000.528  000.528: require('vim.diagnostic')
+092.862  000.709  000.181: require('slimline.defaults')
+093.039  000.153  000.153: require('slimline.components.mode')
+093.247  000.143  000.143: require('slimline.components.recording')
+093.390  000.137  000.137: require('slimline.components.path')
+093.536  000.141  000.141: require('slimline.components.git')
+093.687  000.146  000.146: require('slimline.components.diagnostics')
+093.831  000.139  000.139: require('slimline.components.filetype_lsp')
+093.964  000.128  000.128: require('slimline.components.selectioncount')
+094.098  000.127  000.127: require('slimline.components.searchcount')
+094.226  000.123  000.123: require('slimline.components.progress')
+094.731  000.408  000.408: require('mini.surround')
+097.211  000.197  000.197: require('tabby.module.highlight')
+097.218  000.416  000.219: require('tabby.module.builder')
+097.618  000.234  000.234: require('tabby.module.api')
+098.160  000.185  000.185: require('tabby.feature.tab_jumper')
+098.167  000.545  000.360: require('tabby.feature.tabs')
+098.329  000.161  000.161: require('tabby.feature.wins')
+098.494  000.162  000.162: require('tabby.feature.bufs')
+098.497  001.278  000.176: require('tabby.feature.lines')
+098.990  000.172  000.172: require('tabby.module.file_name_resolver')
+099.021  000.356  000.184: require('tabby.feature.win_name')
+099.029  000.530  000.174: require('tabby.feature.tab_name')
+099.193  000.163  000.163: require('tabby.feature.win_picker')
+099.205  002.666  000.279: require('tabby.tabline')
+099.255  000.021  000.021: sourcing nvim_exec2() called at /Users/lowerc4s3/projects/nuuvim/init.lua:0
+099.694  000.299  000.299: require('ts-enable')
+100.063  000.280  000.280: require('which-key.config')
+102.980  000.393  000.393: require('zpack.commands')
+103.024  080.678  038.188: require('pack')
+104.945  000.972  000.972: require('vim.lsp.protocol')
+104.993  001.270  000.298: require('vim.lsp.log')
+105.545  000.547  000.547: require('vim.lsp.util')
+106.626  000.465  000.465: require('vim.lsp.sync')
+106.686  001.136  000.670: require('vim.lsp._changetracking')
+107.805  000.742  000.742: require('vim.lsp._transport')
+107.845  000.036  000.036: require('vim._core.stringbuffer')
+107.913  001.224  000.445: require('vim.lsp.rpc')
+108.121  004.728  000.552: require('vim.lsp')
+109.245  006.001  001.273: require('lsp.servers')
+109.248  006.222  000.221: require('lsp')
+110.199  000.198  000.198: require('oxocarbon.colorutils')
+111.053  001.413  001.215: require('oxocarbon')
+111.057  001.484  000.071: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/oxocarbon.nvim/colors/oxocarbon.lua
+111.338  000.196  000.196: require('highlights')
+111.341  094.796  001.878: sourcing /Users/lowerc4s3/.config/nuuvim/init.lua
+111.352  003.828: sourcing vimrc file(s)
+111.934  000.198  000.198: sourcing nvim_exec2() called at /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/filetype.lua:0
+111.938  000.287  000.090: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/filetype.lua
+112.328  000.089  000.089: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/syntax/synload.vim
+112.423  000.383  000.293: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/syntax/syntax.vim
+113.249  000.074  000.074: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/which-key.nvim/plugin/which-key.lua
+113.711  000.180  000.180: require('minibuffer')
+114.080  000.139  000.139: require('minibuffer.util')
+114.103  000.388  000.249: require('minibuffer.core')
+114.145  000.678  000.110: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/minibuffer.nvim/plugin/minibuffer.lua
+114.464  000.096  000.096: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/ts-enable.nvim/plugin/ts-enable.lua
+114.701  000.029  000.029: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/tabby.nvim/plugin/tabby.vim
+115.337  000.357  000.357: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/parinfer-rust/plugin/parinfer.vim
+115.698  000.092  000.092: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/nvim-lspconfig/plugin/lspconfig.lua
+116.485  000.578  000.578: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/leap.nvim/plugin/init.lua
+117.068  000.233  000.233: require('gitsigns')
+117.551  000.367  000.367: require('gitsigns.highlight')
+117.733  000.167  000.167: require('gitsigns.debug.log')
+118.096  000.173  000.173: require('gitsigns.util')
+118.107  000.371  000.198: require('gitsigns.config')
+118.743  000.144  000.144: require('gitsigns.debounce')
+118.761  002.024  000.742: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/gitsigns.nvim/plugin/gitsigns.lua
+119.097  000.110  000.110: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/fzf-lua/plugin/fzf-lua.lua
+119.426  000.085  000.085: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/conform.nvim/plugin/conform.lua
+120.590  000.037  000.037: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/gzip.vim
+120.664  000.015  000.015: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/matchit.vim
+120.877  000.158  000.158: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/matchparen.vim
+120.952  000.012  000.012: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/netrwPlugin.vim
+121.159  000.149  000.149: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/rplugin.vim
+121.236  000.015  000.015: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/tarPlugin.vim
+121.315  000.020  000.020: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/tutor.vim
+121.388  000.015  000.015: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/zipPlugin.vim
+121.534  000.089  000.089: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/editorconfig.lua
+121.665  000.067  000.067: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/man.lua
+121.810  000.083  000.083: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/net.lua
+121.934  000.062  000.062: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/osc52.lua
+122.093  000.096  000.096: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/shada.lua
+122.250  000.079  000.079: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/spellfile.lua
+122.290  005.246: loading rtp plugins
+122.715  000.425: loading packages
+122.730  000.015: loading after plugins
+122.743  000.013: inits 3
+124.057  001.313: reading ShaDa
+124.176  000.119: opening buffers
+126.864  002.689: BufEnter autocommands
+126.875  000.011: editing files in windows
+126.909  000.034: --- NVIM STARTED ---
+
+--- Startup times for process: Primary (or UI client) ---
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.001  000.001: --- NVIM STARTING ---
+000.167  000.166: event init
+000.351  000.185: early init
+001.061  000.710: locale set
+001.142  000.080: init first window
+001.823  000.681: inits 1
+001.836  000.013: window checked
+001.844  000.008: parsing arguments
+002.602  000.071  000.071: require('vim._core.shared')
+002.736  000.006  000.006: require('string.buffer')
+002.774  000.071  000.064: require('vim.inspect')
+002.849  000.064  000.064: require('vim._core.options')
+002.851  000.244  000.110: require('vim._core.editor')
+002.919  000.066  000.066: require('vim._core.system')
+002.921  000.449  000.067: require('vim._init_packages')
+002.924  000.631: init lua interpreter
+007.219  004.295: nvim_ui_attach
+007.789  000.570: nvim_set_client_info
+007.794  000.005: --- NVIM STARTED ---
+
+--- Startup times for process: Embedded ---
+
+times in msec
+ clock   self+sourced   self:  sourced script
+ clock   elapsed:              other lines
+
+000.001  000.001: --- NVIM STARTING ---
+000.180  000.179: event init
+000.357  000.177: early init
+000.930  000.573: locale set
+001.007  000.077: init first window
+001.633  000.626: inits 1
+001.657  000.024: window checked
+001.665  000.008: parsing arguments
+002.496  000.074  000.074: require('vim._core.shared')
+002.614  000.007  000.007: require('string.buffer')
+002.653  000.073  000.066: require('vim.inspect')
+002.724  000.060  000.060: require('vim._core.options')
+002.727  000.227  000.094: require('vim._core.editor')
+002.795  000.067  000.067: require('vim._core.system')
+002.797  000.453  000.086: require('vim._init_packages')
+002.800  000.683: init lua interpreter
+005.423  002.624: expanding arguments
+005.466  000.043: inits 2
+005.855  000.389: init highlight
+005.857  000.002: waiting for UI
+006.113  000.255: done waiting for UI
+006.121  000.008: clear screen
+006.393  000.022  000.022: require('vim.keymap')
+007.736  000.248  000.248: sourcing nvim_exec2()
+007.789  000.008  000.008: require('vim._core.log')
+011.755  005.625  005.347: require('vim._core.defaults')
+011.763  000.018: init default mappings & autocommands
+013.322  000.157  000.157: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/ftplugin.vim
+013.541  000.052  000.052: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/indent.vim
+016.008  000.252  000.252: require('vim.fs')
+016.736  000.667  000.667: require('vim.uri')
+016.775  001.195  000.276: require('vim.loader')
+017.681  000.204  000.204: require('vim._async')
+017.704  000.900  000.696: require('vim.pack')
+017.843  000.007  000.007: require('vim.F')
+019.558  000.625  000.625: require('core.keymaps')
+020.189  000.062  000.062: require('vim._core.ui2')
+020.768  000.267  000.267: require('vim._core.ui2.cmdline')
+021.151  000.380  000.380: require('vim._core.ui2.messages')
+021.543  001.965  001.256: require('core.options')
+021.894  000.346  000.346: require('core.autocmd')
+021.902  003.168  000.231: require('core')
+023.862  000.258  000.258: require('zpack.api')
+023.870  000.979  000.721: require('zpack')
+024.136  000.260  000.260: require('zpack.state')
+024.404  000.265  000.265: require('zpack.validate')
+025.414  000.504  000.504: require('zpack.utils')
+025.420  000.877  000.373: require('zpack.deprecation')
+025.666  000.242  000.242: require('zpack.import')
+026.623  000.273  000.273: require('nfnl.module')
+026.634  000.647  000.374: require('plugins.blink')
+027.269  000.358  000.358: require('plugins.buffer-sticks')
+027.627  000.270  000.270: require('plugins.conform')
+027.985  000.237  000.237: require('plugins.fzf-lua')
+028.411  000.232  000.232: require('plugins.gitsigns')
+028.663  000.237  000.237: require('plugins.langmapper')
+029.044  000.226  000.226: require('plugins.leap')
+029.504  000.236  000.236: require('plugins.lightbulb')
+029.811  000.195  000.195: require('plugins.lspconfig')
+029.978  000.157  000.157: require('plugins.mini-icons')
+030.167  000.147  000.147: require('plugins.mini-jump')
+030.463  000.285  000.285: require('plugins.neogit')
+030.868  000.207  000.207: require('plugins.neotab')
+031.076  000.173  000.173: require('plugins.nfnl')
+031.251  000.157  000.157: require('plugins.oil')
+031.718  000.250  000.250: require('plugins.oxocarbon')
+031.931  000.189  000.189: require('plugins.parinfer')
+032.121  000.176  000.176: require('plugins.project')
+032.433  000.202  000.202: require('plugins.slimline')
+032.823  000.178  000.178: require('plugins.surround')
+032.993  000.161  000.161: require('plugins.tabby')
+033.157  000.153  000.153: require('plugins.treesitter')
+033.330  000.163  000.163: require('plugins.which-key')
+033.769  000.373  000.373: require('zpack.hooks')
+034.057  000.267  000.267: require('zpack.merge')
+034.797  000.189  000.189: require('zpack.keymap')
+034.802  000.356  000.167: require('zpack.plugin_loader')
+035.000  000.196  000.196: require('zpack.lazy_trigger.refire')
+035.004  000.728  000.176: require('zpack.lazy_trigger.event')
+035.195  000.189  000.189: require('zpack.lazy_trigger.ft')
+035.374  000.176  000.176: require('zpack.lazy_trigger.cmd')
+035.573  000.196  000.196: require('zpack.lazy_trigger.keys')
+035.579  001.518  000.228: require('zpack.lazy')
+037.274  000.304  000.304: require('zpack.registration')
+041.620  001.228  001.228: require('zpack.module_loader')
+042.122  000.487  000.487: require('zpack.startup')
+057.509  000.199  000.199: require('langmapper.config')
+057.690  000.174  000.174: require('langmapper.helpers')
+057.696  000.711  000.338: require('langmapper.utils')
+057.702  002.990  002.278: require('langmapper')
+060.747  000.158  000.158: require('buffer-sticks.config')
+060.895  000.144  000.144: require('buffer-sticks.state')
+061.191  000.143  000.143: require('buffer-sticks.buffers')
+061.195  000.297  000.154: require('buffer-sticks.window')
+061.510  000.167  000.167: require('buffer-sticks.fuzzy')
+061.514  000.317  000.150: require('buffer-sticks.render')
+061.662  000.147  000.147: require('buffer-sticks.highlights')
+061.956  000.136  000.136: require('buffer-sticks.preview')
+061.960  000.295  000.159: require('buffer-sticks.list')
+061.963  001.569  000.211: require('buffer-sticks')
+062.884  000.463  000.463: require('conform')
+065.066  002.115  002.115: require('mini.icons')
+068.339  000.208  000.208: require('vim.func')
+068.565  000.181  000.181: require('vim.func._memoize')
+068.583  001.363  000.975: require('fzf-lua.utils')
+068.946  000.161  000.161: require('fzf-lua.lib.base64')
+069.251  000.301  000.301: require('fzf-lua.lib.serpent')
+069.258  000.673  000.211: require('fzf-lua.libuv')
+069.270  002.536  000.500: require('fzf-lua.path')
+069.799  000.278  000.278: require('fzf-lua.actions')
+070.134  000.153  000.153: require('fzf-lua.class')
+070.163  000.360  000.207: require('fzf-lua.devicons')
+070.828  000.197  000.197: require('fzf-lua.previewer')
+071.426  001.259  001.063: require('fzf-lua.defaults')
+071.449  002.177  000.280: require('fzf-lua.config')
+071.743  000.032  000.032: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/fzf-lua/autoload/fzf_lua.vim
+071.751  000.206  000.174: sourcing nvim_exec2() called at /Users/lowerc4s3/projects/nuuvim/init.lua:0
+073.065  000.429  000.429: require('fzf-lua.win')
+073.612  000.233  000.233: require('fzf-lua.fzf')
+073.928  000.312  000.312: require('fzf-lua.shell')
+073.962  000.893  000.348: require('fzf-lua.core')
+074.309  000.330  000.330: require('fzf-lua.make_entry')
+074.327  008.193  001.623: require('fzf-lua')
+076.736  000.253  000.253: require('fzf-lua.ctx')
+076.972  000.231  000.231: require('fzf-lua.providers.ui_select')
+077.228  000.251  000.251: require('vim.ui')
+077.446  000.213  000.213: require('which-key')
+079.051  000.608  000.608: require('mini.jump')
+081.244  000.624  000.624: require('oil')
+081.699  000.446  000.446: require('oil.ringbuf')
+082.313  000.610  000.610: require('oil.config')
+085.698  003.112  003.112: require('vim.filetype')
+087.480  000.338  000.338: require('oil.log')
+087.547  000.911  000.573: require('oil.fs')
+088.176  000.239  000.239: require('oil.constants')
+088.212  000.661  000.422: require('oil.util')
+090.533  000.197  000.197: require('project.extensions')
+090.767  000.225  000.225: require('project.util')
+091.014  000.243  000.243: require('project.config.defaults')
+091.056  001.042  000.378: require('project.config')
+091.061  002.358  001.315: require('project')
+092.041  000.229  000.229: require('project.util.globtopattern')
+094.060  000.257  000.257: require('project.util.path')
+094.876  000.245  000.245: require('project.util.log')
+095.093  000.211  000.211: require('project.commands')
+095.425  000.276  000.276: require('project.core')
+095.779  000.300  000.300: require('project.util.history')
+096.963  000.273  000.273: require('project.extensions.fzf-lua')
+097.862  000.447  000.447: require('slimline.highlights')
+098.033  000.912  000.465: require('slimline')
+099.027  000.643  000.643: require('vim.diagnostic')
+099.037  000.994  000.351: require('slimline.defaults')
+099.380  000.234  000.234: require('slimline.components.mode')
+099.662  000.190  000.190: require('slimline.components.recording')
+099.863  000.192  000.192: require('slimline.components.path')
+100.063  000.193  000.193: require('slimline.components.git')
+100.275  000.206  000.206: require('slimline.components.diagnostics')
+100.472  000.190  000.190: require('slimline.components.filetype_lsp')
+100.649  000.171  000.171: require('slimline.components.selectioncount')
+100.944  000.285  000.285: require('slimline.components.searchcount')
+101.151  000.198  000.198: require('slimline.components.progress')
+101.725  000.505  000.505: require('mini.surround')
+105.120  000.248  000.248: require('tabby.module.highlight')
+105.128  000.554  000.307: require('tabby.module.builder')
+105.606  000.219  000.219: require('tabby.module.api')
+106.092  000.274  000.274: require('tabby.feature.tab_jumper')
+106.097  000.487  000.213: require('tabby.feature.tabs')
+106.299  000.201  000.201: require('tabby.feature.wins')
+106.593  000.291  000.291: require('tabby.feature.bufs')
+106.598  001.468  000.270: require('tabby.feature.lines')
+107.214  000.212  000.212: require('tabby.module.file_name_resolver')
+107.239  000.431  000.219: require('tabby.feature.win_name')
+107.248  000.649  000.218: require('tabby.feature.tab_name')
+107.446  000.196  000.196: require('tabby.feature.win_picker')
+107.458  003.290  000.423: require('tabby.tabline')
+107.509  000.021  000.021: sourcing nvim_exec2() called at /Users/lowerc4s3/projects/nuuvim/init.lua:0
+107.924  000.266  000.266: require('ts-enable')
+108.364  000.323  000.323: require('which-key.config')
+113.183  000.608  000.608: require('zpack.commands')
+113.240  091.336  043.132: require('pack')
+115.814  001.333  001.333: require('vim.lsp.protocol')
+115.879  001.728  000.395: require('vim.lsp.log')
+116.523  000.637  000.637: require('vim.lsp.util')
+117.849  000.586  000.586: require('vim.lsp.sync')
+117.924  001.394  000.808: require('vim.lsp._changetracking')
+119.421  001.064  001.064: require('vim.lsp._transport')
+119.472  000.045  000.045: require('vim._core.stringbuffer')
+119.619  001.692  000.583: require('vim.lsp.rpc')
+119.900  006.155  000.703: require('vim.lsp')
+121.477  007.941  001.787: require('lsp.servers')
+121.481  008.238  000.296: require('lsp')
+122.736  000.273  000.273: require('oxocarbon.colorutils')
+123.881  001.887  001.613: require('oxocarbon')
+123.885  001.971  000.084: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/oxocarbon.nvim/colors/oxocarbon.lua
+124.239  000.251  000.251: require('highlights')
+124.243  109.946  002.880: sourcing /Users/lowerc4s3/.config/nuuvim/init.lua
+124.258  002.339: sourcing vimrc file(s)
+125.023  000.264  000.264: sourcing nvim_exec2() called at /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/filetype.lua:0
+125.028  000.386  000.122: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/filetype.lua
+125.536  000.117  000.117: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/syntax/synload.vim
+125.697  000.538  000.421: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/syntax/syntax.vim
+126.714  000.090  000.090: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/which-key.nvim/plugin/which-key.lua
+127.301  000.231  000.231: require('minibuffer')
+127.770  000.186  000.186: require('minibuffer.util')
+127.794  000.488  000.303: require('minibuffer.core')
+127.851  000.864  000.145: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/minibuffer.nvim/plugin/minibuffer.lua
+128.246  000.116  000.116: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/ts-enable.nvim/plugin/ts-enable.lua
+128.601  000.034  000.034: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/tabby.nvim/plugin/tabby.vim
+129.377  000.426  000.426: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/parinfer-rust/plugin/parinfer.vim
+129.844  000.121  000.121: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/nvim-lspconfig/plugin/lspconfig.lua
+130.753  000.627  000.627: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/leap.nvim/plugin/init.lua
+131.456  000.224  000.224: require('gitsigns')
+132.017  000.430  000.430: require('gitsigns.highlight')
+132.252  000.218  000.218: require('gitsigns.debug.log')
+132.787  000.262  000.262: require('gitsigns.util')
+132.800  000.544  000.282: require('gitsigns.config')
+133.594  000.192  000.192: require('gitsigns.debounce')
+133.612  002.483  000.876: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/gitsigns.nvim/plugin/gitsigns.lua
+134.049  000.101  000.101: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/fzf-lua/plugin/fzf-lua.lua
+134.429  000.078  000.078: sourcing /Users/lowerc4s3/.local/share/nuuvim/site/pack/core/opt/conform.nvim/plugin/conform.lua
+135.816  000.096  000.096: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/gzip.vim
+135.914  000.019  000.019: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/matchit.vim
+136.179  000.192  000.192: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/matchparen.vim
+136.276  000.016  000.016: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/netrwPlugin.vim
+136.550  000.199  000.199: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/rplugin.vim
+136.664  000.019  000.019: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/tarPlugin.vim
+136.763  000.025  000.025: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/tutor.vim
+136.856  000.020  000.020: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/zipPlugin.vim
+137.036  000.101  000.101: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/editorconfig.lua
+137.209  000.089  000.089: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/man.lua
+137.395  000.103  000.103: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/net.lua
+137.563  000.085  000.085: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/osc52.lua
+137.827  000.181  000.181: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/shada.lua
+138.008  000.078  000.078: sourcing /usr/local/Cellar/neovim/0.12.2/share/nvim/runtime/plugin/spellfile.lua
+138.113  006.766: loading rtp plugins
+138.505  000.392: loading packages
+138.522  000.017: loading after plugins
+138.539  000.017: inits 3
+140.066  001.528: reading ShaDa
+140.218  000.152: opening buffers
+143.451  003.233: BufEnter autocommands
+143.461  000.010: editing files in windows
+143.503  000.042: --- NVIM STARTED ---
+
