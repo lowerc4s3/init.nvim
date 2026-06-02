@@ -1,2 +1,3 @@
 -- [nfnl] fnl/code/init.fnl
-return require("code.lsp")
+require("code.lsp")
+return require("code.completion")
