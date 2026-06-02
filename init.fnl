@@ -25,8 +25,12 @@
     (tset vim.g (.. :loaded_ plugin) 1)))
 
 (require :core)
-(require :pack)
+(when vim.g.neovide (require :neovide))
+(require :build-hooks)
+(require :initial)
+(require :ui)
+(require :editor)
+(require :navigation)
 (require :lsp)
-
-(vim.cmd.colorscheme :oxocarbon)
+(require :code)
 (require :highlights)
