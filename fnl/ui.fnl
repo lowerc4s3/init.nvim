@@ -1,4 +1,4 @@
-(import-macros {: gh : tx} :lib.macros)
+(import-macros {: gh : | : dot->}  :lib.macros)
 
 (vim.pack.add [(gh :nyoom-engineering/oxocarbon.nvim)
                (gh :nvim-mini/mini.icons)
@@ -16,8 +16,7 @@
   (collect [pattern glyph (pairs table)]
     (values pattern {: glyph})))
 
-(let [mini-icons (require :mini.icons)
-      opts {:file (glyphs {:LICENSE ""
+(let [opts {:file (glyphs {:LICENSE ""
                            :LICENSE.md ""
                            :LICENSE.txt ""})
             :filetype (glyphs {:typst ""})
@@ -35,26 +34,25 @@
                           :typeparameter "*"
                           :snippet "󰆏"
                           :color "󰌁"})}]
-  (mini-icons.setup opts))
+  (dot-> (require :mini.icons) (setup opts)))
 
 ;;;
 ;;; which-key
 ;;;
 
-(let [which-key (require :which-key)
-      opts {:plugins {:marks false
+(let [opts {:preset :helix
+            :show_help false
+            :show_keys false
+            :delay #(or (and $.plugin 0) 200)
+            :filter #(and $.desc (not= 1 ($.desc:find :langmapped 1 true)))
+            :win {:no_overlap false :border :solid :title false}
+            :plugins {:marks false
                       :registers false
                       :presets {:operators false
                                 :motions false
                                 :text_objects false
                                 :windows false
                                 :nav false}}
-            :preset :helix
-            :show_help false
-            :show_keys false
-            :delay #(or (and $.plugin 0) 200)
-            :filter #(and $.desc (not= 1 ($.desc:find :langmapped 1 true)))
-            :win {:no_overlap false :border :solid :title false}
             :icons {:mappings false
                     :separator ":"
                     :keys {:up :<up>
@@ -71,41 +69,35 @@
                            :Space :SPC
                            :Tab :TAB
                            :Esc :ESC}}}]
-  (which-key.setup opts))
+  (dot-> (require :which-key) (setup opts)))
 
 ;;;
 ;;; tabby
 ;;;
 
-(let [tabline (require :tabby.tabline)
-      theme {:active :Normal
-             :inactive :LineNr
-             :fill :LineNr}
+(let [theme {:active :Normal :inactive :LineNr :fill :LineNr}
       render (fn [line]
                (let [tabs (line.tabs)
-                     wins (line.wins_in_tab (line.api.get_current_tab))]
-                 (tx " 󰓩 "
-                     (tabs.foreach (fn [tab]
-                                     (let [hl (if (tab.is_current) theme.active
-                                                  theme.inactive)
-                                           sep (line.sep " " hl theme.fill)]
-                                       (tx sep (tab.name) sep {: hl}))))
-                     (line.spacer)
-                     (wins.foreach (fn [win]
-                                     (let [hl (if (win.is_current) theme.active
-                                                  theme.inactive)
-                                           sep (line.sep " " hl theme.fill)]
-                                       (tx sep (win.buf_name) sep {: hl}))))
-                     "  "
-                     {:hl theme.fill})))]
-  (tabline.set render))
+                     wins (line.wins_in_tab (line.api.get_current_tab))
+                     tab-fn (fn [tab]
+                              (let [hl (if (tab.is_current) theme.active
+                                           theme.inactive)
+                                    sep (line.sep " " hl theme.fill)]
+                                (| sep (tab.name) sep {: hl})))
+                     win-fn (fn [win]
+                              (let [hl (if (win.is_current) theme.active
+                                           theme.inactive)
+                                    sep (line.sep " " hl theme.fill)]
+                                (| sep (win.buf_name) sep {: hl})))]
+                 (| " 󰓩 " (tabs.foreach tab-fn) (line.spacer) (wins.foreach win-fn) "  "
+                    {:hl theme.fill})))]
+  (dot-> (require :tabby.tabline) (set render)))
 
 ;;;
 ;;; slimline
 ;;;
 
-(let [slimline (require :slimline)
-      opts {:style :fg
+(let [opts {:style :fg
             :spaces {:left "" :right ""}
             :components {:left [:mode :recording :path :git]
                          :right [:diagnostics
@@ -122,4 +114,4 @@
                                             :HINT " "
                                             :INFO " "}}
                       :progress {:follow false :icon "󰦪"}}}]
-  (slimline.setup opts))
+  (dot-> (require :slimline) (setup opts)))

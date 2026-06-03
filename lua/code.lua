@@ -5,9 +5,8 @@ vim.pack.add({"https://github.com/Olical/nfnl", "https://github.com/eraserhd/par
 local function _2_()
   vim.pack.add({"https://github.com/dlyongemallo/diffview.nvim", "https://github.com/NeogitOrg/neogit"})
   do
-    local neogit = require("neogit")
     local opts = {disable_hint = true}
-    neogit.setup(opts)
+    require("neogit").setup(opts)
   end
   vim.keymap.set({"n"}, "<Leader>gg", "<Cmd>Neogit<CR>", {desc = "open neogit tab", silent = true})
   vim.keymap.set({"n"}, "<Leader>gl", "<Cmd>Neogit log<CR>", {desc = "view log", silent = true})
@@ -17,7 +16,6 @@ end
 require("mini.misc").safely("later", _2_)
 local function _3_()
   vim.pack.add({"https://github.com/xzbdmw/colorful-menu.nvim", {src = "https://github.com/saghen/blink.cmp", version = "v1"}})
-  local blink = autoload("blink.cmp")
   local col_menu = autoload("colorful-menu")
   local icons = autoload("mini.icons")
   local function tabout(rhs)
@@ -65,11 +63,10 @@ local function _3_()
     return tabout("<Plug>(neotab-reverse)")
   end
   opts = {signature = {enabled = true}, appearance = {nerd_font_variant = "normal"}, completion = {documentation = {auto_show = true}, ghost_text = {enabled = false}, list = {selection = {auto_insert = true, preselect = false}}, menu = {draw = {columns = {{"kind_icon"}, {"label", gap = 1}}, padding = 0, components = {label = {text = col_text, highlight = col_hl}, kind_icon = {text = get_kind_icon}}}}}, sources = {default = {"snippets", "lsp", "buffer"}}, keymap = {preset = "none", ["<CR>"] = {"select_and_accept", "fallback"}, ["<C-b>"] = {"scroll_documentation_up", "fallback"}, ["<C-f>"] = {"scroll_documentation_down", "fallback"}, ["<C-e>"] = {"cancel", "fallback"}, ["<Tab>"] = {_7_, _9_}, ["<S-Tab>"] = {_10_, _12_}}, cmdline = {completion = {menu = {auto_show = true}, list = {selection = {auto_insert = true, preselect = false}}}, keymap = {["<CR>"] = {"accept_and_enter", "fallback"}}}}
-  return blink.setup(opts)
+  return require("blink.cmp").setup(opts)
 end
 require("mini.misc").safely("event:InsertEnter,CmdLineEnter", _3_)
 local function _13_()
-  local conform = require("conform")
   local ignored_fts = {"fennel"}
   local ignored_ft_3f
   local function _14_(...)
@@ -85,7 +82,7 @@ local function _13_()
     end
   end
   opts = {formatters_by_ft = {fennel = {"fnlfmt"}}, default_format_opts = {lsp_format = "fallback"}, format_on_save = _15_}
-  conform.setup(opts)
+  require("conform").setup(opts)
   vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   return nil
 end

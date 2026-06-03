@@ -1,4 +1,4 @@
-(import-macros {: gh : cb : map : plug} :lib.macros)
+(import-macros {: gh : cb : map : plug : dot->} :lib.macros)
 (local {: hi} (require :lib.nvim))
 
 (vim.pack.add [(gh :tpope/vim-repeat)
@@ -8,7 +8,7 @@
                (gh :kawre/neotab.nvim)
                {:src (gh :VonHeikemen/ts-enable.nvim) :version :v2.x}])
 
-((. (require :mini.jump) :setup))
+(dot-> (require :mini.jump) (setup))
 (hi :MiniJump {:link :CurSearch})
 
 (map :nxo :s (plug :leap) {:desc "leap in current window"})
@@ -18,8 +18,7 @@
 (map :xo :ar (plug :leap-remote-inner-text-object)
      {:desc "select remote inner text object"})
 
-(let [surround (require :mini.surround)
-      opts {:mappings {:add :gs
+(let [opts {:mappings {:add :gs
                        :delete :gsd
                        :replace :gsr
                        :find ""
@@ -30,12 +29,11 @@
             ;; place surroundings on separate lines in linewise mode
             ;; and on each line in blockwise mode
             :respect_selection_type true}]
-  (surround.setup opts))
+  (dot-> (require :mini.surround) (setup opts)))
 
 ;; neotab's mappings are handled by blink.cmp
-(let [neotab (require :neotab)
-      opts {:tabkey "" :reverse_key ""}]
-  (neotab.setup opts))
+(let [opts {:tabkey "" :reverse_key ""}]
+  (dot-> (require :neotab) (setup opts)))
 
 (let [opts {:auto_init true :highlights true :folds true}]
   (set vim.g.ts_enable opts))

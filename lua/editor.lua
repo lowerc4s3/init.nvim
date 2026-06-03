@@ -9,14 +9,12 @@ vim.keymap.set({"n"}, "S", "<Plug>(leap-from-window)", {desc = "leap to another 
 vim.keymap.set({"x", "o"}, "ar", "<Plug>(leap-remote-text-object)", {desc = "select remote outer text object", silent = true})
 vim.keymap.set({"x", "o"}, "ar", "<Plug>(leap-remote-inner-text-object)", {desc = "select remote inner text object", silent = true})
 do
-  local surround = require("mini.surround")
   local opts = {mappings = {add = "gs", delete = "gsd", replace = "gsr", find = "", find_left = "", highlight = "", suffix_last = "", suffix_next = ""}, respect_selection_type = true}
-  surround.setup(opts)
+  require("mini.surround").setup(opts)
 end
 do
-  local neotab = require("neotab")
   local opts = {tabkey = "", reverse_key = ""}
-  neotab.setup(opts)
+  require("neotab").setup(opts)
 end
 local opts = {auto_init = true, highlights = true, folds = true}
 vim.g.ts_enable = opts

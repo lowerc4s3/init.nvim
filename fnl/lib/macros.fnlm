@@ -1,5 +1,9 @@
 (local fail (partial assert-compile false))
 
+;;;
+;;; utility macros
+;;;
+
 (lambda str? [x]
   "checks if value's type is string"
   (= :string (type x)))
@@ -12,10 +16,57 @@
   (tset tbl k v)
   tbl)
 
-;; TODO: dot and bar macros (bar is tx)
-;; see https://blog.spore.ink/editor/fennel-macros/
+;; inspired by olical's `tx` macro
+;; and spore's `|` macro (https://blog.spore.ink/editor/fennel-macros/bar.html)
+(lambda | [& args]
+  "mixed sequential and associative tables syntax.
+all args before associative table are considered sequential elements
+and the associative table elements are considered as key-value pairs. so this form
+  ```fnl
+  (| :fst :sec :trd {:key-a 10 :key-b 20})
+  ```
+is equivalent to this
+  ```fnl
+  {1 :fst 2 :sec 3 :trd :key-a 10 :key-b 20}
+  ```"
+  (let [kv-table (if (table? (. args (length args))) (table.remove args))]
+    (when kv-table
+      (each [key value (pairs kv-table)]
+        (tset args key value)))
+    args))
+
+;; idea and implementation by spore
+;; (https://blog.spore.ink/editor/fennel-macros/dot.html)
+(lambda dot-> [expr & calls]
+  "method chaining macro. evaluates `expr` chains all consequential forms
+into methods calls. behaves similarly to clojure's `..` macro.
+example:
+  ```fnl
+  (dot-> (require :module) (modfn :arg1 :arg2) (another-modfn 3 4))
+  ;; notice how this resembles lua method chaining:
+  ;; require('module').modfn('arg1, 'arg2').another_modfn(3, 4)
+  ```"
+  (fn transform [tbl form]
+    (case form
+      ;; (dot-> tbl form) => (. tbl "form")
+      (where field (sym? field)) `(. ,tbl ,(tostring field))
+      ;; (dot-> tbl [x y]) => (. tbl x y)
+      (where fields (sequence? fields)) `(. ,tbl ,(unpack fields))
+      ;; (dot-> tbl (f x)) => ((. tbl "f") x)
+      [field & rest] `((. ,tbl ,(tostring field)) ,(unpack rest))
+      ;; (dot-> tbl ()) => (tbl)
+      [] `(,tbl)))
+  (case calls
+    ;; (dot-> expr calls ...) => (dot-> (dot-> expr form) ...)
+    [form & rest] (dot-> (transform expr form) (unpack rest))
+    ;; (dot-> expr) => expr
+    [] expr))
 
 ;; TODO: autocmd-callback macro
+
+;;;
+;;; neovim api macros
+;;;
 
 (lambda cmd [name]
   "create a command string in form of \":%command<CR>\""
@@ -38,7 +89,7 @@
 
 (lambda map [modes lhs rhs ?opts]
   "define a mapping. modes are defined as a string of mode chars.
-  if `opts` or `opts.silent` are nil, then silent mapping is inferred"
+if `opts` or `opts.silent` are nil, then silent mapping is inferred"
   (assert-compile (str? modes) "expected string for modes")
   (assert-compile (or (not ?opts) (table? ?opts))
                   "expected table or nil for ?opts")
@@ -55,40 +106,34 @@
   (assert-compile (str? repo-name) "expected string for repo-name")
   (.. "https://codeberg.org/" repo-name))
 
-(lambda tx [& args]
-  "mixed sequential and associative tables at compile time.
-  macro by olical on github"
-  (let [to-merge (when (table? (. args (length args)))
-                   (table.remove args))]
-    (when to-merge
-      (each [key value (pairs to-merge)]
-        (tset args key value)))
-    args))
+;;;
+;;; run macros (mini-misc.safely)
+;;;
 
 (lambda safely [hook & body]
   `((. (require :mini.misc) :safely) ,hook (fn [] ,(unpack body))))
 
-(lambda defhook-on-event [events & body]
+(lambda defrun-on-event [events & body]
   "safely execute body on event with mini-misc.safely"
   (let [event-str (if (sequence? events) (table.concat events ",")
                       (str? events) events
                       (fail "expected string or list of strings for events"))]
     (safely (.. "event:" event-str) (unpack body))))
 
-(lambda defhook-now [& body]
+(lambda defrun-now [& body]
   "safely execute body now with mini-misc.safely"
   (safely :now (unpack body)))
 
-(lambda defhook-defer-for [timeout & body]
+(lambda defrun-defer-for [timeout & body]
   "safely execute body after delay with mini-misc.safely.
-  if timeout is &later, then the body will be scheduled immediately,
-  otherwise it will be scheduled after specified delay (in ms)"
+if timeout is &later, then the body will be scheduled immediately,
+otherwise it will be scheduled after specified delay (in ms)"
   (if (= timeout `&later) (safely :later (unpack body))
       (num? timeout) (safely (.. "delay:" timeout) (unpack body))
       (fail "expected &later or number of ms for timeout")))
   
   
-(lambda defhook-on-ft [filetypes & body]
+(lambda defrun-on-ft [filetypes & body]
   "safely execute body on specified filetypes with mini-misc.safely"
   (let [ft-str (if (sequence? filetypes) (table.concat filetypes ",")
                    (str? filetypes) filetypes
@@ -100,8 +145,9 @@
  : plug
  : gh
  : cb
- : tx
- : defhook-now
- : defhook-defer-for
- : defhook-on-event
- : defhook-on-ft}
+ : |
+ : defrun-now
+ : defrun-defer-for
+ : defrun-on-event
+ : defrun-on-ft
+ : dot->}
