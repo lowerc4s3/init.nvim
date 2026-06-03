@@ -1,4 +1,4 @@
-(import-macros {: gh : map : cmd} :lib.macros)
+(import-macros {: gh : map : cmd : defhook-defer-for} :lib.macros)
 
 (vim.pack.add [(gh :stevearc/oil.nvim)
                (gh :ibhagwan/fzf-lua)
@@ -22,29 +22,43 @@
 ;;; fzf-lua
 ;;;
 
-(let [fzf (require :fzf-lua)
-      opts {1 [:ivy :borderless :hide]
-            :fzf_colors true
-            :keymap {:fzf {1 true :ctrl-A :toggle-all}}
-            :actions {:files {1 true
-                              :ctrl-h #(_G.FzfLua.actions.toggle_hidden $...)
-                              :ctrl-Q #(_G.FzfLua.actions.file_sel_to_qf $...)
-                              :alt-Q #(_G.FzfLua.actions.file_sel_to_ll $...)}}}]
-  (fzf.setup opts))
+(defhook-defer-for &later
+  (let [fzf (require :fzf-lua)
+        opts {1 [:ivy :borderless :hide]
+              :fzf_colors true
+              :keymap {:fzf {1 true :ctrl-A :toggle-all}}
+              :actions {:files {1 true
+                                :ctrl-h #(_G.FzfLua.actions.toggle_hidden $...)
+                                :ctrl-Q #(_G.FzfLua.actions.file_sel_to_qf $...)
+                                :alt-Q #(_G.FzfLua.actions.file_sel_to_ll $...)}}}]
+    (fzf.setup opts))
 
-(let [fzf _G.FzfLua]
-  (map :n :<Leader><Leader> fzf.files {:desc "open cwd file"})
-  (map :n "<Leader>," fzf.buffers {:desc "switch buffer"})
-  (map :n "<Leader>'" fzf.resume {:desc "resume last search"})
-  (map :n :<Leader>sf fzf.files {:desc "cwd file"})
-  (map :n :<Leader>sb fzf.buffers {:desc :buffer})
-  (map :n :<Leader>sw fzf.live_grep {:desc "live grep"})
-  (map :n :<Leader>sr fzf.history {:desc "recent file"})
-  (map :n :<Leader>ss fzf.builtin {:desc "select picker"})
-  (map :n :<Leader>hh fzf.helptags {:desc :helptags})
-  (map :n :<Leader>hk fzf.keymaps {:desc :keymaps})
-  (map :n :<Leader>ho fzf.nvim_options {:desc :options})
-  (map :n :<Leader>hH fzf.highlights {:desc :highlights}))
+  (let [fzf _G.FzfLua]
+    (map :n :<Leader><Leader> fzf.files {:desc "open cwd file"})
+    (map :n "<Leader>," fzf.buffers {:desc "switch buffer"})
+    (map :n "<Leader>'" fzf.resume {:desc "resume last search"})
+    (map :n :<Leader>sf fzf.files {:desc "cwd file"})
+    (map :n :<Leader>sb fzf.buffers {:desc :buffer})
+    (map :n :<Leader>sw fzf.live_grep {:desc "live grep"})
+    (map :n :<Leader>sr fzf.history {:desc "recent file"})
+    (map :n :<Leader>ss fzf.builtin {:desc "select picker"})
+    (map :n :<Leader>hh fzf.helptags {:desc :helptags})
+    (map :n :<Leader>hk fzf.keymaps {:desc :keymaps})
+    (map :n :<Leader>ho fzf.nvim_options {:desc :options})
+    (map :n :<Leader>hH fzf.highlights {:desc :highlights})))
+
+;;;
+;;; project
+;;;
+
+(defhook-defer-for &later
+  (let [project (require :project)
+        opts {:fzf_lua {:enabled true :show :names}
+              :scope_chdir :tab
+              :lsp {:enabled false}}]
+    (project.setup opts))
+
+  (map :n :<Leader>sp (cmd "Project fzf-lua") {:desc "project"}))
 
 ;;;
 ;;; buffer-sticks
@@ -72,15 +86,3 @@
   (buffer-sticks.setup opts))
 
 (map :n :<Tab> #(_G.BufferSticks.jump) {:desc "jump to buffer"})
-
-;;;
-;;; project
-;;;
-
-(let [project (require :project)
-      opts {:fzf_lua {:enabled true :show :names}
-            :scope_chdir :tab
-            :lsp {:enabled false}}]
-  (project.setup opts))
-
-(map :n :<Leader>sp (cmd "Project fzf-lua") {:desc "project"})

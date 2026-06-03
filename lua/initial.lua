@@ -1,5 +1,5 @@
 -- [nfnl] fnl/initial.fnl
-vim.pack.add({"https://github.com/Wansmer/langmapper.nvim"})
+vim.pack.add({"https://github.com/Wansmer/langmapper.nvim", "https://github.com/nvim-mini/mini.misc"})
 local langmapper = require("langmapper")
 local opts
 local function _1_()

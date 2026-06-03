@@ -4,6 +4,10 @@
 
 (vim.pack.add [(gh :neovim/nvim-lspconfig)])
 
+;;;
+;;; configuration
+;;;
+
 (let [s diagnostic.severity
       opts {:severity_sort true
             :virtual_lines {:current_line true}
@@ -39,6 +43,10 @@
 
 (autocmd :LspAttach {:group (augroup :LspAttachGroup {:clear true})
                      :callback on-attach})
+
+;;;
+;;; servers
+;;;
 
 (lsp.config :rust_analyzer
         {:settings {:rust-analyzer {:inlayHints {:typeHints false

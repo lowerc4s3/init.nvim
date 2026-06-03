@@ -45,6 +45,10 @@
       "rev": "a0bb5dedc981a47826fc95498583b192c69353df",
       "src": "https://github.com/nvim-mini/mini.jump"
     },
+    "mini.misc": {
+      "rev": "eb2246ede307fc863a12e9d9b0fa4b7ca9b88188",
+      "src": "https://github.com/nvim-mini/mini.misc"
+    },
     "mini.surround": {
       "rev": "d12d8e6ea8e4d9d3e6fb0e3ff11c84fcce2299ac",
       "src": "https://github.com/nvim-mini/mini.surround"

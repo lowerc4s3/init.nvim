@@ -1,32 +1,32 @@
-(import-macros {: gh : map : cmd : plug} :lib.macros)
-(local {: autocmd} (require :lib.nvim))
+(import-macros {: gh : map : cmd : plug : defhook-on-event : defhook-defer-for} :lib.macros)
 (local {: autoload} (require :nfnl.module))
 
 (vim.pack.add [(gh :Olical/nfnl)
                (gh :eraserhd/parinfer-rust)
                (gh :lewis6991/gitsigns.nvim)
-               (gh :dlyongemallo/diffview.nvim)
-               (gh :NeogitOrg/neogit)
                (gh :stevearc/conform.nvim)])
 
 ;;;
 ;;; neogit
 ;;;
 
-(let [neogit (require :neogit)
-      opts {:disable_hint true}]
-  (neogit.setup opts))
+(defhook-defer-for &later
+  (vim.pack.add [(gh :dlyongemallo/diffview.nvim)
+                 (gh :NeogitOrg/neogit)])
+  (let [neogit (require :neogit)
+        opts {:disable_hint true}]
+    (neogit.setup opts))
 
-(map :n :<Leader>gg (cmd :Neogit) {:desc "open neogit tab"})
-(map :n :<Leader>gl (cmd "Neogit log") {:desc "view log"})
-(map :n :<Leader>gp (cmd "Neogit pull") {:desc :pull})
-(map :n :<Leader>gP (cmd "Neogit push") {:desc :push})
+  (map :n :<Leader>gg (cmd :Neogit) {:desc "open neogit tab"})
+  (map :n :<Leader>gl (cmd "Neogit log") {:desc "view log"})
+  (map :n :<Leader>gp (cmd "Neogit pull") {:desc :pull})
+  (map :n :<Leader>gP (cmd "Neogit push") {:desc :push}))
 
 ;;;
 ;;; blink
 ;;;
 
-(fn setup-blink []
+(defhook-on-event [:InsertEnter :CmdLineEnter]
   (vim.pack.add [(gh :xzbdmw/colorful-menu.nvim)
                  {:src (gh :saghen/blink.cmp) :version :v1}])
   (local blink (autoload :blink.cmp))
@@ -72,21 +72,20 @@
                         :keymap {:<CR> [:accept_and_enter :fallback]}}}]
     (blink.setup opts)))
 
-(autocmd [:InsertEnter :CmdLineEnter] {:once true :callback setup-blink})
-
 ;;;
 ;;; conform
 ;;;
 
 ;; NOTE: fnlfmt sometimes produces really stupid formatting
 ;; so the manual formatter call is prefered
-(let [conform (require :conform)
-      ignored-fts [:fennel]
-      ignored-ft? (partial vim.tbl_contains ignored-fts)
-      opts {:formatters_by_ft {:fennel [:fnlfmt]}
-            :default_format_opts {:lsp_format :fallback}
-            :format_on_save (fn [bufnr]
-                              (when (not (ignored-ft? (. vim.bo bufnr :filetype)))
-                                {:timeout_ms 500}))}]
-  (conform.setup opts)
-  (set vim.o.formatexpr "v:lua.require'conform'.formatexpr()"))
+(defhook-defer-for &later
+  (let [conform (require :conform)
+        ignored-fts [:fennel]
+        ignored-ft? (partial vim.tbl_contains ignored-fts)
+        opts {:formatters_by_ft {:fennel [:fnlfmt]}
+              :default_format_opts {:lsp_format :fallback}
+              :format_on_save (fn [bufnr]
+                                (when (not (ignored-ft? (. vim.bo bufnr :filetype)))
+                                  {:timeout_ms 500}))}]
+    (conform.setup opts)
+    (set vim.o.formatexpr "v:lua.require'conform'.formatexpr()")))
