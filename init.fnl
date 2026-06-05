@@ -24,8 +24,8 @@
 ;; bootstrap fennel support
 (vim.pack.add [{:src (gh :rktjmp/hotpot.nvim)
                 :version (vim.version.range :^2.0.0)}])
-
 (require :hotpot)
+
 (require :core)
 (when vim.g.neovide (require :neovide))
 (require :build-hooks)
