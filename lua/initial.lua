@@ -1,8 +1,0 @@
--- [nfnl] fnl/initial.fnl
-vim.pack.add({"https://github.com/Wansmer/langmapper.nvim", "https://github.com/nvim-mini/mini.misc"})
-local opts
-local function _1_()
-  return "langmapped"
-end
-opts = {custom_desc = _1_}
-return require("langmapper").setup(opts)

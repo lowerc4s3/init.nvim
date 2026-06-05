@@ -1,4 +1,3 @@
-(local {: autoload} (require :nfnl.module))
 (import-macros {: gh
                 : map
                 : cmd
@@ -7,8 +6,7 @@
                 : defrun-defer-for
                 : dot->} :lib.macros)
 
-(vim.pack.add [(gh :Olical/nfnl)
-               (gh :eraserhd/parinfer-rust)
+(vim.pack.add [(gh :eraserhd/parinfer-rust)
                (gh :lewis6991/gitsigns.nvim)
                (gh :stevearc/conform.nvim)])
 
@@ -35,8 +33,8 @@
   (vim.pack.add [(gh :xzbdmw/colorful-menu.nvim)
                  {:src (gh :saghen/blink.cmp) :version :v1}])
 
-  (local col-menu (autoload :colorful-menu))
-  (local icons (autoload :mini.icons))
+  (local col-menu (require :colorful-menu))
+  (local icons (require :mini.icons))
 
   (fn tabout [rhs]
     "for some reason neotab doesn't trigger when using lua api
