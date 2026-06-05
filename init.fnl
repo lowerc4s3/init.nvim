@@ -3,9 +3,6 @@
 ;; enable lua module loader
 (vim.loader.enable)
 
-;; bootstrap fennel support
-(vim.pack.add [(gh :Olical/nfnl)])
-
 ;; disable unused builtin plugins
 (let [builtins [:gzip
                 :zip
@@ -24,6 +21,11 @@
   (each [_ plugin (ipairs builtins)]
     (tset vim.g (.. :loaded_ plugin) 1)))
 
+;; bootstrap fennel support
+(vim.pack.add [{:src (gh :rktjmp/hotpot.nvim)
+                :version (vim.version.range :^2.0.0)}])
+
+(require :hotpot)
 (require :core)
 (when vim.g.neovide (require :neovide))
 (require :build-hooks)
