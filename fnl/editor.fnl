@@ -1,4 +1,4 @@
-(import-macros {: gh : cb : map : plug : dot->} :lib.macros)
+(import-macros {: gh : cb : map : plug : dot->} :lib.macro)
 (local {: hi} (require :lib.nvim))
 
 (vim.pack.add [(gh :tpope/vim-repeat)

@@ -1,4 +1,4 @@
-(import-macros {: gh : dot->} :lib.macros)
+(import-macros {: gh : dot->} :lib.macro)
 
 (vim.pack.add [(gh :Wansmer/langmapper.nvim)
                (gh :nvim-mini/mini.misc)])

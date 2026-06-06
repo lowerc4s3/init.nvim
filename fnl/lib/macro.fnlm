@@ -16,6 +16,10 @@
   (tset tbl k v)
   tbl)
 
+;;;
+;;; syntax macros
+;;;
+
 ;; inspired by olical's `tx` macro
 ;; and spore's `|` macro (https://blog.spore.ink/editor/fennel-macros/bar.html)
 (lambda | [& args]
@@ -113,7 +117,7 @@ if `opts` or `opts.silent` are nil, then silent mapping is inferred"
 (lambda safely [hook & body]
   `((. (require :mini.misc) :safely) ,hook (fn [] ,(unpack body))))
 
-(lambda defrun-on-event [events & body]
+(lambda with-event-do [events & body]
   "safely execute body on event with mini-misc.safely"
   (let [event-str (if (sequence? events) (table.concat events ",")
                       (str? events) events
@@ -124,7 +128,7 @@ if `opts` or `opts.silent` are nil, then silent mapping is inferred"
   "safely execute body now with mini-misc.safely"
   (safely :now (unpack body)))
 
-(lambda defrun-defer-for [timeout & body]
+(lambda with-delay-do [timeout & body]
   "safely execute body after delay with mini-misc.safely.
 if timeout is &later, then the body will be scheduled immediately,
 otherwise it will be scheduled after specified delay (in ms)"
@@ -133,7 +137,7 @@ otherwise it will be scheduled after specified delay (in ms)"
       (fail "expected &later or number of ms for timeout")))
   
   
-(lambda defrun-on-ft [filetypes & body]
+(lambda with-filetype-do [filetypes & body]
   "safely execute body on specified filetypes with mini-misc.safely"
   (let [ft-str (if (sequence? filetypes) (table.concat filetypes ",")
                    (str? filetypes) filetypes
@@ -147,7 +151,7 @@ otherwise it will be scheduled after specified delay (in ms)"
  : cb
  : |
  : defrun-now
- : defrun-defer-for
- : defrun-on-event
- : defrun-on-ft
+ : with-event-do
+ : with-delay-do
+ : with-filetype-do
  : dot->}

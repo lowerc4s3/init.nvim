@@ -1,4 +1,4 @@
-(import-macros {: gh : map : cmd : defrun-defer-for : dot->} :lib.macros)
+(import-macros {: gh : map : cmd : with-delay-do : dot->} :lib.macro)
 
 (vim.pack.add [(gh :stevearc/oil.nvim)
                (gh :ibhagwan/fzf-lua)
@@ -21,7 +21,7 @@
 ;;; fzf-lua
 ;;;
 
-(defrun-defer-for &later
+(with-delay-do &later
   (let [opts {1 [:ivy :borderless :hide]
               :fzf_colors true
               :keymap {:fzf {1 true :ctrl-A :toggle-all}}
@@ -49,7 +49,7 @@
 ;;; project
 ;;;
 
-(defrun-defer-for &later
+(with-delay-do &later
   (let [opts {:fzf_lua {:enabled true :show :names}
               :scope_chdir :tab
               :lsp {:enabled false}}]

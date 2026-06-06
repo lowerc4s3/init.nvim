@@ -1,4 +1,4 @@
-(import-macros {: gh} :lib.macros)
+(import-macros {: gh} :lib.macro)
 (local {: autocmd : augroup : auclear} (require :lib.nvim))
 (local {: lsp : diagnostic} vim)
 

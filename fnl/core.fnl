@@ -1,4 +1,4 @@
-(import-macros {: cmd : map} :lib.macros)
+(import-macros {: cmd : map} :lib.macro)
 (local {: autocmd : augroup} (require :lib.nvim))
 (local {: g : o : opt} vim)
 

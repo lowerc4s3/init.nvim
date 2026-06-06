@@ -1,4 +1,4 @@
-(import-macros {: gh : | : dot->}  :lib.macros)
+(import-macros {: gh : | : dot->}  :lib.macro)
 
 (vim.pack.add [(gh :nyoom-engineering/oxocarbon.nvim)
                (gh :nvim-mini/mini.icons)
