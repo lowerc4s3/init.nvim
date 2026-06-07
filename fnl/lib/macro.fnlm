@@ -1,20 +1,35 @@
 (local fail (partial assert-compile false))
 
 ;;;
+;;; comp-time utiliy functions
+;;;
+
+(fn type= [t x]
+  (= t (type x)))
+  
+(local str? (partial type= :string))
+(local num? (partial type= :number))
+(local fn? (partial type= :function))
+(local ->str tostring)
+
+(λ every? [pred xs]
+  (accumulate [acc true _ x (ipairs xs)]
+    (and acc (pred x))))
+
+;;;
 ;;; utility macros
 ;;;
 
-(lambda str? [x]
-  "checks if value's type is string"
-  (= :string (type x)))
 
-(lambda num? [x]
-  "checks if value's type is number"
-  (= :number (type x)))
+(λ gh [repo-name]
+  "make a github source link"
+  (assert-compile (str? repo-name) "expected string for repo-name")
+  (.. "https://github.com/" repo-name))
 
-(lambda assoc [tbl k v]
-  (tset tbl k v)
-  tbl)
+(λ cb [repo-name]
+  "make a codeberg source link"
+  (assert-compile (str? repo-name) "expected string for repo-name")
+  (.. "https://codeberg.org/" repo-name))
 
 ;;;
 ;;; syntax macros
@@ -22,7 +37,7 @@
 
 ;; inspired by olical's `tx` macro
 ;; and spore's `|` macro (https://blog.spore.ink/editor/fennel-macros/bar.html)
-(lambda | [& args]
+(λ | [& args]
   "mixed sequential and associative tables syntax.
 all args before associative table are considered sequential elements
 and the associative table elements are considered as key-value pairs. so this form
@@ -41,7 +56,7 @@ is equivalent to this
 
 ;; idea and implementation by spore
 ;; (https://blog.spore.ink/editor/fennel-macros/dot.html)
-(lambda dot-> [expr & calls]
+(λ dot-> [expr & calls]
   "method chaining macro. evaluates `expr` chains all consequential forms
 into methods calls. behaves similarly to clojure's `..` macro.
 example:
@@ -66,92 +81,167 @@ example:
     ;; (dot-> expr) => expr
     [] expr))
 
-;; TODO: autocmd-callback macro
-
 ;;;
 ;;; neovim api macros
 ;;;
 
-(lambda cmd [name]
-  "create a command string in form of \":%command<CR>\""
+(λ cmd [name]
+  "create a command string in form of \"<Cmd>%command<CR>\""
   (assert-compile (str? name) "expected string for name")
   (.. "<Cmd>" name "<CR>"))
 
-(lambda plug [name]
+(λ plug [name]
   "create a <Plug>(%name) keymap string"
   (assert-compile (str? name) "expected string for name")
   (.. "<Plug>(" name ")"))
 
-(lambda split-mode-str [modes]
-  (icollect [mode (string.gmatch modes ".")] mode))
+(λ map! [[modes & opts] lhs rhs]
+  (assert-compile (sym? modes) "expected a symbol for modes")
+  (assert-compile (str? lhs) "expected string for lhs")
 
-(lambda merge-opts-with-default [?opts]
-  (case ?opts
-    nil {:silent true}
-    {:silent nil} (assoc ?opts :silent true)
-    _ ?opts))
+  (local opts* {})
+  (each [i opt (ipairs opts)]
+    (case (->str opt)
+      ;; buffer can optionally accept a buffer number
+      :&buffer
+      (set opts*.buf
+           (case (. opts (+ 1 i))
+             (where buf (num? buf)) buf
+             _ 0))
+      ;; check for description string
+      :&desc
+      (set opts*.desc
+           (case (. opts (+ 1 i))
+             (where desc (str? desc)) desc
+             _ (fail "expected a string after &desc")))
+      ;; don't set fields for &buffer and &desc value 
+      (where switch (and (not= opts*.desc switch) (not= opts*.buf switch)))
+      (tset opts* (switch:sub 2) true)))
 
-(lambda map [modes lhs rhs ?opts]
+  (let [modes (->str modes)
+        modes (icollect [mode (modes:gmatch ".")] mode)]
+    `(vim.keymap.set ,modes ,lhs ,rhs ,opts*)))
+
+(λ map [modes lhs rhs ?opts]
   "define a mapping. modes are defined as a string of mode chars.
 if `opts` or `opts.silent` are nil, then silent mapping is inferred"
   (assert-compile (str? modes) "expected string for modes")
   (assert-compile (or (not ?opts) (table? ?opts))
                   "expected table or nil for ?opts")
-  (let [opts (merge-opts-with-default ?opts)]
-    `(vim.keymap.set ,(split-mode-str modes) ,lhs ,rhs ,opts)))
+  (let [opts (case ?opts
+               nil {:silent true}
+               {:silent nil} (do (set ?opts.silent true) ?opts)
+               _ ?opts)
+        modes (icollect [mode (string.gmatch modes ".")] mode)]
+    `(vim.keymap.set ,modes ,lhs ,rhs ,opts)))
 
-(lambda gh [repo-name]
-  "make a github source link"
-  (assert-compile (str? repo-name) "expected string for repo-name")
-  (.. "https://github.com/" repo-name))
+(λ set-opt! [o opt name ?val]
+  (assert-compile (sym? o) "expected symbol for o")
+  (assert-compile (sym? opt) "expected symbol for opt")
+  (assert-compile (sym? name) "expected symbol for a name")
+  (local name (->str name))
+  (if (not ?val)
+      ;; switch option case
+      (let [toggle-val (not= :no (name:sub 1 2))
+            ;; if we reset the value, remove the "no" prefix
+            name (if toggle-val name (name:sub 3))]
+        `(tset ,o ,name ,toggle-val))
+      ;; list modifying case
+      (let [suffix (name:sub -1)
+            trimmed-name (name:sub 1 -2)
+            opt-modify #`(: (. ,opt ,trimmed-name) ,$1 ,?val)]
+        (case suffix
+          "+" (opt-modify :append ?val)
+          "-" (opt-modify :remove ?val)
+          "^" (opt-modify :prepend ?val)
+          "?" `(. ,o trimmed-name)
+          ;; general case
+          _ `(tset ,o ,name ,?val)))))
 
-(lambda cb [repo-name]
-  "make a codeberg source link"
-  (assert-compile (str? repo-name) "expected string for repo-name")
-  (.. "https://codeberg.org/" repo-name))
+(λ set! [name ?val]
+  "set a vim option with vim.o or vim.opt for modifying list options.
+name must be a symbol and can have a prefix:
+  - \"+\" - append to list;
+  - \"^\" - prepend to list;
+  - \"-\" - remove from list.
+if value is nil, then the option is considered a switch
+and the value is false if the prefix is \"no\" and true otherwise"
+  (set-opt! `vim.o `vim.opt name ?val))
+
+(lambda bset! [& args]
+  "set a buffer local vim option with vim.bo or vim.opt_local for modifying list options.
+name must be a symbol and can have a prefix:
+  - \"+\" - append to list;
+  - \"^\" - prepend to list;
+  - \"-\" - remove from list.
+if value is nil, then the option is considered a switch
+and the value is false if the prefix is \"no\" and true otherwise.
+
+macro optionally accepts a bufnr as a first argument to set option in specified buffer."
+  (case args
+    (where [bufnr name ?val] (num? bufnr)) (set-opt! '(. vim.bo ,bufnr) 'vim.opt_local name ?val)
+    [name ?val] (set-opt! 'vim.bo 'vim.opt_local name ?val)))
+
+(lambda wset! [& args]
+  "set a window local vim option with vim.wo or vim.opt_local for modifying list options.
+name must be a symbol and can have a prefix:
+  - \"+\" - append to list;
+  - \"^\" - prepend to list;
+  - \"-\" - remove from list.
+if value is nil, then the option is considered a switch
+and the value is false if the prefix is \"no\" and true otherwise
+
+macro optionally accepts a winid as a first argument to set option in specified window."
+  (case args
+    (where [winid name ?val] (num? winid)) (set-opt! '(. vim.wo ,winid) 'vim.opt_local name ?val)
+    [name ?val] (set-opt! 'vim.wo 'vim.opt_local name ?val)))
 
 ;;;
 ;;; run macros (mini-misc.safely)
 ;;;
 
-(lambda safely [hook & body]
+(λ run-safely [hook & body]
   `((. (require :mini.misc) :safely) ,hook (fn [] ,(unpack body))))
 
-(lambda with-event-do [events & body]
+(λ with-event-do [events & body]
   "safely execute body on event with mini-misc.safely"
   (let [event-str (if (sequence? events) (table.concat events ",")
                       (str? events) events
                       (fail "expected string or list of strings for events"))]
-    (safely (.. "event:" event-str) (unpack body))))
+    (run-safely (.. "event:" event-str) (unpack body))))
 
-(lambda defrun-now [& body]
+(λ with-safely-do [& body]
   "safely execute body now with mini-misc.safely"
-  (safely :now (unpack body)))
+  (run-safely :now (unpack body)))
 
-(lambda with-delay-do [timeout & body]
+(λ with-delay-do [timeout & body]
   "safely execute body after delay with mini-misc.safely.
 if timeout is &later, then the body will be scheduled immediately,
 otherwise it will be scheduled after specified delay (in ms)"
-  (if (= timeout `&later) (safely :later (unpack body))
-      (num? timeout) (safely (.. "delay:" timeout) (unpack body))
+  (if (= timeout `&later) (run-safely :later (unpack body))
+      (num? timeout) (run-safely (.. "delay:" timeout) (unpack body))
       (fail "expected &later or number of ms for timeout")))
-  
-  
-(lambda with-filetype-do [filetypes & body]
+
+(λ with-filetype-do [filetypes & body]
   "safely execute body on specified filetypes with mini-misc.safely"
   (let [ft-str (if (sequence? filetypes) (table.concat filetypes ",")
                    (str? filetypes) filetypes
                    (fail "expected string or list of strings for events"))]
-    (safely (.. "filetype:" ft-str) (unpack body))))
+    (run-safely (.. "filetype:" ft-str) (unpack body))))
 
 {: cmd
  : map
+ : map!
+ : set!
+ : bset!
+ : wset!
  : plug
  : gh
  : cb
  : |
- : defrun-now
+ : dot->
+ :=> dot->
+ : with-safely-do
  : with-event-do
  : with-delay-do
- : with-filetype-do
- : dot->}
+ : with-filetype-do}
