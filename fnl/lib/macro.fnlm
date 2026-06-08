@@ -81,12 +81,15 @@ example:
 ;;;
 
 (lambda set^ [opt val]
+  "prepend to vim.opt like option"
   `(: ,opt :prepend ,val))
 
 (lambda set+ [opt val]
+  "append to vim.opt like option"
   `(: ,opt :append ,val))
 
 (lambda set- [opt val]
+  "remove from vim.opt like option"
   `(: ,opt :remove ,val))
 
 ;;;
