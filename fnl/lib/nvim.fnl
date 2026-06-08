@@ -1,10 +1,15 @@
 (local autocmd vim.api.nvim_create_autocmd)
-(local augroup vim.api.nvim_create_augroup)
+(local augroup #(vim.api.nvim_create_augroup $1 (or $2 {})))
 (local auclear vim.api.nvim_clear_autocmds)
+
+(local map vim.keymap.set)
+(local unmap vim.keymap.del)
 
 (local hi (partial vim.api.nvim_set_hl 0))
 
 {: autocmd
  : augroup
+ : auclear
  : hi
- : auclear}
+ : map
+ : unmap}

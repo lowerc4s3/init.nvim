@@ -1,4 +1,4 @@
-(local hi (partial vim.api.nvim_set_hl 0))
+(local {: hi} (require :lib.nvim))
 
 (macro cmp->blink [hls]
   (icollect [_ kind (ipairs hls)]

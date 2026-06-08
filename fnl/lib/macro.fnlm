@@ -9,17 +9,12 @@
   
 (local str? (partial type= :string))
 (local num? (partial type= :number))
-(local fn? (partial type= :function))
-(local ->str tostring)
-
-(λ every? [pred xs]
-  (accumulate [acc true _ x (ipairs xs)]
-    (and acc (pred x))))
 
 ;;;
 ;;; utility macros
 ;;;
 
+;; TODO: macro prelude
 
 (λ gh [repo-name]
   "make a github source link"
@@ -41,11 +36,11 @@
   "mixed sequential and associative tables syntax.
 all args before associative table are considered sequential elements
 and the associative table elements are considered as key-value pairs. so this form
-  ```fnl
+  ```fennel
   (| :fst :sec :trd {:key-a 10 :key-b 20})
   ```
 is equivalent to this
-  ```fnl
+  ```fennel
   {1 :fst 2 :sec 3 :trd :key-a 10 :key-b 20}
   ```"
   (let [kv-table (if (table? (. args (length args))) (table.remove args))]
@@ -56,11 +51,11 @@ is equivalent to this
 
 ;; idea and implementation by spore
 ;; (https://blog.spore.ink/editor/fennel-macros/dot.html)
-(λ dot-> [expr & calls]
+(λ => [expr & calls]
   "method chaining macro. evaluates `expr` chains all consequential forms
 into methods calls. behaves similarly to clojure's `..` macro.
 example:
-  ```fnl
+  ```fennel
   (dot-> (require :module) (modfn :arg1 :arg2) (another-modfn 3 4))
   ;; notice how this resembles lua method chaining:
   ;; require('module').modfn('arg1, 'arg2').another_modfn(3, 4)
@@ -77,7 +72,7 @@ example:
       [] `(,tbl)))
   (case calls
     ;; (dot-> expr calls ...) => (dot-> (dot-> expr form) ...)
-    [form & rest] (dot-> (transform expr form) (unpack rest))
+    [form & rest] (=> (transform expr form) (unpack rest))
     ;; (dot-> expr) => expr
     [] expr))
 
@@ -85,116 +80,14 @@ example:
 ;;; neovim api macros
 ;;;
 
-(λ cmd [name]
-  "create a command string in form of \"<Cmd>%command<CR>\""
-  (assert-compile (str? name) "expected string for name")
-  (.. "<Cmd>" name "<CR>"))
+(lambda set^ [opt val]
+  `(: ,opt :prepend ,val))
 
-(λ plug [name]
-  "create a <Plug>(%name) keymap string"
-  (assert-compile (str? name) "expected string for name")
-  (.. "<Plug>(" name ")"))
+(lambda set+ [opt val]
+  `(: ,opt :append ,val))
 
-(λ map! [[modes & opts] lhs rhs]
-  (assert-compile (sym? modes) "expected a symbol for modes")
-  (assert-compile (str? lhs) "expected string for lhs")
-
-  (local opts* {})
-  (each [i opt (ipairs opts)]
-    (case (->str opt)
-      ;; buffer can optionally accept a buffer number
-      :&buffer
-      (set opts*.buf
-           (case (. opts (+ 1 i))
-             (where buf (num? buf)) buf
-             _ 0))
-      ;; check for description string
-      :&desc
-      (set opts*.desc
-           (case (. opts (+ 1 i))
-             (where desc (str? desc)) desc
-             _ (fail "expected a string after &desc")))
-      ;; don't set fields for &buffer and &desc value 
-      (where switch (and (not= opts*.desc switch) (not= opts*.buf switch)))
-      (tset opts* (switch:sub 2) true)))
-
-  (let [modes (->str modes)
-        modes (icollect [mode (modes:gmatch ".")] mode)]
-    `(vim.keymap.set ,modes ,lhs ,rhs ,opts*)))
-
-(λ map [modes lhs rhs ?opts]
-  "define a mapping. modes are defined as a string of mode chars.
-if `opts` or `opts.silent` are nil, then silent mapping is inferred"
-  (assert-compile (str? modes) "expected string for modes")
-  (assert-compile (or (not ?opts) (table? ?opts))
-                  "expected table or nil for ?opts")
-  (let [opts (case ?opts
-               nil {:silent true}
-               {:silent nil} (do (set ?opts.silent true) ?opts)
-               _ ?opts)
-        modes (icollect [mode (string.gmatch modes ".")] mode)]
-    `(vim.keymap.set ,modes ,lhs ,rhs ,opts)))
-
-(λ set-opt! [o opt name ?val]
-  (assert-compile (sym? o) "expected symbol for o")
-  (assert-compile (sym? opt) "expected symbol for opt")
-  (assert-compile (sym? name) "expected symbol for a name")
-  (local name (->str name))
-  (if (not ?val)
-      ;; switch option case
-      (let [toggle-val (not= :no (name:sub 1 2))
-            ;; if we reset the value, remove the "no" prefix
-            name (if toggle-val name (name:sub 3))]
-        `(tset ,o ,name ,toggle-val))
-      ;; list modifying case
-      (let [suffix (name:sub -1)
-            trimmed-name (name:sub 1 -2)
-            opt-modify #`(: (. ,opt ,trimmed-name) ,$1 ,?val)]
-        (case suffix
-          "+" (opt-modify :append ?val)
-          "-" (opt-modify :remove ?val)
-          "^" (opt-modify :prepend ?val)
-          "?" `(. ,o trimmed-name)
-          ;; general case
-          _ `(tset ,o ,name ,?val)))))
-
-(λ set! [name ?val]
-  "set a vim option with vim.o or vim.opt for modifying list options.
-name must be a symbol and can have a prefix:
-  - \"+\" - append to list;
-  - \"^\" - prepend to list;
-  - \"-\" - remove from list.
-if value is nil, then the option is considered a switch
-and the value is false if the prefix is \"no\" and true otherwise"
-  (set-opt! `vim.o `vim.opt name ?val))
-
-(lambda bset! [& args]
-  "set a buffer local vim option with vim.bo or vim.opt_local for modifying list options.
-name must be a symbol and can have a prefix:
-  - \"+\" - append to list;
-  - \"^\" - prepend to list;
-  - \"-\" - remove from list.
-if value is nil, then the option is considered a switch
-and the value is false if the prefix is \"no\" and true otherwise.
-
-macro optionally accepts a bufnr as a first argument to set option in specified buffer."
-  (case args
-    (where [bufnr name ?val] (num? bufnr)) (set-opt! '(. vim.bo ,bufnr) 'vim.opt_local name ?val)
-    [name ?val] (set-opt! 'vim.bo 'vim.opt_local name ?val)))
-
-(lambda wset! [& args]
-  "set a window local vim option with vim.wo or vim.opt_local for modifying list options.
-name must be a symbol and can have a prefix:
-  - \"+\" - append to list;
-  - \"^\" - prepend to list;
-  - \"-\" - remove from list.
-if value is nil, then the option is considered a switch
-and the value is false if the prefix is \"no\" and true otherwise
-
-macro optionally accepts a winid as a first argument to set option in specified window."
-  (case args
-    (where [winid name ?val] (num? winid)) (set-opt! '(. vim.wo ,winid) 'vim.opt_local name ?val)
-    [name ?val] (set-opt! 'vim.wo 'vim.opt_local name ?val)))
+(lambda set- [opt val]
+  `(: ,opt :remove ,val))
 
 ;;;
 ;;; run macros (mini-misc.safely)
@@ -229,18 +122,13 @@ otherwise it will be scheduled after specified delay (in ms)"
                    (fail "expected string or list of strings for events"))]
     (run-safely (.. "filetype:" ft-str) (unpack body))))
 
-{: cmd
- : map
- : map!
- : set!
- : bset!
- : wset!
- : plug
+{: set^
+ : set+
+ : set-
  : gh
  : cb
  : |
- : dot->
- :=> dot->
+ : =>
  : with-safely-do
  : with-event-do
  : with-delay-do

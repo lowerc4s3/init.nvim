@@ -30,7 +30,7 @@
     (autocmd [:CursorMoved :CursorMovedI]
              {: buffer : group :callback lsp.buf.clear_references})
     (autocmd :LspDetach
-             {:group (augroup :WordLspDetach {:clear true})
+             {:group (augroup :WordLspDetach)
               :callback (fn [{: buf}]
                           (lsp.buf.clear_references)
                           (auclear {:buffer buf :group :WordLspHighlight}))})))
@@ -41,23 +41,22 @@
     (when (and ?client (?client:supports_method doc-hl buf))
       (setup-word-ref-hl buf))))
 
-(autocmd :LspAttach {:group (augroup :LspAttachGroup {:clear true})
-                     :callback on-attach})
+(autocmd :LspAttach {:group (augroup :LspAttachGroup) :callback on-attach})
 
 ;;;
 ;;; servers
 ;;;
 
-(lsp.config :rust_analyzer
-            {:settings {:rust-analyzer {:inlayHints {:typeHints false
-                                                     :chainingHints false
-                                                     :parameterHints false
-                                                     :closingBraceHints false}
-                                        :check {:command :clippy}
-                                        :imports {:granularity {:group :module
-                                                                :prefix :self
-                                                                :preferPrelude true}}
-                                        :assist {:preferSelf true}}}})
+(let [opts {:inlayHints {:typeHints false
+                         :chainingHints false
+                         :parameterHints false
+                         :closingBraceHints false}
+            :check {:command :clippy}
+            :imports {:granularity {:group :module
+                                    :prefix :self
+                                    :preferPrelude true}}
+            :assist {:preferSelf true}}]
+  (lsp.config :rust_analyzer {:settings {:rust-analyzer opts}}))
 
 (lsp.enable [:fennel_ls
              :rust_analyzer

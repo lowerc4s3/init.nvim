@@ -1,14 +1,5 @@
-(import-macros {: gh
-                : with-event-do
-                : with-delay-do
-                : map
-                : cmd
-                : plug
-                : |
-                : dot->} :lib.macro)
-; (import-macros {: gh : with-event-do : with-delay-do} :macros.util
-;                {: map : cmd : plug} :macros.nvim
-;                {: | : dot->} :macros.syntax)
+(import-macros {: gh : with-event-do : with-delay-do : | : =>} :lib.macro)
+(local {: map} (require :lib.nvim))
 
 (vim.pack.add [(gh :eraserhd/parinfer-rust)
                (gh :lewis6991/gitsigns.nvim)
@@ -22,12 +13,12 @@
   (vim.pack.add [(gh :dlyongemallo/diffview.nvim)
                  (gh :NeogitOrg/neogit)])
   (let [opts {:disable_hint true}]
-    (dot-> (require :neogit) (setup opts)))
+    (=> (require :neogit) (setup opts)))
 
-  (map :n :<Leader>gg (cmd :Neogit) {:desc "open neogit tab"})
-  (map :n :<Leader>gl (cmd "Neogit log") {:desc "view log"})
-  (map :n :<Leader>gp (cmd "Neogit pull") {:desc :pull})
-  (map :n :<Leader>gP (cmd "Neogit push") {:desc :push}))
+  (map :n :<Leader>gg "<cmd>Neogit<cr>") {:desc "open neogit tab"}
+  (map :n :<Leader>gl "<cmd>Neogit log<cr>" {:desc "view log"})
+  (map :n :<Leader>gp "<cmd>Neogit pull<cr>" {:desc :pull})
+  (map :n :<Leader>gP "<cmd>Neogit push<cr>" {:desc :push}))
 
 ;;;
 ;;; blink
@@ -69,15 +60,15 @@
                        :<C-e> [:cancel :fallback]
                        :<Tab> [#(if ($.is_visible) ($.select_next)
                                     ($.snippet_active) ($.accept))
-                               #(tabout (plug :neotab-out))]
+                               #(tabout "<plug>(neotab-out)")]
                        :<S-Tab> [#(if ($.is_visible) ($.select_prev)
                                       ($.snippet_active) ($.snippet_backward))
-                                 #(tabout (plug :neotab-reverse))]}
+                                 #(tabout "<plug>(neotab-reverse)")]}
               :cmdline {:completion {:menu {:auto_show true}
                                      :list {:selection {:preselect false
                                                         :auto_insert true}}}
                         :keymap {:<CR> [:accept_and_enter :fallback]}}}]
-    (dot-> (require :blink.cmp) (setup opts))))
+    (=> (require :blink.cmp) (setup opts))))
 
 ;;;
 ;;; conform
@@ -93,5 +84,5 @@
               :format_on_save (fn [bufnr]
                                 (when (not (ignored-ft? (. vim.bo bufnr :filetype)))
                                   {:timeout_ms 500}))}]
-    (dot-> (require :conform) (setup opts))
+    (=> (require :conform) (setup opts))
     (set vim.o.formatexpr "v:lua.require'conform'.formatexpr()")))

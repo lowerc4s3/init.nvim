@@ -1,4 +1,4 @@
-(import-macros {: map} :lib.macro)
+(local {: map} (require :lib.nvim))
 
 (macro nv [name val]
   "set neovide option (desugars into vim.g.neovide_%name = val)"
@@ -25,19 +25,14 @@
 ;; interpret left option as meta on macos (right one is used as yabai super key)
 (nv input_macos_option_key_is_meta :only_right)
 
-(fn mod [key]
-  "make a mod keymap string <mod-%key>.
-  mod is system-dependant and defined as cmd in macos (<D>)
-  and ctrl-shift elsewhere (<C-S>)"
-  (let [prefix (if (vim.fn.has :macunix) :<D- :<C-S-)]
-    (.. prefix key ">")))
+(let [prefix (if (vim.fn.has :macunix) "<D-" "<C-S-")
+      mod #(.. prefix $ ">")]
+  (map [:n :v :l :t]
+       (mod "n")
+       #(vim.uv.spawn "neovide" {:detached true} (fn []))
+       {:desc "spawn new instance"})
 
-(map :n
-     (mod :n)
-     #(vim.uv.spawn :neovide {:detached true} (fn []))
-     {:desc "spawn new instance"})
-
-(map :nvsxoilct
-     (mod :v)
-     #(vim.api.nvim_paste (vim.fn.getreg "+") true -1)
-     {:desc "paste from system clipboard"})
+  (map [:n :v :l :t]
+       (mod "v")
+       #(vim.api.nvim_paste (vim.fn.getreg :+) true -1)
+       {:desc "paste from system clipboard"}))

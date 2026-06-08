@@ -1,4 +1,4 @@
-(import-macros {: gh : | : dot->}  :lib.macro)
+(import-macros {: gh : | : =>}  :lib.macro)
 
 (vim.pack.add [(gh :nyoom-engineering/oxocarbon.nvim)
                (gh :nvim-mini/mini.icons)
@@ -34,7 +34,7 @@
                           :typeparameter "*"
                           :snippet "󰆏"
                           :color "󰌁"})}]
-  (dot-> (require :mini.icons) (setup opts)))
+  (=> (require :mini.icons) (setup opts)))
 
 ;;;
 ;;; which-key
@@ -69,7 +69,7 @@
                            :Space :SPC
                            :Tab :TAB
                            :Esc :ESC}}}]
-  (dot-> (require :which-key) (setup opts)))
+  (=> (require :which-key) (setup opts)))
 
 ;;;
 ;;; tabby
@@ -91,7 +91,7 @@
                                 (| sep (win.buf_name) sep {: hl})))]
                  (| " 󰓩 " (tabs.foreach tab-fn) (line.spacer) (wins.foreach win-fn) "  "
                     {:hl theme.fill})))]
-  (dot-> (require :tabby.tabline) (set render)))
+  (=> (require :tabby.tabline) (set render)))
 
 ;;;
 ;;; slimline
@@ -114,4 +114,4 @@
                                             :HINT " "
                                             :INFO " "}}
                       :progress {:follow false :icon "󰦪"}}}]
-  (dot-> (require :slimline) (setup opts)))
+  (=> (require :slimline) (setup opts)))
