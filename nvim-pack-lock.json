@@ -6,8 +6,8 @@
       "version": "'v1'"
     },
     "buffer-sticks.nvim": {
-      "rev": "aa15783b2b997d43bd6046ec96a614dfcc78afa7",
-      "src": "https://github.com/ahkohd/buffer-sticks.nvim"
+      "rev": "ae7ddb493a396125d3c3c3e69e51b6d9bfc76a8c",
+      "src": "https://github.com/JustBarnt/buffer-sticks.nvim"
     },
     "colorful-menu.nvim": {
       "rev": "13f9b7eaa9cd2901b4f8915cfb2483c3be4c8c20",

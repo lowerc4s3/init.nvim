@@ -3,7 +3,10 @@
 
 (vim.pack.add [(gh :stevearc/oil.nvim)
                (gh :ibhagwan/fzf-lua)
-               (gh :ahkohd/buffer-sticks.nvim)
+               ;; NOTE: ahkohd/buffer-sticks.nvim 
+               ;; is currently broken on nightly  
+               ;; so we use a fork with a fix
+               (gh :JustBarnt/buffer-sticks.nvim)
                (gh :DrKJeff16/project.nvim)])
 
 (let [opts {:delete_to_trash true
