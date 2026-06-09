@@ -49,7 +49,7 @@
 (set o.linebreak true) ; wrap lines at sensible points
 (set o.foldlevel 999) ; don't fold automatically
 (set^ opt.guicursor "a:Cursor") ; force cursor hl in all modes
-(=> (require :vim._core.ui2) (enable {:msg {:target :msg}}))
+(=> (require :vim._core.ui2) (enable {:msg {:targets :msg}}))
 
 ;;; modeline
 (set o.cmdheight 0)
