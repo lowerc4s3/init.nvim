@@ -1,39 +1,44 @@
-(import-macros {: gh : cb : =>} :lib.macro)
+(import-macros {: gh : cb : => : with-safely} :lib.macro)
 (local {: hi : map} (require :lib.nvim))
+(local {: pack} vim)
 
-(vim.pack.add [(gh :tpope/vim-repeat)
-               (cb :andyg/leap.nvim)
-               (gh :nvim-mini/mini.jump)
-               (gh :nvim-mini/mini.surround)
-               (gh :kawre/neotab.nvim)
-               {:src (gh :VonHeikemen/ts-enable.nvim) :version :v2.x}])
+(with-safely :now
+  (pack.add [(gh :nvim-mini/mini.jump)])
+  (=> (require :mini.jump) (setup))
+  (hi :MiniJump {:link :CurSearch}))
 
-(=> (require :mini.jump) (setup))
-(hi :MiniJump {:link :CurSearch})
+(with-safely :now
+  (pack.add [(gh :tpope/vim-repeat)
+             (cb :andyg/leap.nvim)])
+  (map [:n :x :o] "s" "<plug>(leap)" {:desc "leap in current window"})
+  (map :n "S" "<plug>(leap-from-window)" {:desc "leap to another window"})
+  (map [:x :o] "ar" "<plug>(leap-remote-text-object)"
+       {:desc "select remote outer text object"})
+  (map [:x :o] "ir" "<plug>(leap-remote-inner-text-object)"
+       {:desc "select remote inner text object"}))
 
-(map [:n :x :o] "s" "<plug>(leap)" {:desc "leap in current window"})
-(map :n "S" "<plug>(leap-from-window)" {:desc "leap to another window"})
-(map [:x :o] "ar" "<plug>(leap-remote-text-object)"
-     {:desc "select remote outer text object"})
-(map [:x :o] "ir" "<plug>(leap-remote-inner-text-object)"
-     {:desc "select remote inner text object"})
-
-(let [opts {:mappings {:add :gs
-                       :delete :gsd
-                       :replace :gsr
-                       :find ""
-                       :find_left ""
-                       :highlight ""
-                       :suffix_last ""
-                       :suffix_next ""}
-            ;; place surroundings on separate lines in linewise mode
-            ;; and on each line in blockwise mode
-            :respect_selection_type true}]
-  (=> (require :mini.surround) (setup opts)))
+(with-safely :now
+  (pack.add [(gh :nvim-mini/mini.surround)])
+  (let [opts {:mappings {:add :gs
+                         :delete :gsd
+                         :replace :gsr
+                         :find ""
+                         :find_left ""
+                         :highlight ""
+                         :suffix_last ""
+                         :suffix_next ""}
+              ;; place surroundings on separate lines in linewise mode
+              ;; and on each line in blockwise mode
+              :respect_selection_type true}]
+    (=> (require :mini.surround) (setup opts))))
 
 ;; neotab's mappings are handled by blink.cmp
-(let [opts {:tabkey "" :reverse_key ""}]
-  (=> (require :neotab) (setup opts)))
+(with-safely :now
+  (pack.add [(gh :kawre/neotab.nvim)])
+  (let [opts {:tabkey "" :reverse_key ""}]
+    (=> (require :neotab) (setup opts))))
 
-(let [opts {:auto_init true :highlights true :folds true}]
-  (set vim.g.ts_enable opts))
+(with-safely :now
+  (pack.add [{:src (gh :VonHeikemen/ts-enable.nvim) :version :v2.x}])
+  (let [opts {:auto_init true :highlights true :folds true}]
+    (set vim.g.ts_enable opts)))

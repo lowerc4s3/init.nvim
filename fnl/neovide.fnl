@@ -32,7 +32,7 @@
        #(vim.uv.spawn "neovide" {:detached true} (fn []))
        {:desc "spawn new instance"})
 
-  (map [:n :v :l :t]
+  (map [:n :v :l :t :i]
        (mod "v")
        #(vim.api.nvim_paste (vim.fn.getreg :+) true -1)
        {:desc "paste from system clipboard"}))

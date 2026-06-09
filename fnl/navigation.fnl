@@ -1,40 +1,35 @@
-(import-macros {: gh : with-delay-do : =>} :lib.macro)
+(import-macros {: gh : with-safely : =>} :lib.macro)
 (local {: map} (require :lib.nvim))
+(local {: pack} vim)
 
-(vim.pack.add [(gh :stevearc/oil.nvim)
-               (gh :ibhagwan/fzf-lua)
-               ;; NOTE: ahkohd/buffer-sticks.nvim 
-               ;; is currently broken on nightly  
-               ;; so we use a fork with a fix
-               (gh :JustBarnt/buffer-sticks.nvim)
-               (gh :DrKJeff16/project.nvim)])
+(with-safely :now
+  (pack.add [(gh :stevearc/oil.nvim)])
+  (let [opts {:delete_to_trash true
+              :watch_for_changes true
+              :constrain_cursor :name
+              :keymaps {"gS" {1 :actions.change_sort :mode :n}
+                        "q" {1 :actions.close :mode :n}
+                        "<C-h>" false
+                        "<C-s>" {1 :actions.select :opts {:horizontal true}}
+                        "<C-v>" {1 :actions.select :opts {:vertical true}}}}]
+    (=> (require :oil) (setup opts)))
 
-(let [opts {:delete_to_trash true
-            :watch_for_changes true
-            :constrain_cursor :name
-            :keymaps {:gS {1 :actions.change_sort :mode :n}
-                      :q {1 :actions.close :mode :n}
-                      :<C-h> false
-                      :<C-s> {1 :actions.select :opts {:horizontal true}}
-                      :<C-v> {1 :actions.select :opts {:vertical true}}}}]
-  (=> (require :oil) (setup opts)))
-
-(map :n "-" "<cmd>Oil<cr>") {:desc "open parent dir"}
+  (map :n "-" "<cmd>Oil<cr>") {:desc "open parent dir"})
 
 ;;;
-;;; fzf-lua
+;;; fzf-lua and project
 ;;;
 
-(with-delay-do &later
+(with-safely :later
+  (pack.add [(gh :ibhagwan/fzf-lua) (gh :DrKJeff16/project.nvim)])
   (let [opts {1 [:ivy :borderless :hide]
               :fzf_colors true
-              :keymap {:fzf {1 true :ctrl-A :toggle-all}}
+              :keymap {:fzf {1 true "ctrl-A" :toggle-all}}
               :actions {:files {1 true
-                                :ctrl-h #(_G.FzfLua.actions.toggle_hidden $...)
-                                :ctrl-Q #(_G.FzfLua.actions.file_sel_to_qf $...)
-                                :alt-Q #(_G.FzfLua.actions.file_sel_to_ll $...)}}}]
+                                "ctrl-h" #(_G.FzfLua.actions.toggle_hidden $...)
+                                "ctrl-Q" #(_G.FzfLua.actions.file_sel_to_qf $...)
+                                "alt-Q" #(_G.FzfLua.actions.file_sel_to_ll $...)}}}]
     (=> (require :fzf-lua) (setup opts)))
-
   (let [fzf _G.FzfLua]
     (map :n "<Leader><Leader>" fzf.files {:desc "open cwd file"})
     (map :n "<Leader>," fzf.buffers {:desc "switch buffer"})
@@ -47,42 +42,38 @@
     (map :n "<Leader>hh" fzf.helptags {:desc :helptags})
     (map :n "<Leader>hk" fzf.keymaps {:desc :keymaps})
     (map :n "<Leader>ho" fzf.nvim_options {:desc :options})
-    (map :n "<Leader>hH" fzf.highlights {:desc :highlights})))
-
-;;;
-;;; project
-;;;
-
-(with-delay-do &later
+    (map :n "<Leader>hH" fzf.highlights {:desc :highlights}))
   (let [opts {:fzf_lua {:enabled true :show :names}
               :scope_chdir :tab
               :lsp {:enabled false}}]
     (=> (require :project) (setup opts)))
-
   (map :n "<Leader>sp" "<cmd>Project fzf-lua<cr>" {:desc "project"}))
 
 ;;;
 ;;; buffer-sticks
 ;;;
 
-(let [opts {:list {:keys {:close_buffer :<C-d>
-                          :move_up :<C-k>
-                          :move_down :<C-j>}
-                   :filter {:keys {:move_up :<C-k>
-                                   :move_down :<C-j>}
-                            :title "/"}}
-            :winblend 100
-            :filter {:names ["^$"]} ; hide unnamed buffers
-            :highlights {:active {:link :Normal}
-                         :list_selected {:link "@function"}
-                         :alternate {:link :Comment}
-                         :inactive {:link :Comment}
-                         :active_modified {:link :DiagnosticWarn}
-                         :alternate_modified {:link :DiagnosticWarn}
-                         :inactive_modified {:link :DiagnosticWarn}
-                         :label {:link :Bold}
-                         :filter_title {:link :Comment}
-                         :filter_selected {:link "@function"}}}]
-  (=> (require :buffer-sticks) (setup opts)))
-
-(map :n "<Tab>" #(_G.BufferSticks.jump) {:desc "jump to buffer"})
+(with-safely :now
+  ;; NOTE: ahkohd/buffer-sticks.nvim 
+  ;; is currently broken on nightly  
+  ;; so we use a fork with a fix
+  (pack.add [(gh :JustBarnt/buffer-sticks.nvim)])
+  (let [opts {:list {:keys {:close_buffer "<C-d>"
+                            :move_up "<C-k>"
+                            :move_down "<C-j>"}
+                     :filter {:keys {:move_up "<C-k>" :move_down "<C-j>"}
+                              :title "/"}}
+              :winblend 100
+              :filter {:names ["^$"]} ; hide unnamed buffers
+              :highlights {:active {:link :Normal}
+                           :list_selected {:link "@function"}
+                           :alternate {:link :Comment}
+                           :inactive {:link :Comment}
+                           :active_modified {:link :DiagnosticWarn}
+                           :alternate_modified {:link :DiagnosticWarn}
+                           :inactive_modified {:link :DiagnosticWarn}
+                           :label {:link :Bold}
+                           :filter_title {:link :Comment}
+                           :filter_selected {:link "@function"}}}]
+    (=> (require :buffer-sticks) (setup opts)))
+  (map :n "<Tab>" #(_G.BufferSticks.jump) {:desc "jump to buffer"}))

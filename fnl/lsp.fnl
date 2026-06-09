@@ -1,8 +1,9 @@
-(import-macros {: gh} :lib.macro)
+(import-macros {: gh : with-safely} :lib.macro)
 (local {: autocmd : augroup : auclear} (require :lib.nvim))
-(local {: lsp : diagnostic} vim)
+(local {: lsp : diagnostic : pack} vim)
 
-(vim.pack.add [(gh :neovim/nvim-lspconfig)])
+(with-safely :now
+  (pack.add [(gh :neovim/nvim-lspconfig)]))
 
 ;;;
 ;;; configuration

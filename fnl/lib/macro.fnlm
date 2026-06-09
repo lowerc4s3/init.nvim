@@ -7,6 +7,7 @@
 (fn type= [t x]
   (= t (type x)))
   
+(local ->str tostring)
 (local str? (partial type= :string))
 (local num? (partial type= :number))
 
@@ -63,11 +64,11 @@ example:
   (fn transform [tbl form]
     (case form
       ;; (dot-> tbl form) => (. tbl "form")
-      (where field (sym? field)) `(. ,tbl ,(tostring field))
+      (where field (sym? field)) `(. ,tbl ,(->str field))
       ;; (dot-> tbl [x y]) => (. tbl x y)
       (where fields (sequence? fields)) `(. ,tbl ,(unpack fields))
       ;; (dot-> tbl (f x)) => ((. tbl "f") x)
-      [field & rest] `((. ,tbl ,(tostring field)) ,(unpack rest))
+      [field & rest] `((. ,tbl ,(->str field)) ,(unpack rest))
       ;; (dot-> tbl ()) => (tbl)
       [] `(,tbl)))
   (case calls
@@ -80,15 +81,15 @@ example:
 ;;; neovim api macros
 ;;;
 
-(lambda set^ [opt val]
+(λ set^ [opt val]
   "prepend to vim.opt like option"
   `(: ,opt :prepend ,val))
 
-(lambda set+ [opt val]
+(λ set+ [opt val]
   "append to vim.opt like option"
   `(: ,opt :append ,val))
 
-(lambda set- [opt val]
+(λ set- [opt val]
   "remove from vim.opt like option"
   `(: ,opt :remove ,val))
 
@@ -125,6 +126,26 @@ otherwise it will be scheduled after specified delay (in ms)"
                    (fail "expected string or list of strings for events"))]
     (run-safely (.. "filetype:" ft-str) (unpack body))))
 
+(λ with-safely [hook ...]
+  "execute `body` once on certain condition and warn on error.
+accepts following hooks:
+  - `:now` - run immediately;
+  - `:later` - schedule execution with `vim.schedule`;
+  - `[:delay timeout] - delay execution for `timeout` ms with `vim.defer_fn`;
+  - `[:on-event events ?patterns] - run on one or more events matching patterns;
+  - `[:on-filetype filetypes] - run on one or more filetypes`"
+  (let [->comma-list #(if (sequence? $) (table.concat $ ",")
+                          (str? $) $
+                          (fail "expected string or list of strings for value"))
+        hook-str (case hook
+                   :now :now
+                   :later :later
+                   [:on-event e p] (.. "event:" (->comma-list e) "~" (->comma-list p))
+                   [:on-event e] (.. "event:" (->comma-list e))
+                   [:on-filetype ft] (.. "filetype:" (->comma-list ft))
+                   _ (fail "invalid hook"))]
+    (=> `(require :mini.misc) `(safely ,hook-str (fn [] ,...)))))
+
 {: set^
  : set+
  : set-
@@ -132,7 +153,4 @@ otherwise it will be scheduled after specified delay (in ms)"
  : cb
  : |
  : =>
- : with-safely-do
- : with-event-do
- : with-delay-do
- : with-filetype-do}
+ : with-safely}

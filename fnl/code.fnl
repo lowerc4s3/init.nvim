@@ -1,17 +1,19 @@
-(import-macros {: gh : with-event-do : with-delay-do : | : =>} :lib.macro)
+(import-macros {: gh : with-safely : | : =>} :lib.macro)
 (local {: map} (require :lib.nvim))
+(local {: pack} vim)
 
-(vim.pack.add [(gh :eraserhd/parinfer-rust)
-               (gh :lewis6991/gitsigns.nvim)
-               (gh :stevearc/conform.nvim)])
+(with-safely :now
+  (pack.add [(gh :eraserhd/parinfer-rust)
+             (gh :lewis6991/gitsigns.nvim)]))
+             
 
 ;;;
 ;;; neogit
 ;;;
 
-(with-delay-do &later
-  (vim.pack.add [(gh :dlyongemallo/diffview.nvim)
-                 (gh :NeogitOrg/neogit)])
+(with-safely :later
+  (pack.add [(gh :dlyongemallo/diffview.nvim)
+             (gh :NeogitOrg/neogit)])
   (let [opts {:disable_hint true}]
     (=> (require :neogit) (setup opts)))
 
@@ -24,9 +26,9 @@
 ;;; blink
 ;;;
 
-(with-event-do [:InsertEnter :CmdLineEnter]
-  (vim.pack.add [(gh :xzbdmw/colorful-menu.nvim)
-                 {:src (gh :saghen/blink.cmp) :version :v1}])
+(with-safely [:on-event [:InsertEnter :CmdLineEnter]]
+  (pack.add [(gh :xzbdmw/colorful-menu.nvim)
+             {:src (gh :saghen/blink.cmp) :version :v1}])
 
   (local col-menu (require :colorful-menu))
   (local icons (require :mini.icons))
@@ -76,7 +78,8 @@
 
 ;; NOTE: fnlfmt sometimes produces really stupid formatting
 ;; so the manual formatter call is prefered
-(with-delay-do &later
+(with-safely :later
+  (pack.add [(gh :stevearc/conform.nvim)])
   (let [ignored-fts [:fennel]
         ignored-ft? (partial vim.tbl_contains ignored-fts)
         opts {:formatters_by_ft {:fennel [:fnlfmt]}
