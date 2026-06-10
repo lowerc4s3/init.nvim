@@ -42,6 +42,10 @@
       "rev": "59d70b1bdf8e76e0637e6ebcc150fb6767f67fc5",
       "src": "https://codeberg.org/andyg/leap.nvim"
     },
+    "lualine.nvim": {
+      "rev": "221ce6b2d999187044529f49da6554a92f740a96",
+      "src": "https://github.com/nvim-lualine/lualine.nvim"
+    },
     "mini.icons": {
       "rev": "520995f1d75da0e4cc901ee95080b1ff2bc46b94",
       "src": "https://github.com/nvim-mini/mini.icons"
@@ -85,10 +89,6 @@
     "project.nvim": {
       "rev": "124f2a5015fad619a57a650fab3c2eef73a4a089",
       "src": "https://github.com/DrKJeff16/project.nvim"
-    },
-    "slimline.nvim": {
-      "rev": "6e1387e69e222957ff87e5ddc61470d4e04ac683",
-      "src": "https://github.com/sschleemilch/slimline.nvim"
     },
     "tabby.nvim": {
       "rev": "3c130e1fcb598ce39a9c292847e32d7c3987cf11",

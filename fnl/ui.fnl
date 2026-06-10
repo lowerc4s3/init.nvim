@@ -97,26 +97,55 @@
   (=> (require :tabby.tabline) (set render)))
 
 ;;;
-;;; slimline
+;;; lualine
 ;;;
 
 (with-safely :now
-  (pack.add [(gh :sschleemilch/slimline.nvim)])
-  (let [opts {:style :fg
-              :spaces {:left "" :right ""}
-              :components {:left [:mode :recording :path :git]
-                           :right [:diagnostics
-                                   :filetype_lsp
-                                   :selectioncount
-                                   :searchcount
-                                   :progress]}
-              :configs {:path {:icons {:folder "󰉋 "
-                                       :modified "[+]"
-                                       :read_only "[RO]"}}
-                        :git {:icons {:branch "#"}}
-                        :diagnostics {:icons {:ERROR " "
-                                              :WARN " "
-                                              :HINT " "
-                                              :INFO " "}}
-                        :progress {:follow false :icon "󰦪"}}}]
-    (=> (require :slimline) (setup opts))))
+  (pack.add [(gh :nvim-lualine/lualine.nvim)])
+  (let [colors {:primary :Normal :secondary :LineNr}
+        options {:icons_enabled true
+                 :component_separators {:left "" :right ""}
+                 :section_separators {:left "" :right ""}
+                 :refresh {:events [:WinEnter
+                                    :BufEnter
+                                    :BufWritePost
+                                    :SessionLoadPost
+                                    :FileChangedShellPost
+                                    :VimResized
+                                    :Filetype
+                                    :CursorMoved
+                                    :CursorMovedI
+                                    :ModeChanged
+                                    :DiagnosticChanged
+                                    :RecordingEnter
+                                    :RecordingLeave]}}
+        extensions [:oil :quickfix]
+        mode (| :mode {:fmt #($:sub 1 3)})
+        branch (| :branch {:icons_enabled false :fmt #(.. "#" $)})
+        diff (| :diff {:colored false :color colors.secondary})
+        filename (| :filename
+                    {:symbols {:modified "[**]"
+                               :readonly "[RO]"
+                               :unnamed "[??]"}})
+        location (| :location {:color colors.secondary})
+        progress (| "%P" {:color colors.secondary})
+        recording (| #(vim.fn.reg_recording) {:icon "󰑊" :color :ErrorMsg})
+        selection-count (| :selectioncount {:icon "󰒉"})
+        sections {:lualine_a []
+                  :lualine_b []
+                  :lualine_c [mode recording filename branch diff]
+                  :lualine_x [:diagnostics
+                              :searchcount
+                              selection-count
+                              location
+                              progress]
+                  :lualine_y []
+                  :lualine_z []}
+        filename-inactive (| :filename
+                             {:file_status false :color colors.secondary})
+        inactive_sections {:lualine_c [filename-inactive]
+                           :lualine_x [location]}]
+    (=> (require :lualine) (setup {: options
+                                   : sections
+                                   : inactive_sections
+                                   : extensions}))))
