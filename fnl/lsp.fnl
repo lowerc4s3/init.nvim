@@ -1,4 +1,4 @@
-(import-macros {: gh : with-safely} :lib.macro)
+(import-macros {: gh : with-safely : |} :lib.macro)
 (local {: autocmd : augroup : auclear} (require :lib.nvim))
 (local {: lsp : pack} vim)
 
@@ -21,13 +21,25 @@
                           (lsp.buf.clear_references)
                           (auclear {:buffer buf :group :WordLspHighlight}))})))
 
+(fn lsp-spinner [{:data {:params {: token : value}}}]
+  (let [{: message : title : kind :percentage percent} value
+        status (if (not= kind :end) :running :success)
+        opts {:id (.. "lsp." token)
+              :kind :progress
+              :source :vim.lsp
+              : title
+              : status
+              : percent}]
+    (vim.api.nvim_echo [(| (or message "done"))] false opts)))
+
 (fn on-attach [{: buf :data {: client_id}}]
+  (autocmd :LspProgress {: buf :callback lsp-spinner})
   (let [?client (lsp.get_client_by_id client_id)
         doc-hl :textDocument/documentHighlight]
     (when (and ?client (?client:supports_method doc-hl buf))
       (setup-word-ref-hl buf))))
 
-(autocmd :LspAttach {:group (augroup :LspAttachGroup) :callback on-attach})
+(autocmd :LspAttach {:group (augroup :LspOnAttach) :callback on-attach})
 
 ;;;
 ;;; servers
