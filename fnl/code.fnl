@@ -1,5 +1,5 @@
 (import-macros {: gh : with-safely : | : =>} :lib.macro)
-(local {: map} (require :lib.nvim))
+(local {: map : defmapgroup : mapleader} (require :lib.nvim))
 (local {: pack} vim)
 
 (with-safely :now
@@ -16,6 +16,7 @@
   (let [opts {:disable_hint true}]
     (=> (require :neogit) (setup opts)))
 
+  (defmapgroup "<Leader>g" "git")
   (map :n :<Leader>gg "<cmd>Neogit<cr>") {:desc "open neogit tab"}
   (map :n :<Leader>gl "<cmd>Neogit log<cr>" {:desc "view log"})
   (map :n :<Leader>gp "<cmd>Neogit pull<cr>" {:desc :pull})
@@ -85,9 +86,11 @@
               :default_format_opts {:lsp_format :fallback}
               :format_on_save (fn [bufnr]
                                 (when (not (ignored-ft? (. vim.bo bufnr :filetype)))
-                                  {:timeout_ms 500}))}]
-    (=> (require :conform) (setup opts))
-    (set vim.o.formatexpr "v:lua.require'conform'.formatexpr()")))
+                                  {:timeout_ms 500}))}
+        conform (require :conform)]
+    (conform.setup opts)
+    (set vim.o.formatexpr "v:lua.require'conform'.formatexpr()")
+    (mapleader "cf" #(conform.format {:async true}) {:desc "format current buffer"})))
 
 ;;;
 ;;; lightbulb

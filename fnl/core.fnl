@@ -1,6 +1,6 @@
 (import-macros {: set+ : set^ : =>} :lib.macro)
-(local {: autocmd : augroup : map} (require :lib.nvim))
-(local {: g : o : opt} vim)
+(local {: autocmd : augroup : map : mapleader} (require :lib.nvim))
+(local {: g : o : opt : pack} vim)
 
 ;;;
 ;;; options
@@ -97,6 +97,13 @@
 (map :i "<C-j>" "<Down>" {:desc "move down"})
 (map :i "<C-k>" "<Up>" {:desc "move up"})
 (map :i "<C-l>" "<Right>" {:desc "move right"})
+
+(mapleader "cd" vim.diagnostic.setloclist {:desc "code diagnostics"})
+(mapleader "cD" vim.diagnostic.setqflist {:desc "code diagnostics (workspace)"})
+
+(mapleader "pl" #(pack.update nil {:offline true}) {:desc "list packages"})
+(mapleader "pf" #(pack.update nil) {:desc "fetch updates"})
+(mapleader "px" #(vim.cmd.packdel {:bang true}) {:desc "clean unused plugins"})
 
 ;;;
 ;;; autocmds

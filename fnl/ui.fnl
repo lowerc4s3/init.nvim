@@ -1,5 +1,6 @@
 (import-macros {: gh : | : => : with-safely} :lib.macro)
 (local {: pack} vim)
+(local {: defmapgroup} (require :lib.nvim))
 
 (with-safely :now
   (pack.add [(gh :nyoom-engineering/oxocarbon.nvim)])
@@ -70,7 +71,8 @@
                              :Space "SPC"
                              :Tab "TAB"
                              :Esc "ESC"}}}]
-    (=> (require :which-key) (setup opts))))
+    (=> (require :which-key) (setup opts))
+    (defmapgroup "<Leader>p" "packages")))
 
 ;;;
 ;;; tabby
