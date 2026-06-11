@@ -1,6 +1,6 @@
 (import-macros {: set+ : set^ : =>} :lib.macro)
 (local {: autocmd : augroup : map : mapleader} (require :lib.nvim))
-(local {: g : o : opt : pack} vim)
+(local {: g : o : wo : opt : pack} vim)
 
 ;;;
 ;;; options
@@ -125,4 +125,6 @@
       (autocmd :TextPutPost
                {: group
                 :callback #(hl-op {:higroup :Visual})
-                :desc "highlight put area"}))))
+                :desc "highlight put area"})))
+  (autocmd :WinEnter {: group :callback #(set wo.cursorline true)})
+  (autocmd :WinLeave {: group :callback #(set wo.cursorline false)}))
