@@ -124,25 +124,31 @@
         branch (| :branch {:icons_enabled false :fmt #(.. "#" $)})
         diff (| :diff {:colored false :color colors.secondary})
         filename (| :filename
-                    {:symbols {:modified "[**]"
+                    {:path 1 ; relative path
+                     :symbols {:modified "[**]"
                                :readonly "[RO]"
-                               :unnamed "[??]"}})
+                               :unnamed "[??]"
+                               :newfile "[++]"}})
+        recording (| #(vim.fn.reg_recording) {:icon "󰑊" :color :ErrorMsg})
+        search-count (| :searchcount {:icon ""})
+        selection-count (| :selectioncount {:icon "󰒉"})
         location (| :location {:color colors.secondary})
         progress (| "%P" {:color colors.secondary})
-        recording (| #(vim.fn.reg_recording) {:icon "󰑊" :color :ErrorMsg})
-        selection-count (| :selectioncount {:icon "󰒉"})
-        sections {:lualine_a []
+        sections {:lualine_a [mode]
                   :lualine_b []
-                  :lualine_c [mode recording filename branch diff]
+                  :lualine_c [recording filename branch diff]
                   :lualine_x [:diagnostics
-                              :searchcount
+                              search-count
                               selection-count
                               location
                               progress]
                   :lualine_y []
                   :lualine_z []}
         filename-inactive (| :filename
-                             {:file_status false :color colors.secondary})
+                             {:file_status false
+                              :path 1 ; relative path
+                              :color colors.secondary
+                              :symbols {:unnamed "[??]" :newfile "[++]"}})
         inactive_sections {:lualine_c [filename-inactive]
                            :lualine_x [location]}]
     (=> (require :lualine) (setup {: options
