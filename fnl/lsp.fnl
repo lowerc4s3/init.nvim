@@ -1,6 +1,6 @@
 (import-macros {: gh : with-safely} :lib.macro)
 (local {: autocmd : augroup : auclear} (require :lib.nvim))
-(local {: lsp : diagnostic : pack} vim)
+(local {: lsp : pack} vim)
 
 (with-safely :now
   (pack.add [(gh :neovim/nvim-lspconfig)]))
@@ -8,21 +8,6 @@
 ;;;
 ;;; configuration
 ;;;
-
-(let [s diagnostic.severity
-      opts {:severity_sort true
-            :virtual_lines {:current_line true}
-            :virtual_text {:virt_text_pos :eol_right_align
-                           :current_line false}
-            :signs {:text {s.ERROR ""
-                           s.WARN ""
-                           s.HINT ""
-                           s.INFO ""}
-                    :numhl {s.ERROR :DiagnosticSignError
-                            s.WARN :DiagnosticSignWarn
-                            s.HINT :DiagnosticSignHint
-                            s.WARN :DiagnosticSignWarn}}}]
-  (diagnostic.config opts))
 
 (fn setup-word-ref-hl [buffer]
   (let [group (augroup :WordLspHighlight {:clear false})]

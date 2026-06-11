@@ -36,4 +36,5 @@
         oxo (. (require :oxocarbon) :oxocarbon)]
     (hi "@punctuation.delimiter" {:fg gray50})
     (hi "@punctuation.bracket" {:fg gray50})
-    (hi :NonText {:fg gray50 :bg oxo.none}))) ; snacks.picker uses this a lot
+    (hi :NonText {:fg gray50 :bg oxo.none}) ; snacks.picker uses this a lot
+    (hi :Delimiter {:link "@punctuation.delimiter"})))

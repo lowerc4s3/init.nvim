@@ -1,6 +1,22 @@
 (import-macros {: gh : cb : => : with-safely} :lib.macro)
 (local {: hi : map} (require :lib.nvim))
-(local {: pack} vim)
+(local {: pack : diagnostic} vim)
+
+(let [s diagnostic.severity
+      opts {:severity_sort true
+            :virtual_lines {:current_line true}
+            :virtual_text {:virt_text_pos :eol_right_align
+                           :current_line false}
+            :signs {:text {s.ERROR ""
+                           s.WARN ""
+                           s.HINT ""
+                           s.INFO ""}
+                    :numhl {s.ERROR :DiagnosticSignError
+                            s.WARN :DiagnosticSignWarn
+                            s.HINT :DiagnosticSignHint
+                            s.WARN :DiagnosticSignWarn}}}]
+  (diagnostic.config opts))
+
 
 (with-safely :now
   (pack.add [(gh :nvim-mini/mini.jump)])
@@ -42,3 +58,21 @@
   (pack.add [{:src (gh :VonHeikemen/ts-enable.nvim) :version :v2.x}])
   (let [opts {:auto_init true :highlights true :folds true}]
     (set vim.g.ts_enable opts)))
+
+(with-safely :now
+  (pack.add [(gh :stevearc/quicker.nvim)])
+  (let [sev vim.diagnostic.severity
+        {:signs {:text icons}} (vim.diagnostic.config)
+        opts {:borders {:vert "│"
+                        :strong_header "─"
+                        :strong_cross "┼"
+                        :strong_end "┤"
+                        :soft_header "╌"
+                        :soft_cross "┼"
+                        :soft_end "┤"}
+              :type_icons {:E (. icons sev.ERROR)
+                           :W (. icons sev.WARN)
+                           :I (. icons sev.INFO)
+                           :N (. icons sev.INFO)
+                           :H (. icons sev.HINT)}}]
+    (=> (require :quicker) (setup opts))))

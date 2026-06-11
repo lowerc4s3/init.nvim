@@ -13,7 +13,7 @@
 ## ui
 - [x] theme
 - [x] modeline
-- [ ] prettier quickfix
+- [x] prettier quickfix
 - [x] gitsigns
 - [x] lightbulb
 - [x] inline diagnostics
