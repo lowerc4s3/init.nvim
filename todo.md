@@ -14,17 +14,15 @@
 - [x] theme
 - [x] modeline
 - [ ] prettier quickfix
-- [ ] action anims (tiny-glimmer.nvim)
 - [x] gitsigns
-- [ ] lightbulb
-- [ ] inline diagnostics
-- [ ] code action ui
+- [x] lightbulb
+- [x] inline diagnostics
+- [x] code action ui
 
 # misc
 - [ ] terminal (probably just spawn new tab with terminal)
 - [x] project management
 
 # other
-- [ ] replace zpack with vim.pack + lz.n
-- [ ] restucture config based on features
-- [ ] use plugin/ dir
+- [x] replace zpack with vim.pack + lz.n
+- [x] restucture config based on features

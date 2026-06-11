@@ -5,7 +5,6 @@
 (with-safely :now
   (pack.add [(gh :eraserhd/parinfer-rust)
              (gh :lewis6991/gitsigns.nvim)]))
-             
 
 ;;;
 ;;; neogit
@@ -89,3 +88,18 @@
                                   {:timeout_ms 500}))}]
     (=> (require :conform) (setup opts))
     (set vim.o.formatexpr "v:lua.require'conform'.formatexpr()")))
+
+;;;
+;;; lightbulb
+;;;
+
+(with-safely :now
+  (pack.add [(gh :kosayoda/nvim-lightbulb)])
+  (let [opts {:autocmd {:enabled true
+                        :updatetime -1} ; avoid setting the updatetime
+              :code_lenses true
+              :sign {:enabled false}
+              :virtual_text {:enabled true
+                             :text "󰌵"
+                             :lens_text ""}}]
+    (=> (require :nvim-lightbulb) (setup opts))))
