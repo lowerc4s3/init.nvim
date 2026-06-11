@@ -21,10 +21,6 @@
       "rev": "06685829495ac5d7367a0693ef02ef0d6b97fda0",
       "src": "https://github.com/dlyongemallo/diffview.nvim"
     },
-    "fzf-lua": {
-      "rev": "e3a71496027f2e3c4a60340170c04d66053d5c4c",
-      "src": "https://github.com/ibhagwan/fzf-lua"
-    },
     "gitsigns.nvim": {
       "rev": "dd3f588bacbeb041be6facf1742e42097f62165d",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
@@ -89,6 +85,10 @@
     "project.nvim": {
       "rev": "124f2a5015fad619a57a650fab3c2eef73a4a089",
       "src": "https://github.com/DrKJeff16/project.nvim"
+    },
+    "snacks.nvim": {
+      "rev": "882c996cf28183f4d63640de0b4c02ec886d01f2",
+      "src": "https://github.com/folke/snacks.nvim"
     },
     "tabby.nvim": {
       "rev": "3c130e1fcb598ce39a9c292847e32d7c3987cf11",

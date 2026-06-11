@@ -1,4 +1,4 @@
-(import-macros {: gh : with-safely : =>} :lib.macro)
+(import-macros {: gh : with-safely : | : =>} :lib.macro)
 (local {: map} (require :lib.nvim))
 (local {: pack} vim)
 
@@ -13,41 +13,48 @@
                         "<C-s>" {1 :actions.select :opts {:horizontal true}}
                         "<C-v>" {1 :actions.select :opts {:vertical true}}}}]
     (=> (require :oil) (setup opts)))
-
-  (map :n "-" "<cmd>Oil<cr>") {:desc "open parent dir"})
+  (map :n "-" "<cmd>Oil<cr>" {:desc "open parent dir"}))
 
 ;;;
-;;; fzf-lua and project
+;;; snacks.picker
+;;;
+
+;; snacks initializes ridiculously fast
+;; so there's no need to lazy-load it
+(with-safely :now
+  (pack.add [(gh :folke/snacks.nvim)])
+  (let [opts {:prompt "  "
+              :layout {:preset :ivy_split}
+              :win {:input {:keys {"<Esc>" (| :close {:mode [:n :i]})
+                                   "<C-h>" (| :toggle_hidden {:mode [:n :i]})
+                                   "<C-i>" (| :toggle_ignored {:mode [:n :i]})
+                                   "<C-l>" (| :toggle_live {:mode [:n :i]})}}}
+              :icons {:ui {:live "[live]"}}}]
+    (=> (require :snacks) (setup {:picker opts})))
+  (let [pick _G.Snacks.picker]
+    (map :n "<Leader><Leader>" pick.files) {:desc "open cwd file"}
+    (map :n "<Leader>," pick.buffers) {:desc "switch buffer"}
+    (map :n "<Leader>'" pick.resume) {:desc "resume last search"}
+    (map :n "<Leader>sf" pick.files {:desc "cwd file"})
+    (map :n "<Leader>sb" pick.buffers {:desc :buffer})
+    (map :n "<Leader>sw" pick.grep {:desc "live grep"})
+    (map :n "<Leader>sr" pick.recent {:desc "recent file"})
+    (map :n "<Leader>ss" pick.pickers {:desc "select picker"})
+    (map :n "<Leader>hh" pick.help {:desc :helptags})
+    (map :n "<Leader>hk" pick.keymaps {:desc :keymaps})
+    (map :n "<Leader>hH" pick.highlights {:desc :highlights})))
+
+;;;
+;;; project.nvim
 ;;;
 
 (with-safely :later
-  (pack.add [(gh :ibhagwan/fzf-lua) (gh :DrKJeff16/project.nvim)])
-  (let [opts {1 [:ivy :borderless :hide]
-              :fzf_colors true
-              :keymap {:fzf {1 true "ctrl-A" :toggle-all}}
-              :actions {:files {1 true
-                                "ctrl-h" #(_G.FzfLua.actions.toggle_hidden $...)
-                                "ctrl-Q" #(_G.FzfLua.actions.file_sel_to_qf $...)
-                                "alt-Q" #(_G.FzfLua.actions.file_sel_to_ll $...)}}}]
-    (=> (require :fzf-lua) (setup opts)))
-  (let [fzf _G.FzfLua]
-    (map :n "<Leader><Leader>" fzf.files {:desc "open cwd file"})
-    (map :n "<Leader>," fzf.buffers {:desc "switch buffer"})
-    (map :n "<Leader>'" fzf.resume {:desc "resume last search"})
-    (map :n "<Leader>sf" fzf.files {:desc "cwd file"})
-    (map :n "<Leader>sb" fzf.buffers {:desc :buffer})
-    (map :n "<Leader>sw" fzf.live_grep {:desc "live grep"})
-    (map :n "<Leader>sr" fzf.history {:desc "recent file"})
-    (map :n "<Leader>ss" fzf.builtin {:desc "select picker"})
-    (map :n "<Leader>hh" fzf.helptags {:desc :helptags})
-    (map :n "<Leader>hk" fzf.keymaps {:desc :keymaps})
-    (map :n "<Leader>ho" fzf.nvim_options {:desc :options})
-    (map :n "<Leader>hH" fzf.highlights {:desc :highlights}))
-  (let [opts {:fzf_lua {:enabled true :show :names}
+  (pack.add [(gh :DrKJeff16/project.nvim)])
+  (let [opts {:snacks {:enabled true :opts {:show :names}}
               :scope_chdir :tab
               :lsp {:enabled false}}]
     (=> (require :project) (setup opts)))
-  (map :n "<Leader>sp" "<cmd>Project fzf-lua<cr>" {:desc "project"}))
+  (map :n "<Leader>sp" "<cmd>Project snacks<cr>" {:desc "project"}))
 
 ;;;
 ;;; buffer-sticks
