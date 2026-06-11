@@ -115,7 +115,14 @@
             :pattern [:help :qf :man]
             :callback #(map :n "q" "<cmd>close<cr>" {:desc "Close help" :buf 0})
             :desc "quit help pages with 'q'"})
-  (autocmd :TextYankPost
-           {: group
-            :callback #(vim.hl.on_yank {:higroup :Visual})
-            :desc "highlight yanked area"}))
+  (let [has-hl_op (vim.fn.has :nvim-0.13)
+        hl-op (if has-hl_op vim.hl.hl_op vim.hl.on_yank)]
+    (autocmd :TextYankPost
+             {: group
+              :callback #(hl-op {:higroup :Visual})
+              :desc "highlight yanked area"})
+    (when has-hl_op
+      (autocmd :TextPutPost
+               {: group
+                :callback #(hl-op {:higroup :Visual})
+                :desc "highlight put area"}))))
