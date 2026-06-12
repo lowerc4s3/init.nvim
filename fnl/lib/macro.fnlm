@@ -14,8 +14,6 @@
 ;;; utility macros
 ;;;
 
-;; TODO: macro prelude
-
 (λ gh [repo-name]
   "make a github source link"
   (assert-compile (str? repo-name) "expected string for repo-name")

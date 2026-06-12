@@ -16,10 +16,18 @@
                             s.WARN :DiagnosticSignWarn}}}]
   (diagnostic.config opts))
 
+;;;
+;;; mini.jump
+;;;
+
 (with-safely :now
   (pack.add [(gh :nvim-mini/mini.jump)])
   (=> (require :mini.jump) (setup))
   (hi :MiniJump {:link :CurSearch}))
+
+;;;
+;;; leap.nvim
+;;;
 
 (with-safely :now
   (pack.add [(gh :tpope/vim-repeat) (cb :andyg/leap.nvim)])
@@ -29,6 +37,10 @@
        {:desc "select remote outer text object"})
   (map [:x :o] "ir" "<plug>(leap-remote-inner-text-object)"
        {:desc "select remote inner text object"}))
+
+;;;
+;;; mini.surround
+;;;
 
 (with-safely :now
   (pack.add [(gh :nvim-mini/mini.surround)])
@@ -45,16 +57,56 @@
               :respect_selection_type true}]
     (=> (require :mini.surround) (setup opts))))
 
+;;;
+;;; neotab
+;;;
+
 ;; neotab's mappings are handled by blink.cmp
 (with-safely :now
   (pack.add [(gh :kawre/neotab.nvim)])
   (let [opts {:tabkey "" :reverse_key ""}]
     (=> (require :neotab) (setup opts))))
 
+;;;
+;;; ts-enable
+;;;
+
 (with-safely :now
   (pack.add [{:src (gh :VonHeikemen/ts-enable.nvim) :version :v2.x}])
   (let [opts {:auto_init true :highlights true :folds true}]
     (set vim.g.ts_enable opts)))
+
+;;;
+;;; treesitter-textobjects
+;;;
+
+(with-safely :now
+  (pack.add [(gh :nvim-treesitter/nvim-treesitter-textobjects)])
+  (let [opts {:select {:selection_modes {"@loop.outer" :V
+                                         "@condition.outer" :V
+                                         "@class.outer" :V
+                                         "@comment.outer" :V}}}]
+    (=> (require :nvim-treesitter-textobjects) (setup opts)))
+  (let [sel #(=> (require :nvim-treesitter-textobjects.select)
+                 (select_textobject $ :textobjects))
+        map-textobject (fn [lhs capture]
+                         (map [:x :o] lhs #(sel capture) {:silent true}))]
+    (map-textobject "if" "@function.inner")
+    (map-textobject "af" "@function.outer")
+    (map-textobject "ia" "@parameter.inner")
+    (map-textobject "aa" "@parameter.outer")
+    (map-textobject "il" "@loop.inner")
+    (map-textobject "al" "@loop.outer")
+    (map-textobject "ic" "@condition.inner")
+    (map-textobject "ac" "@condition.outer")
+    (map-textobject "ik" "@assignment.lhs")
+    (map-textobject "iv" "@assignment.rhs")
+    (map-textobject "ak" "@assignment.lhs")
+    (map-textobject "av" "@assignment.rhs")))
+
+;;;
+;;; quicker
+;;;
 
 (with-safely :now
   (pack.add [(gh :stevearc/quicker.nvim)])

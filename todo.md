@@ -1,8 +1,8 @@
 # plugins
 ## editor
 - [ ] autopairs
-- [ ] ts textobjects
-- [ ] keymaps
+- [x] ts textobjects
+- [x] keymaps
 - [x] file manager
 
 ## coding
