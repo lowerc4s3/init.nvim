@@ -56,6 +56,4 @@
             :assist {:preferSelf true}}]
   (lsp.config :rust_analyzer {:settings {:rust-analyzer opts}}))
 
-(lsp.enable [:fennel_ls
-             :rust_analyzer
-             :tinymist])
+(lsp.enable [:fennel_ls :rust_analyzer :tinymist])

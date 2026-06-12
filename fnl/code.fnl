@@ -3,24 +3,21 @@
 (local {: pack} vim)
 
 (with-safely :now
-  (pack.add [(gh :eraserhd/parinfer-rust)
-             (gh :lewis6991/gitsigns.nvim)]))
+  (pack.add [(gh :eraserhd/parinfer-rust) (gh :lewis6991/gitsigns.nvim)]))
 
 ;;;
 ;;; neogit
 ;;;
 
 (with-safely :later
-  (pack.add [(gh :dlyongemallo/diffview.nvim)
-             (gh :NeogitOrg/neogit)])
+  (pack.add [(gh :dlyongemallo/diffview.nvim) (gh :NeogitOrg/neogit)])
   (let [opts {:disable_hint true}]
     (=> (require :neogit) (setup opts)))
-
   (defmapgroup "<Leader>g" "git")
-  (map :n :<Leader>gg "<cmd>Neogit<cr>") {:desc "open neogit tab"}
-  (map :n :<Leader>gl "<cmd>Neogit log<cr>" {:desc "view log"})
-  (map :n :<Leader>gp "<cmd>Neogit pull<cr>" {:desc :pull})
-  (map :n :<Leader>gP "<cmd>Neogit push<cr>" {:desc :push}))
+  (map :n "<leader>gg" "<cmd>Neogit<cr>" {:desc "open neogit tab"})
+  (map :n "<leader>gl" "<cmd>Neogit log<cr>" {:desc "view log"})
+  (map :n "<leader>gp" "<cmd>Neogit pull<cr>" {:desc "pull"})
+  (map :n "<leader>gP" "<cmd>Neogit push<cr>" {:desc "push"}))
 
 ;;;
 ;;; blink
@@ -28,48 +25,45 @@
 
 (with-safely [:on-event [:InsertEnter :CmdLineEnter]]
   (pack.add [(gh :xzbdmw/colorful-menu.nvim)
-             {:src (gh :saghen/blink.cmp) :version :v1}])
-
-  (local col-menu (require :colorful-menu))
-  (local icons (require :mini.icons))
-
-  (fn tabout [rhs]
-    "for some reason neotab doesn't trigger when using lua api
-    in blink keymap so we need to use the plug api instead"
-    (vim.api.nvim_feedkeys (vim.keycode rhs) :i false)
-    true)
-
-  (let [col-text #(col-menu.blink_components_text $)
-        col-hl #(col-menu.blink_components_highlight $)
-        get-kind-icon #(.. " " (icons.get :lsp $.kind) $.icon_gap)
-        opts {:signature {:enabled true}
-              :appearance {:nerd_font_variant :normal}
-              :completion {:documentation {:auto_show true}
-                           :ghost_text {:enabled false}
-                           :list {:selection {:preselect false
-                                              :auto_insert true}}
-                           :menu {:draw {:columns [{1 :kind_icon}
-                                                   {1 :label :gap 1}]
-                                         :padding 0
-                                         :components {:label {:text col-text
-                                                              :highlight col-hl}
-                                                      :kind_icon {:text get-kind-icon}}}}}
-              :sources {:default [:snippets :lsp :buffer]}
-              :keymap {:preset :none
-                       :<CR> [:select_and_accept :fallback]
-                       :<C-b> [:scroll_documentation_up :fallback]
-                       :<C-f> [:scroll_documentation_down :fallback]
-                       :<C-e> [:cancel :fallback]
-                       :<Tab> [#(if ($.is_visible) ($.select_next)
-                                    ($.snippet_active) ($.accept))
-                               #(tabout "<plug>(neotab-out)")]
-                       :<S-Tab> [#(if ($.is_visible) ($.select_prev)
-                                      ($.snippet_active) ($.snippet_backward))
-                                 #(tabout "<plug>(neotab-reverse)")]}
-              :cmdline {:completion {:menu {:auto_show true}
-                                     :list {:selection {:preselect false
-                                                        :auto_insert true}}}
-                        :keymap {:<CR> [:accept_and_enter :fallback]}}}]
+             {:src (gh :saghen/blink.cmp) :version "v1"}])
+  (let [signature {:enabled true}
+        appearance {:nerd_font_variant :normal}
+        menu-draw (let [col-menu (require :colorful-menu)
+                        icons (require :mini.icons)
+                        label-text #(col-menu.blink_components_text $)
+                        label-hl #(col-menu.blink_components_highlight $)
+                        kind-icon #(.. " " (icons.get :lsp $.kind) $.icon_gap)]
+                    {:columns [(| :kind_icon) (| :label {:gap 1})]
+                     :padding 0
+                     :components {:label {:text label-text :highlight label-hl}
+                                  :kind_icon {:text kind-icon}}})
+        completion {:documentation {:auto_show true}
+                    :ghost_text {:enabled false}
+                    :list {:selection {:preselect false :auto_insert true}}
+                    :menu {:draw menu-draw}}
+        sources {:default [:snippets :lsp :buffer]}
+        keymap (let [tabout #(vim.api.nvim_feedkeys (vim.keycode $) :i false)]
+                 {:preset :none
+                  "<cr>" [:select_and_accept :fallback]
+                  "<c-b>" [:scroll_documentation_up :fallback]
+                  "<c-f>" [:scroll_documentation_down :fallback]
+                  "<c-e>" [:cancel :fallback]
+                  "<tab>" [#(if ($.is_visible) ($.select_next)
+                                ($.snippet_active) ($.accept))
+                           #(tabout "<plug>(neotab-out)")]
+                  "<s-tab>" [#(if ($.is_visible) ($.select_prev)
+                                  ($.snippet_active) ($.snippet_backward))
+                             #(tabout "<plug>(neotab-reverse)")]})
+        cmdline {:completion {:menu {:auto_show true}
+                              :list {:selection {:preselect false
+                                                 :auto_insert true}}}
+                 :keymap {:<cr> [:accept_and_enter :fallback]}}
+        opts {: signature
+              : appearance
+              : completion
+              : sources
+              : keymap
+              : cmdline}]
     (=> (require :blink.cmp) (setup opts))))
 
 ;;;
@@ -82,15 +76,17 @@
   (pack.add [(gh :stevearc/conform.nvim)])
   (let [ignored-fts [:fennel]
         ignored-ft? (partial vim.tbl_contains ignored-fts)
-        opts {:formatters_by_ft {:fennel [:fnlfmt]}
+        fmt (fn [bufnr]
+              (when (not (ignored-ft? (. vim.bo bufnr :filetype)))
+                {:timeout_ms 500}))
+        opts {:formatters_by_ft {:fennel ["fnlfmt"]}
               :default_format_opts {:lsp_format :fallback}
-              :format_on_save (fn [bufnr]
-                                (when (not (ignored-ft? (. vim.bo bufnr :filetype)))
-                                  {:timeout_ms 500}))}
+              :format_on_save fmt}
         conform (require :conform)]
     (conform.setup opts)
     (set vim.o.formatexpr "v:lua.require'conform'.formatexpr()")
-    (mapleader "cf" #(conform.format {:async true}) {:desc "format current buffer"})))
+    (mapleader "cf" #(conform.format {:async true})
+               {:desc "format current buffer"})))
 
 ;;;
 ;;; lightbulb
@@ -98,11 +94,8 @@
 
 (with-safely :now
   (pack.add [(gh :kosayoda/nvim-lightbulb)])
-  (let [opts {:autocmd {:enabled true
-                        :updatetime -1} ; avoid setting the updatetime
+  (let [opts {:autocmd {:enabled true :updatetime -1}
               :code_lenses true
               :sign {:enabled false}
-              :virtual_text {:enabled true
-                             :text "󰌵"
-                             :lens_text ""}}]
+              :virtual_text {:enabled true :text "󰌵" :lens_text ""}}]
     (=> (require :nvim-lightbulb) (setup opts))))

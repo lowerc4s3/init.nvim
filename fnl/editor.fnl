@@ -5,8 +5,7 @@
 (let [s diagnostic.severity
       opts {:severity_sort true
             :virtual_lines {:current_line true}
-            :virtual_text {:virt_text_pos :eol_right_align
-                           :current_line false}
+            :virtual_text {:virt_text_pos :eol_right_align :current_line false}
             :signs {:text {s.ERROR ""
                            s.WARN ""
                            s.HINT ""
@@ -17,15 +16,13 @@
                             s.WARN :DiagnosticSignWarn}}}]
   (diagnostic.config opts))
 
-
 (with-safely :now
   (pack.add [(gh :nvim-mini/mini.jump)])
   (=> (require :mini.jump) (setup))
   (hi :MiniJump {:link :CurSearch}))
 
 (with-safely :now
-  (pack.add [(gh :tpope/vim-repeat)
-             (cb :andyg/leap.nvim)])
+  (pack.add [(gh :tpope/vim-repeat) (cb :andyg/leap.nvim)])
   (map [:n :x :o] "s" "<plug>(leap)" {:desc "leap in current window"})
   (map :n "S" "<plug>(leap-from-window)" {:desc "leap to another window"})
   (map [:x :o] "ar" "<plug>(leap-remote-text-object)"

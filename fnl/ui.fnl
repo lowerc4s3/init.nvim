@@ -1,6 +1,6 @@
 (import-macros {: gh : | : => : with-safely} :lib.macro)
-(local {: pack} vim)
 (local {: defmapgroup} (require :lib.nvim))
+(local {: pack} vim)
 
 (with-safely :now
   (pack.add [(gh :nyoom-engineering/oxocarbon.nvim)])
@@ -14,7 +14,6 @@
   (macro glyphs [table]
     (collect [pattern glyph (pairs table)]
       (values pattern {: glyph})))
-
   (pack.add [(gh :nvim-mini/mini.icons)])
   (let [opts {:file (glyphs {"LICENSE" ""
                              "LICENSE.md" ""
@@ -72,7 +71,8 @@
                              :Tab "TAB"
                              :Esc "ESC"}}}]
     (=> (require :which-key) (setup opts))
-    (defmapgroup "<Leader>p" "packages")))
+    (defmapgroup "<Leader>p" "packages")
+    (defmapgroup "<Leader>c" "code")))
 
 ;;;
 ;;; tabby
@@ -85,15 +85,15 @@
     (let [theme {:active :Normal :inactive :LineNr :fill :LineNr}
           tabs (line.tabs)
           wins (line.wins_in_tab (line.api.get_current_tab))
-          tab-fn (fn [tab]
-                   (let [hl (if (tab.is_current) theme.active theme.inactive)
-                         sep (line.sep " " hl theme.fill)]
-                     (| sep (tab.name) sep {: hl})))
-          win-fn (fn [win]
-                   (let [hl (if (win.is_current) theme.active theme.inactive)
-                         sep (line.sep " " hl theme.fill)]
-                     (| sep (win.buf_name) sep {: hl})))]
-      (| " 󰓩 " (tabs.foreach tab-fn) (line.spacer) (wins.foreach win-fn) "  "
+          show-tab (fn [tab]
+                     (let [hl (if (tab.is_current) theme.active theme.inactive)
+                           sep (line.sep " " hl theme.fill)]
+                       (| sep (tab.name) sep {: hl})))
+          show-win (fn [win]
+                     (let [hl (if (win.is_current) theme.active theme.inactive)
+                           sep (line.sep " " hl theme.fill)]
+                       (| sep (win.buf_name) sep {: hl})))]
+      (| " 󰓩 " (tabs.foreach show-tab) (line.spacer) (wins.foreach show-win) "  "
          {:hl theme.fill})))
 
   (=> (require :tabby.tabline) (set render)))

@@ -6,10 +6,9 @@
 
 (fn type= [t x]
   (= t (type x)))
-  
+
 (local ->str tostring)
 (local str? (partial type= :string))
-(local num? (partial type= :number))
 
 ;;;
 ;;; utility macros
@@ -53,29 +52,37 @@ is equivalent to this
 ;; idea and implementation by spore
 ;; (https://blog.spore.ink/editor/fennel-macros/dot.html)
 (λ => [expr & calls]
-  "method chaining macro. evaluates `expr` chains all consequential forms
-into methods calls. behaves similarly to clojure's `..` macro.
+  "table function chaining macro. evaluates `expr` chains all
+consequential forms into methods calls. behaves similarly to
+clojure's `..` macro.
 example:
   ```fennel
-  (dot-> (require :module) (modfn :arg1 :arg2) (another-modfn 3 4))
-  ;; notice how this resembles lua method chaining:
+  (=> (require :module) (modfn :arg1 :arg2) (another-modfn 3 4))
+  ;; notice how this resembles lua table function chaining:
   ;; require('module').modfn('arg1, 'arg2').another_modfn(3, 4)
   ```"
   (fn transform [tbl form]
     (case form
-      ;; (dot-> tbl form) => (. tbl "form")
-      (where field (sym? field)) `(. ,tbl ,(->str field))
-      ;; (dot-> tbl [x y]) => (. tbl x y)
-      (where fields (sequence? fields)) `(. ,tbl ,(unpack fields))
-      ;; (dot-> tbl (f x)) => ((. tbl "f") x)
-      [field & rest] `((. ,tbl ,(->str field)) ,(unpack rest))
-      ;; (dot-> tbl ()) => (tbl)
-      [] `(,tbl)))
+      ;; (=> tbl form) -> (. tbl "form")
+      (where field (sym? field))
+      `(. ,tbl ,(->str field))
+      ;; (=> tbl [x y]) -> (. tbl x y)
+      (where fields (sequence? fields))
+      `(. ,tbl ,(unpack fields))
+      ;; (=> tbl (f x)) -> ((. tbl "f") x)
+      [field & rest]
+      `((. ,tbl ,(->str field)) ,(unpack rest))
+      ;; (=> tbl ()) -> (tbl)
+      []
+      `(,tbl)))
+
   (case calls
-    ;; (dot-> expr calls ...) => (dot-> (dot-> expr form) ...)
-    [form & rest] (=> (transform expr form) (unpack rest))
-    ;; (dot-> expr) => expr
-    [] expr))
+    ;; (=> expr calls ...) -> (=> (=> expr form) ...)
+    [form & rest]
+    (=> (transform expr form) (unpack rest))
+    ;; (=> expr) -> expr
+    []
+    expr))
 
 ;;;
 ;;; neovim api macros
@@ -96,35 +103,6 @@ example:
 ;;;
 ;;; run macros (mini-misc.safely)
 ;;;
-
-(λ run-safely [hook & body]
-  `((. (require :mini.misc) :safely) ,hook (fn [] ,(unpack body))))
-
-(λ with-event-do [events & body]
-  "safely execute body on event with mini-misc.safely"
-  (let [event-str (if (sequence? events) (table.concat events ",")
-                      (str? events) events
-                      (fail "expected string or list of strings for events"))]
-    (run-safely (.. "event:" event-str) (unpack body))))
-
-(λ with-safely-do [& body]
-  "safely execute body now with mini-misc.safely"
-  (run-safely :now (unpack body)))
-
-(λ with-delay-do [timeout & body]
-  "safely execute body after delay with mini-misc.safely.
-if timeout is &later, then the body will be scheduled immediately,
-otherwise it will be scheduled after specified delay (in ms)"
-  (if (= timeout `&later) (run-safely :later (unpack body))
-      (num? timeout) (run-safely (.. "delay:" timeout) (unpack body))
-      (fail "expected &later or number of ms for timeout")))
-
-(λ with-filetype-do [filetypes & body]
-  "safely execute body on specified filetypes with mini-misc.safely"
-  (let [ft-str (if (sequence? filetypes) (table.concat filetypes ",")
-                   (str? filetypes) filetypes
-                   (fail "expected string or list of strings for events"))]
-    (run-safely (.. "filetype:" ft-str) (unpack body))))
 
 (λ with-safely [hook ...]
   "execute `body` once on certain condition and warn on error.

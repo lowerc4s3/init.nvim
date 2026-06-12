@@ -25,6 +25,7 @@
   (pack.add [(gh :folke/snacks.nvim)])
   (let [opts {:prompt "  "
               :layout {:preset :ivy_split}
+              :ui_select false
               :win {:input {:keys {"<Esc>" (| :close {:mode [:n :i]})
                                    "<C-h>" (| :toggle_hidden {:mode [:n :i]})
                                    "<C-i>" (| :toggle_ignored {:mode [:n :i]})
@@ -41,7 +42,6 @@
     (map :n "<Leader>sw" pick.grep {:desc "live grep"})
     (map :n "<Leader>sr" pick.recent {:desc "recent file"})
     (map :n "<Leader>ss" pick.pickers {:desc "select picker"})
-
     (defmapgroup "<Leader>h" "help")
     (map :n "<Leader>hh" pick.help {:desc :helptags})
     (map :n "<Leader>hk" pick.keymaps {:desc :keymaps})
