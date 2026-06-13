@@ -23,14 +23,15 @@
 
 (fn lsp-spinner [{:data {:params {: token : value}}}]
   (let [{: message : title : kind :percentage percent} value
-        status (if (not= kind :end) :running :success)
+        status (if (= kind :end) :success :running)
         opts {:id (.. "lsp." token)
               :kind :progress
               :source :vim.lsp
               : title
               : status
               : percent}]
-    (vim.api.nvim_echo [(| (or message "done"))] false opts)))
+    (vim.api.nvim_echo [(| (or message "󰄬"))] false opts))
+  false)
 
 (fn on-attach [{: buf :data {: client_id}}]
   (autocmd :LspProgress {: buf :callback lsp-spinner})

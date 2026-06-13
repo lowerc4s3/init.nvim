@@ -1,6 +1,6 @@
 # plugins
 ## editor
-- [ ] autopairs
+- [x] autopairs
 - [x] ts textobjects
 - [x] keymaps
 - [x] file manager
