@@ -58,6 +58,15 @@
     (=> (require :mini.surround) (setup opts))))
 
 ;;;
+;;; autopairs
+;;;
+
+(with-safely [:on-event :InsertEnter]
+  (pack.add [(gh :windwp/nvim-autopairs)])
+  (let [opts {:disable_filetype [:TelescopePrompt :snacks_picker_input :fennel]}]
+    (=> (require :nvim-autopairs) (setup opts))))
+
+;;;
 ;;; neotab
 ;;;
 
@@ -80,7 +89,8 @@
 ;;; treesitter-textobjects
 ;;;
 
-(with-safely :now
+;; this one loads pretty slow
+(with-safely :later
   (pack.add [(gh :nvim-treesitter/nvim-treesitter-textobjects)])
   (let [opts {:select {:selection_modes {"@loop.outer" :V
                                          "@condition.outer" :V

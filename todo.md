@@ -20,7 +20,7 @@
 - [x] code action ui
 
 # misc
-- [ ] terminal (probably just spawn new tab with terminal)
+- [x] terminal (probably just spawn new tab with terminal)
 - [x] project management
 
 # other
