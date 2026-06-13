@@ -8,7 +8,8 @@
 
 (local map vim.keymap.set)
 (local unmap vim.keymap.del)
-(fn mapleader [lhs rhs opts]
+
+(fn maplead [lhs rhs opts]
   "define a normal mode mapping starting with <Leader>"
   (map :n (.. "<Leader>" lhs) rhs opts))
 
@@ -23,6 +24,6 @@
  : auclear
  : hi
  : map
- : mapleader
+ : maplead
  : defmapgroup
  : unmap}

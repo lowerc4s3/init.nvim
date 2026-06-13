@@ -1,5 +1,5 @@
 (import-macros {: gh : with-safely : | : =>} :lib.macro)
-(local {: map : defmapgroup} (require :lib.nvim))
+(local {: map : maplead : defmapgroup} (require :lib.nvim))
 (local {: pack} vim)
 
 (with-safely :now
@@ -33,18 +33,19 @@
     (=> (require :snacks) (setup {:picker opts})))
   (let [pick _G.Snacks.picker]
     (defmapgroup "<Leader>s" "search")
-    (map :n "<Leader><Leader>" pick.files {:desc "open cwd file"})
-    (map :n "<Leader>," pick.buffers {:desc "switch buffer"})
-    (map :n "<Leader>'" pick.resume {:desc "resume last search"})
-    (map :n "<Leader>sf" pick.files {:desc "cwd file"})
-    (map :n "<Leader>sb" pick.buffers {:desc :buffer})
-    (map :n "<Leader>sw" pick.grep {:desc "live grep"})
-    (map :n "<Leader>sr" pick.recent {:desc "recent file"})
-    (map :n "<Leader>ss" pick.pickers {:desc "select picker"})
+    (maplead "<Leader>" pick.files {:desc "open cwd file"})
+    (maplead "," pick.buffers {:desc "switch buffer"})
+    (maplead "'" pick.resume {:desc "resume last search"})
+    (maplead "sf" pick.files {:desc "cwd file"})
+    (maplead "sb" pick.buffers {:desc :buffer})
+    (maplead "sw" pick.grep {:desc "live grep"})
+    (maplead "sr" pick.recent {:desc "recent file"})
+    (maplead "sz" pick.zoxide {:desc "jump with zoxide"})
+    (maplead "ss" pick.pickers {:desc "select picker"})
     (defmapgroup "<Leader>h" "help")
-    (map :n "<Leader>hh" pick.help {:desc :helptags})
-    (map :n "<Leader>hk" pick.keymaps {:desc :keymaps})
-    (map :n "<Leader>hH" pick.highlights {:desc :highlights})))
+    (maplead "hh" pick.help {:desc :helptags})
+    (maplead "hk" pick.keymaps {:desc :keymaps})
+    (maplead "hi" pick.highlights {:desc :highlights})))
 
 ;;;
 ;;; project.nvim
@@ -61,7 +62,7 @@
               :scope_chdir :tab
               :lsp {:enabled false}}]
     (=> (require :project) (setup opts)))
-  (map :n "<Leader>sp" "<cmd>Project snacks<cr>" {:desc "project"}))
+  (maplead "sp" "<cmd>Project snacks<cr>" {:desc "project"}))
 
 ;;;
 ;;; buffer-sticks

@@ -1,5 +1,5 @@
 (import-macros {: gh : with-safely : | : =>} :lib.macro)
-(local {: map : defmapgroup : mapleader} (require :lib.nvim))
+(local {: map : defmapgroup : maplead} (require :lib.nvim))
 (local {: pack} vim)
 
 (with-safely :now
@@ -14,10 +14,10 @@
   (let [opts {:disable_hint true}]
     (=> (require :neogit) (setup opts)))
   (defmapgroup "<Leader>g" "git")
-  (map :n "<leader>gg" "<cmd>Neogit<cr>" {:desc "open neogit tab"})
-  (map :n "<leader>gl" "<cmd>Neogit log<cr>" {:desc "view log"})
-  (map :n "<leader>gp" "<cmd>Neogit pull<cr>" {:desc "pull"})
-  (map :n "<leader>gP" "<cmd>Neogit push<cr>" {:desc "push"}))
+  (maplead "gg" "<cmd>Neogit<cr>" {:desc "open neogit tab"})
+  (maplead "gl" "<cmd>Neogit log<cr>" {:desc "view log"})
+  (maplead "gp" "<cmd>Neogit pull<cr>" {:desc "pull"})
+  (maplead "gP" "<cmd>Neogit push<cr>" {:desc "push"}))
 
 ;;;
 ;;; blink
@@ -85,7 +85,7 @@
         conform (require :conform)]
     (conform.setup opts)
     (set vim.o.formatexpr "v:lua.require'conform'.formatexpr()")
-    (mapleader "cf" #(conform.format {:async true})
+    (maplead "cf" #(conform.format {:async true})
                {:desc "format current buffer"})))
 
 ;;;

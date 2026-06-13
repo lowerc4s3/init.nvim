@@ -1,5 +1,5 @@
 (import-macros {: set+ : set^ : =>} :lib.macro)
-(local {: autocmd : augroup : map : mapleader} (require :lib.nvim))
+(local {: autocmd : augroup : map : maplead} (require :lib.nvim))
 (local {: g : o : wo : opt : pack} vim)
 
 ;;;
@@ -98,12 +98,12 @@
 (map :i "<C-k>" "<Up>" {:desc "move up"})
 (map :i "<C-l>" "<Right>" {:desc "move right"})
 
-(mapleader "cd" vim.diagnostic.setloclist {:desc "code diagnostics"})
-(mapleader "cD" vim.diagnostic.setqflist {:desc "code diagnostics (workspace)"})
+(maplead "cd" vim.diagnostic.setloclist {:desc "code diagnostics"})
+(maplead "cD" vim.diagnostic.setqflist {:desc "code diagnostics (workspace)"})
 
-(mapleader "pl" #(pack.update nil {:offline true}) {:desc "list packages"})
-(mapleader "pf" #(pack.update nil) {:desc "fetch updates"})
-(mapleader "px" #(vim.cmd.packdel {:bang true}) {:desc "clean unused plugins"})
+(maplead "pl" #(pack.update nil {:offline true}) {:desc "list packages"})
+(maplead "pf" #(pack.update nil) {:desc "fetch updates"})
+(maplead "px" #(vim.cmd.packdel {:bang true}) {:desc "clean unused plugins"})
 
 ;;;
 ;;; autocmds
