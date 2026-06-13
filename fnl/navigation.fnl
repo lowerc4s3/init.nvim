@@ -23,8 +23,7 @@
 ;; so there's no need to lazy-load it
 (with-safely :now
   (pack.add [(gh :folke/snacks.nvim)])
-  (let [opts {:prompt "  "
-              :layout {:preset :ivy_split}
+  (let [opts {:layout {:preset :ivy_split}
               :ui_select false
               :win {:input {:keys {"<Esc>" (| :close {:mode [:n :i]})
                                    "<C-h>" (| :toggle_hidden {:mode [:n :i]})
@@ -53,7 +52,12 @@
 
 (with-safely :later
   (pack.add [(gh :DrKJeff16/project.nvim)])
-  (let [opts {:snacks {:enabled true :opts {:show :names}}
+  (let [(icon highlight) (_G.MiniIcons.get :default :directory)
+        opts {:snacks {:enabled true
+                       :opts {:show :names
+                              :layout :select
+                              :icon {:icon (.. icon " ") : highlight}
+                              :title "Projects"}}
               :scope_chdir :tab
               :lsp {:enabled false}}]
     (=> (require :project) (setup opts)))

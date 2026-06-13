@@ -31,10 +31,15 @@
                :Operator
                :TypeParameter])
   (hi :FloatTitle {:link :NormalFloat})
-  (hi :SnacksPickerPrompt {:link :NormalFloat})
   (let [gray50 "#8d8d8d"
         oxo (. (require :oxocarbon) :oxocarbon)]
     (hi "@punctuation.delimiter" {:fg gray50})
     (hi "@punctuation.bracket" {:fg gray50})
     (hi :NonText {:fg gray50 :bg oxo.none}) ; snacks.picker uses this a lot
-    (hi :Delimiter {:link "@punctuation.delimiter"})))
+    (hi :Delimiter {:link "@punctuation.delimiter"})
+
+    (hi :SnacksPickerPrompt {:fg oxo.base03 :bg oxo.blend})
+    (hi :SnacksPickerInputCursorLine {:link :NormalFloat})
+    (hi :SnacksPickerListCursorLine {:link :CursorLine})
+    (hi :SnacksPickerMatch {:fg oxo.base11})
+    (hi :SnacksPickerPreviewTitle {:link :TelescopePreviewTitle})))
