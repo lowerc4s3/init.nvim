@@ -23,14 +23,16 @@
 
 (fn lsp-spinner [{:data {:params {: token : value}}}]
   (let [{: message : title : kind :percentage percent} value
+        {: spinner} _G.Snacks.util
         status (if (= kind :end) :success :running)
+        title (.. (if message (spinner) "󰄬") " " title)
         opts {:id (.. "lsp." token)
               :kind :progress
               :source :vim.lsp
               : title
               : status
               : percent}]
-    (vim.api.nvim_echo [(| (or message "󰄬"))] false opts))
+    (vim.api.nvim_echo [(| (or message "done"))] false opts))
   false)
 
 (fn on-attach [{: buf :data {: client_id}}]
