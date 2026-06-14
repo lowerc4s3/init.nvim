@@ -1,5 +1,5 @@
 (import-macros {: gh : with-safely : | : =>} :lib.macro)
-(local {: map : defmapgroup : maplead} (require :lib.nvim))
+(local {: defgroup : maplead} (require :lib.map))
 (local {: pack} vim)
 
 (with-safely :now
@@ -13,7 +13,7 @@
   (pack.add [(gh :dlyongemallo/diffview.nvim) (gh :NeogitOrg/neogit)])
   (let [opts {:disable_hint true}]
     (=> (require :neogit) (setup opts)))
-  (defmapgroup "<Leader>g" "git")
+  (defgroup "<Leader>g" "git")
   (maplead "gg" "<cmd>Neogit<cr>" {:desc "open neogit tab"})
   (maplead "gl" "<cmd>Neogit log<cr>" {:desc "view log"})
   (maplead "gp" "<cmd>Neogit pull<cr>" {:desc "pull"})

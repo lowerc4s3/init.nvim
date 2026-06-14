@@ -1,5 +1,5 @@
 (import-macros {: gh : with-safely : | : =>} :lib.macro)
-(local {: map : maplead : defmapgroup} (require :lib.nvim))
+(local {: map : maplead : defgroup} (require :lib.map))
 (local {: pack} vim)
 
 (with-safely :now
@@ -32,7 +32,7 @@
               :icons {:ui {:live "[live]"}}}]
     (=> (require :snacks) (setup {:picker opts})))
   (let [pick _G.Snacks.picker]
-    (defmapgroup "<Leader>s" "search")
+    (defgroup "<Leader>s" "search")
     (maplead "<Leader>" pick.files {:desc "open cwd file"})
     (maplead "," pick.buffers {:desc "switch buffer"})
     (maplead "'" pick.resume {:desc "resume last search"})
@@ -42,7 +42,7 @@
     (maplead "sr" pick.recent {:desc "recent file"})
     (maplead "sz" pick.zoxide {:desc "jump with zoxide"})
     (maplead "ss" pick.pickers {:desc "select picker"})
-    (defmapgroup "<Leader>h" "help")
+    (defgroup "<Leader>h" "help")
     (maplead "hh" pick.help {:desc :helptags})
     (maplead "hk" pick.keymaps {:desc :keymaps})
     (maplead "hi" pick.highlights {:desc :highlights})))

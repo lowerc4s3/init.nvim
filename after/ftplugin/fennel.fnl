@@ -1,5 +1,5 @@
 (import-macros {: set+} :lib.macro)
-(local {: maploclead} (require :lib.nvim))
+(local {: maploclead} (require :lib.map))
 (local {: bo : g : opt_local : cmd : notify} vim)
 
 ;; treat `with-safely` macro as one taking the body

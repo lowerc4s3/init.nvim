@@ -1,5 +1,6 @@
 (import-macros {: gh : cb : => : with-safely} :lib.macro)
-(local {: hi : map} (require :lib.nvim))
+(local {: hi} (require :lib.nvim))
+(local {: map} (require :lib.map))
 (local {: pack : diagnostic} vim)
 
 (let [s diagnostic.severity

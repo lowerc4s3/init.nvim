@@ -1,4 +1,4 @@
-(local {: map} (require :lib.nvim))
+(local {: map} (require :lib.map))
 
 (macro setnv [name val]
   "set neovide option (desugars into vim.g.neovide_%name = val)"

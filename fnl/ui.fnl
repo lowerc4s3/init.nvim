@@ -1,5 +1,5 @@
 (import-macros {: gh : | : => : with-safely} :lib.macro)
-(local {: defmapgroup} (require :lib.nvim))
+(local {: defgroup : loadgroups} (require :lib.map))
 (local {: pack} vim)
 
 (with-safely :now
@@ -71,8 +71,7 @@
                              :Tab "TAB"
                              :Esc "ESC"}}}]
     (=> (require :which-key) (setup opts))
-    (defmapgroup "<Leader>p" "packages")
-    (defmapgroup "<Leader>c" "code")))
+    (loadgroups)))
 
 ;;;
 ;;; tabby
