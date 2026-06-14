@@ -48,7 +48,10 @@
 (set o.conceallevel 2) ; hide * markup for bold and italic, but not markers with substitutions
 (set o.wrap false)
 (set o.linebreak true) ; wrap lines at sensible points
-(set o.foldlevel 999) ; don't fold automatically
+(set o.foldlevelstart 999) ; don't fold automatically
+(set o.foldtext "")
+(set o.foldcolumn :1)
+
 (set^ opt.guicursor "a:Cursor") ; force cursor hl in all modes
 (=> (require :vim._core.ui2) (enable {:msg {:targets :msg}}))
 
