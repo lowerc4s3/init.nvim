@@ -4,20 +4,21 @@
 (local map keymap.set)
 (local unmap keymap.del)
 
-(fn maplead [lhs rhs opts]
+(fn maplead [lhs rhs ?opts]
   "define a normal mode mapping starting with <Leader>"
-  (map :n (.. "<Leader>" lhs) rhs opts))
+  (map :n (.. "<Leader>" lhs) rhs ?opts))
 
-(fn maploclead [lhs rhs opts]
+(fn maploclead [lhs rhs ?opts]
   "define a normal mode mapping starting with <LocalLeader>"
-  (map :n (.. "<LocalLeader>" lhs) rhs opts))
+  (map :n (.. "<LocalLeader>" lhs) rhs ?opts))
 
 (when (not _G.nuvim/mapgroups)
   (set _G.nuvim/mapgroups []))
   
-(fn defgroup [lhs desc]
+(fn defgroup [lhs desc ?opts]
   "define a which-key group"
   (let [group (| lhs {:group desc})]
+    (vim.tbl_extend :keep group (or ?opts {}))
     (case _G.package.loaded.which-key
       nil (table.insert _G.nuvim/mapgroups group)
       wk (wk.add [group]))))

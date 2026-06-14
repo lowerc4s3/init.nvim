@@ -1,5 +1,5 @@
 (import-macros {: gh : | : => : with-safely} :lib.macro)
-(local {: defgroup : loadgroups} (require :lib.map))
+(local {: loadgroups} (require :lib.map))
 (local {: pack} vim)
 
 (with-safely :now
@@ -47,13 +47,7 @@
               :delay #(if $.plugin 0 200)
               :filter #(not= $.desc :langmapped)
               :win {:no_overlap false :border :solid :title false}
-              :plugins {:marks false
-                        :registers false
-                        :presets {:operators false
-                                  :motions false
-                                  :text_objects false
-                                  :windows false
-                                  :nav false}}
+              :plugins {:marks false :registers false}
               :icons {:mappings false
                       :separator ":"
                       :keys {:up "<up>"

@@ -75,7 +75,7 @@
 ;;;
 
 (set g.mapleader " ")
-(set g.maplocalleader ",")
+(set g.maplocalleader "\\")
 
 (map [:n :v :o] "<Space>" "<Nop>")
 (map :n "<Esc>" "<cmd>nohlsearch<cr>" {:desc "disable search hl"})
