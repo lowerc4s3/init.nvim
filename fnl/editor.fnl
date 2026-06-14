@@ -81,7 +81,7 @@
 ;;;
 
 (with-safely :now
-  (pack.add [{:src (gh :VonHeikemen/ts-enable.nvim) :version :v2.x}])
+  (pack.add [{:src (gh :VonHeikemen/ts-enable.nvim) :version "v2.x"}])
   (let [opts {:auto_init true :highlights true :folds true}]
     (set vim.g.ts_enable opts)))
 

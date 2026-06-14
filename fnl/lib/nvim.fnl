@@ -13,6 +13,10 @@
   "define a normal mode mapping starting with <Leader>"
   (map :n (.. "<Leader>" lhs) rhs opts))
 
+(fn maploclead [lhs rhs opts]
+  "define a normal mode mapping starting with <LocalLeader>"
+  (map :n (.. "<LocalLeader>" lhs) rhs opts))
+
 (fn defmapgroup [lhs desc]
   "define a which-key group"
   (=> (require :which-key) (add [(| lhs {:group desc})])))
@@ -25,5 +29,6 @@
  : hi
  : map
  : maplead
+ : maploclead
  : defmapgroup
  : unmap}

@@ -37,7 +37,7 @@
 (autocmd :PackChanged {:desc "build plugins" :callback build-hooks})
 
 ;; bootstrap fennel support
-(pack.add [{:src (gh :rktjmp/hotpot.nvim) :version (version.range :^2.0.0)}])
+(pack.add [{:src (gh :rktjmp/hotpot.nvim) :version (version.range "^2.0.0")}])
 (require :hotpot)
 
 ;;;
