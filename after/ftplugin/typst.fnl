@@ -15,4 +15,4 @@
 
 
 (defgroup "<LocalLeader>p" "preview" {:buf 0})
-(maploclead "pt" (cmd "TypstPreviewToggle") {:desc "toggle preview"})
+(maploclead "pt" #(cmd "TypstPreviewToggle") {:desc "toggle preview"})
