@@ -99,3 +99,15 @@
               :sign {:enabled false}
               :virtual_text {:enabled true :text "󰌵" :lens_text ""}}]
     (=> (require :nvim-lightbulb) (setup opts))))
+
+;;;
+;;; colorizer
+;;;
+
+(with-safely :later
+  (pack.add [(gh :catgoose/nvim-colorizer.lua)])
+  (let [opts {:options {:parsers {:names {:enable false}
+                                  :hex {:no_hash true}}
+                        :display {:mode :virtualtext
+                                  :virtualtext {:position :before}}}}]
+    (=> (require :colorizer) (setup opts))))

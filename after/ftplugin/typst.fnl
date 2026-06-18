@@ -1,7 +1,8 @@
 (import-macros {: with-safely : gh : =>} :lib.macro)
 (local {: maploclead : defgroup} (require :lib.map))
-(local {: bo : pack : version : cmd} vim)
+(local {: bo : wo : pack : version : cmd} vim)
 
+(set wo.spell true)
 (let [width 2]
   (set bo.shiftwidth width)
   (set bo.tabstop width)

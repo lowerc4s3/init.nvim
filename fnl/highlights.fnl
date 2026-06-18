@@ -31,6 +31,7 @@
                :Operator
                :TypeParameter])
   (hi :FloatTitle {:link :NormalFloat})
+  (hi :FoldColumn {:link :LineNr})
   (let [gray50 "#8d8d8d"
         oxo (. (require :oxocarbon) :oxocarbon)]
     (hi "@punctuation.delimiter" {:fg gray50})
