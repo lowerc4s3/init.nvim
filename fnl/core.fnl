@@ -1,7 +1,7 @@
 (import-macros {: set+ : set^ : =>} :lib.macro)
 (local {: autocmd : augroup} (require :lib.nvim))
 (local {: map : maplead : defgroup} (require :lib.map))
-(local {: g : o : wo : opt : pack} vim)
+(local {: g : o : wo : opt : pack : cmd} vim)
 
 ;;;
 ;;; options
@@ -48,9 +48,11 @@
 (set o.conceallevel 2) ; hide * markup for bold and italic, but not markers with substitutions
 (set o.wrap false)
 (set o.linebreak true) ; wrap lines at sensible points
-(set o.foldlevelstart 999) ; don't fold automatically
+(set o.foldlevel 99)
 (set o.foldtext "")
-(set o.foldcolumn :1)
+(set o.foldcolumn :0)
+(set o.foldnestmax 4)
+(set o.fillchars "fold: ,foldinner: ,foldsep: ,foldopen:,foldclose:")
 
 (set^ opt.guicursor "a:Cursor") ; force cursor hl in all modes
 (=> (require :vim._core.ui2) (enable {:msg {:targets :msg}}))
@@ -65,7 +67,7 @@
 (set+ opt.shortmess {:S true}) ; do not show search count message
 
 ;;; language
-(set o.spelllang "en_us,ru")
+(set o.spelllang "ru,en_us")
 (let [esc #(vim.fn.escape $ ";,.\"|\\]")
       en (esc "`qwertyuiop[]asdfghjkl;'zxcvbnm")
       ru (esc "ёйцукенгшщзхъфывапролджэячсмить")
@@ -105,6 +107,7 @@
 (defgroup "<Leader>c" "code")
 (maplead "cd" vim.diagnostic.setloclist {:desc "code diagnostics"})
 (maplead "cD" vim.diagnostic.setqflist {:desc "code diagnostics (workspace)"})
+(maplead "ct" #(cmd "tab terminal") {:desc "create terminal tab"})
 
 (defgroup "<Leader>p" "packages")
 (maplead "pl" #(pack.update nil {:offline true}) {:desc "list packages"})
