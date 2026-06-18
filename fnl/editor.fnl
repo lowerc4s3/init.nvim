@@ -106,14 +106,19 @@
     (map-textobject "af" "@function.outer")
     (map-textobject "ia" "@parameter.inner")
     (map-textobject "aa" "@parameter.outer")
-    (map-textobject "il" "@loop.inner")
-    (map-textobject "al" "@loop.outer")
+    (map-textobject "iL" "@loop.inner")
+    (map-textobject "aL" "@loop.outer")
     (map-textobject "ic" "@condition.inner")
     (map-textobject "ac" "@condition.outer")
     (map-textobject "ik" "@assignment.lhs")
     (map-textobject "iv" "@assignment.rhs")
     (map-textobject "ak" "@assignment.lhs")
     (map-textobject "av" "@assignment.rhs")))
+
+(with-safely :later
+  (pack.add [(gh :nvim-treesitter/nvim-treesitter-context)])
+  (let [opts {:mode :topline :max_lines 2}]
+    (=> (require :treesitter-context) (setup opts))))
 
 ;;;
 ;;; quicker
