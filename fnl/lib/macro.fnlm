@@ -1,7 +1,7 @@
 (local fail (partial assert-compile false))
 
 ;;;
-;;; comp-time utiliy functions
+;;; comp-time utility functions
 ;;;
 
 (fn type= [t x]

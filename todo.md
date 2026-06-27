@@ -6,7 +6,7 @@
 - [x] file manager
 
 ## coding
-- [ ] typst/latex/markdown support
+- [x] typst/latex/markdown support
 - [ ] snippets
 - [ ] dap
 

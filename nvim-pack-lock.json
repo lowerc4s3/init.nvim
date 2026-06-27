@@ -118,10 +118,9 @@
       "rev": "3c130e1fcb598ce39a9c292847e32d7c3987cf11",
       "src": "https://github.com/nanozuki/tabby.nvim"
     },
-    "ts-enable.nvim": {
-      "rev": "caa312e0b1b1b2e99943792526d64445dcf74d48",
-      "src": "https://github.com/VonHeikemen/ts-enable.nvim",
-      "version": "'v2.x'"
+    "tree-sitter-manager.nvim": {
+      "rev": "ae305699da5e97b6cffdd5cc6f6045b1b0bd26ea",
+      "src": "https://github.com/romus204/tree-sitter-manager.nvim"
     },
     "typst-preview.nvim": {
       "rev": "325036ee145ca51d9efb145c09ac16bce3bc8b7d",

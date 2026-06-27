@@ -78,13 +78,13 @@
     (=> (require :neotab) (setup opts))))
 
 ;;;
-;;; ts-enable
+;;; tree-sitter-manager
 ;;;
 
-(with-safely :now
-  (pack.add [{:src (gh :VonHeikemen/ts-enable.nvim) :version "v2.x"}])
-  (let [opts {:auto_init true :highlights true :folds true}]
-    (set vim.g.ts_enable opts)))
+(with-safely :later
+  (pack.add [(gh :romus204/tree-sitter-manager.nvim)])
+  (let [opts {:border :solid}]
+    (=> (require :tree-sitter-manager) (setup opts))))
 
 ;;;
 ;;; treesitter-textobjects
