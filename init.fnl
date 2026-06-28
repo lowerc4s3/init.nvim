@@ -21,7 +21,11 @@
                 :spellfile_plugin
                 :matchit]]
   (each [_ plugin (ipairs builtins)]
-    (tset g (.. :loaded_ plugin) 1)))
+    (tset g (.. "loaded_" plugin) 1)))
+
+(let [providers [:python3 :node :ruby :perl]]
+  (each [_ provider (ipairs providers)]
+    (tset g (.. "loaded_" provider "_provider") 0)))
 
 ;;;
 ;;; plugin build hooks
@@ -44,10 +48,10 @@
 ;;; modules
 ;;;
 
+(require :startup)
 (require :core)
 (when g.neovide (require :neovide))
 
-(require :startup)
 (require :ui)
 (require :editor)
 (require :navigation)

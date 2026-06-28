@@ -10,6 +10,12 @@ do
     g[("loaded_" .. plugin)] = 1
   end
 end
+do
+  local providers = {"python3", "node", "ruby", "perl"}
+  for _, provider in ipairs(providers) do
+    g[("loaded_" .. provider .. "_provider")] = 0
+  end
+end
 local function build_parinfer(_1_)
   local kind = _1_.kind
   local path = _1_.path
@@ -30,12 +36,12 @@ end
 autocmd("PackChanged", {desc = "build plugins", callback = build_hooks})
 pack.add({{src = "https://github.com/rktjmp/hotpot.nvim", version = version.range("^2.0.0")}})
 require("hotpot")
+require("startup")
 require("core")
 if g.neovide then
   require("neovide")
 else
 end
-require("startup")
 require("ui")
 require("editor")
 require("navigation")
