@@ -126,7 +126,7 @@
             :desc "quit help pages with 'q'"})
   (autocmd :WinEnter {: group :callback #(set wo.cursorline true)})
   (autocmd :WinLeave {: group :callback #(set wo.cursorline false)})
-  (let [has-hl_op (vim.fn.has :nvim-0.13)
+  (let [has-hl_op (not= (vim.fn.has :nvim-0.13) 0)
         hl-op (if has-hl_op vim.hl.hl_op vim.hl.on_yank)]
     (autocmd :TextYankPost
              {: group
