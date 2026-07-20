@@ -4,7 +4,7 @@
   "set neovide option (desugars into vim.g.neovide_%name = val)"
   `(tset vim.g ,(.. :neovide_ (tostring name)) ,val))
 
-(set vim.o.linespace 11)
+(set vim.o.linespace 7)
 
 (let [pad 10]
   (setnv padding_top pad)
