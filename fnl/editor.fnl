@@ -81,7 +81,7 @@
 ;;; tree-sitter-manager
 ;;;
 
-(with-safely :later
+(with-safely :now
   (pack.add [(gh :romus204/tree-sitter-manager.nvim)])
   (let [opts {:border :solid}]
     (=> (require :tree-sitter-manager) (setup opts))))
