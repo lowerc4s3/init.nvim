@@ -141,3 +141,13 @@
                            :N (. icons sev.INFO)
                            :H (. icons sev.HINT)}}]
     (=> (require :quicker) (setup opts))))
+
+;;;
+;;; direnv
+;;;
+
+(with-safely :now
+  (pack.add [(gh :NotAShelf/direnv.nvim)])
+  (let [opts {:keybindings false
+              :autoload_direnv true}]
+    (=> (require :direnv) (setup opts))))
