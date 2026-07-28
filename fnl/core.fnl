@@ -29,6 +29,7 @@
 (set o.clipboard :unnamedplus) ; use system clipboard by default
 (set o.timeoutlen 1000) ; wait 1 sec for keymap to complete
 (set o.updatetime 500) ; fire CursorHold event every 0.5 secs
+(set o.exrc true) ; enable project-local configuration
 
 ;;; file handling
 (set o.swapfile false) ; no .swp files
