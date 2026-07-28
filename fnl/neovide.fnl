@@ -25,7 +25,7 @@
 ;; interpret right option as meta on macos (left one is used as yabai super key)
 (setnv input_macos_option_key_is_meta :only_right)
 
-(let [prefix (if (vim.fn.has :macunix) "<D-" "<C-S-")
+(let [prefix (if (= (vim.fn.has :macunix) 1) "<D-" "<C-S-")
       mod #(.. prefix $ ">")]
   (map [:n :v :l :t] (mod "n")
        #(vim.uv.spawn "neovide" {:detached true} (fn []))
