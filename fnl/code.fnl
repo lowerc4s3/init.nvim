@@ -10,7 +10,7 @@
 ;;;
 
 (with-safely :later
-  (pack.add [(gh :dlyongemallo/diffview.nvim) (gh :NeogitOrg/neogit)])
+  (pack.add [(gh :dlyongemallo/diffview-plus.nvim) (gh :NeogitOrg/neogit)])
   (let [opts {:disable_hint true}]
     (=> (require :neogit) (setup opts)))
   (defgroup "<Leader>g" "git")
