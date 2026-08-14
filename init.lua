@@ -16,25 +16,29 @@ do
     g[("loaded_" .. provider .. "_provider")] = 0
   end
 end
-local function build_parinfer(_1_)
-  local kind = _1_.kind
-  local path = _1_.path
-  local _arg_2_ = _1_.spec
-  local name = _arg_2_.name
-  if ((name == "parinfer-rust") and ((kind == "update") or (kind == "install"))) then
-    local function _3_()
+if (_G.mnw ~= nil) then
+  vim.cmd.packadd("hotpot.nvim")
+else
+  local function build_parinfer(_1_)
+    local kind = _1_.kind
+    local path = _1_.path
+    local _arg_2_ = _1_.spec
+    local name = _arg_2_.name
+    if ((name == "parinfer-rust") and ((kind == "update") or (kind == "install"))) then
+      local function _3_()
+      end
+      return vim.system({"cargo", "build", "--release"}, {cwd = path}, _3_)
+    else
+      return nil
     end
-    return vim.system({"cargo", "build", "--release"}, {cwd = path}, _3_)
-  else
-    return nil
   end
+  local function build_hooks(_5_)
+    local data = _5_.data
+    return build_parinfer(data)
+  end
+  autocmd("PackChanged", {desc = "build plugins", callback = build_hooks})
+  pack.add({{src = "https://github.com/rktjmp/hotpot.nvim", version = version.range("^2.0.0")}})
 end
-local function build_hooks(_5_)
-  local data = _5_.data
-  return build_parinfer(data)
-end
-autocmd("PackChanged", {desc = "build plugins", callback = build_hooks})
-pack.add({{src = "https://github.com/rktjmp/hotpot.nvim", version = version.range("^2.0.0")}})
 require("hotpot")
 require("startup")
 require("core")

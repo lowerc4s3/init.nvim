@@ -1,16 +1,16 @@
 (import-macros {: gh : with-safely : | : =>} :lib.macro)
 (local {: defgroup : maplead} (require :lib.map))
-(local {: pack} vim)
+(local {: packadd} (require :lib.nvim))
 
 (with-safely :now
-  (pack.add [(gh :eraserhd/parinfer-rust) (gh :lewis6991/gitsigns.nvim)]))
+  (packadd (gh :eraserhd/parinfer-rust) (gh :lewis6991/gitsigns.nvim)))
 
 ;;;
 ;;; neogit
 ;;;
 
 (with-safely :later
-  (pack.add [(gh :dlyongemallo/diffview-plus.nvim) (gh :NeogitOrg/neogit)])
+  (packadd (gh :dlyongemallo/diffview-plus.nvim) (gh :NeogitOrg/neogit))
   (let [opts {:disable_hint true}]
     (=> (require :neogit) (setup opts)))
   (defgroup "<Leader>g" "git")
@@ -24,8 +24,8 @@
 ;;;
 
 (with-safely [:on-event [:InsertEnter :CmdLineEnter]]
-  (pack.add [(gh :xzbdmw/colorful-menu.nvim)
-             {:src (gh :saghen/blink.cmp) :version "v1"}])
+  (packadd (gh :xzbdmw/colorful-menu.nvim)
+           {:src (gh :saghen/blink.cmp) :version "v1"})
   (let [signature {:enabled true}
         appearance {:nerd_font_variant :normal}
         menu-draw (let [col-menu (require :colorful-menu)
@@ -73,7 +73,7 @@
 ;; NOTE: fnlfmt sometimes produces really stupid formatting
 ;; so the manual formatter call is prefered
 (with-safely :later
-  (pack.add [(gh :stevearc/conform.nvim)])
+  (packadd (gh :stevearc/conform.nvim))
   (let [ignored-fts [:fennel]
         ignored-ft? (partial vim.tbl_contains ignored-fts)
         fmt (fn [bufnr]
@@ -93,7 +93,7 @@
 ;;;
 
 (with-safely :now
-  (pack.add [(gh :kosayoda/nvim-lightbulb)])
+  (packadd (gh :kosayoda/nvim-lightbulb))
   (let [opts {:autocmd {:enabled true :updatetime -1}
               :code_lenses true
               :sign {:enabled false}
@@ -105,7 +105,7 @@
 ;;;
 
 (with-safely :later
-  (pack.add [(gh :catgoose/nvim-colorizer.lua)])
+  (packadd (gh :catgoose/nvim-colorizer.lua))
   (let [opts {:options {:parsers {:names {:enable false}
                                   :hex {:no_hash true}}
                         :display {:mode :virtualtext

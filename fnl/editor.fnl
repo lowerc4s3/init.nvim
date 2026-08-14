@@ -1,7 +1,7 @@
 (import-macros {: gh : cb : => : with-safely} :lib.macro)
-(local {: hi} (require :lib.nvim))
+(local {: hi : packadd} (require :lib.nvim))
 (local {: map} (require :lib.map))
-(local {: pack : diagnostic} vim)
+(local {: diagnostic} vim)
 
 (let [s diagnostic.severity
       opts {:severity_sort true
@@ -22,7 +22,7 @@
 ;;;
 
 (with-safely :now
-  (pack.add [(gh :nvim-mini/mini.jump)])
+  (packadd (gh :nvim-mini/mini.jump))
   (=> (require :mini.jump) (setup))
   (hi :MiniJump {:link :CurSearch}))
 
@@ -31,7 +31,7 @@
 ;;;
 
 (with-safely :now
-  (pack.add [(gh :tpope/vim-repeat) (cb :andyg/leap.nvim)])
+  (packadd (gh :tpope/vim-repeat) (cb :andyg/leap.nvim))
   (map [:n :x :o] "s" "<plug>(leap)" {:desc "leap in current window"})
   (map :n "S" "<plug>(leap-from-window)" {:desc "leap to another window"})
   (map [:x :o] "ar" "<plug>(leap-remote-text-object)"
@@ -44,7 +44,7 @@
 ;;;
 
 (with-safely :now
-  (pack.add [(gh :nvim-mini/mini.surround)])
+  (packadd (gh :nvim-mini/mini.surround))
   (let [opts {:mappings {:add :gs
                          :delete :gsd
                          :replace :gsr
@@ -63,7 +63,7 @@
 ;;;
 
 (with-safely [:on-event :InsertEnter]
-  (pack.add [(gh :windwp/nvim-autopairs)])
+  (packadd (gh :windwp/nvim-autopairs))
   (let [opts {:disable_filetype [:TelescopePrompt :snacks_picker_input :fennel]}]
     (=> (require :nvim-autopairs) (setup opts))))
 
@@ -73,7 +73,7 @@
 
 ;; neotab's mappings are handled by blink.cmp
 (with-safely :now
-  (pack.add [(gh :kawre/neotab.nvim)])
+  (packadd (gh :kawre/neotab.nvim))
   (let [opts {:tabkey "" :reverse_key ""}]
     (=> (require :neotab) (setup opts))))
 
@@ -82,7 +82,7 @@
 ;;;
 
 (with-safely :now
-  (pack.add [(gh :romus204/tree-sitter-manager.nvim)])
+  (packadd (gh :romus204/tree-sitter-manager.nvim))
   (let [opts {:border :solid}]
     (=> (require :tree-sitter-manager) (setup opts))))
 
@@ -92,7 +92,7 @@
 
 ;; this one loads pretty slow
 (with-safely :later
-  (pack.add [(gh :nvim-treesitter/nvim-treesitter-textobjects)])
+  (packadd (gh :nvim-treesitter/nvim-treesitter-textobjects))
   (let [opts {:select {:selection_modes {"@loop.outer" :V
                                          "@condition.outer" :V
                                          "@class.outer" :V
@@ -116,7 +116,7 @@
     (map-textobject "av" "@assignment.rhs")))
 
 (with-safely :later
-  (pack.add [(gh :nvim-treesitter/nvim-treesitter-context)])
+  (packadd (gh :nvim-treesitter/nvim-treesitter-context))
   (let [opts {:mode :topline :max_lines 2}]
     (=> (require :treesitter-context) (setup opts))))
 
@@ -125,7 +125,7 @@
 ;;;
 
 (with-safely :now
-  (pack.add [(gh :stevearc/quicker.nvim)])
+  (packadd (gh :stevearc/quicker.nvim))
   (let [sev vim.diagnostic.severity
         {:signs {:text icons}} (vim.diagnostic.config)
         opts {:borders {:vert "│"
@@ -147,7 +147,7 @@
 ;;;
 
 (with-safely :now
-  (pack.add [(gh :NotAShelf/direnv.nvim)])
+  (packadd (gh :NotAShelf/direnv.nvim))
   (let [opts {:keybindings false
               :autoload_direnv true}]
     (=> (require :direnv) (setup opts))))

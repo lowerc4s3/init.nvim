@@ -110,10 +110,11 @@
 (maplead "cD" vim.diagnostic.setqflist {:desc "code diagnostics (workspace)"})
 (maplead "ct" #(cmd "tab terminal") {:desc "create terminal tab"})
 
-(defgroup "<Leader>p" "packages")
-(maplead "pl" #(pack.update nil {:offline true}) {:desc "list packages"})
-(maplead "pf" #(pack.update nil) {:desc "fetch updates"})
-(maplead "px" #(vim.cmd.packdel {:bang true}) {:desc "clean unused plugins"})
+(when (= _G.mnw nil)
+  (defgroup "<Leader>p" "packages")
+  (maplead "pl" #(pack.update nil {:offline true}) {:desc "list packages"})
+  (maplead "pf" #(pack.update nil) {:desc "fetch updates"})
+  (maplead "px" #(vim.cmd.packdel {:bang true}) {:desc "clean unused plugins"}))
 
 ;;;
 ;;; autocmds

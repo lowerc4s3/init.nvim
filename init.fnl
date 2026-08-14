@@ -31,17 +31,24 @@
 ;;; plugin build hooks
 ;;;
 
-(fn build-parinfer [{: kind : path :spec {: name}}]
-  (when (and (= name :parinfer-rust) (or (= kind :update) (= kind :install)))
-    (vim.system ["cargo" "build" "--release"] {:cwd path} (fn []))))
+;; NOTE: lib.nvim module already contains packadd function
+;; which handles mnw but since we haven't yet loaded hotpot
+;; we can't require that module yet
+(if (not= _G.mnw nil)
+  (vim.cmd.packadd :hotpot.nvim)
+  (do
+    (fn build-parinfer [{: kind : path :spec {: name}}]
+      (when (and (= name :parinfer-rust) (or (= kind :update) (= kind :install)))
+        (vim.system ["cargo" "build" "--release"] {:cwd path} (fn []))))
 
-(fn build-hooks [{: data}]
-  (build-parinfer data))
+    (fn build-hooks [{: data}]
+      (build-parinfer data))
 
-(autocmd :PackChanged {:desc "build plugins" :callback build-hooks})
+    (autocmd :PackChanged {:desc "build plugins" :callback build-hooks})
 
-;; bootstrap fennel support
-(pack.add [{:src (gh :rktjmp/hotpot.nvim) :version (version.range "^2.0.0")}])
+    ;; bootstrap fennel support
+    (pack.add [{:src (gh :rktjmp/hotpot.nvim) :version (version.range "^2.0.0")}])))
+
 (require :hotpot)
 
 ;;;

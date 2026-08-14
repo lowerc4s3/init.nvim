@@ -1,6 +1,7 @@
 (import-macros {: with-safely : gh : =>} :lib.macro)
 (local {: maploclead : defgroup} (require :lib.map))
-(local {: bo : wo : pack : version : cmd} vim)
+(local {: packadd} (require :lib.nvim))
+(local {: bo : wo :  version : cmd} vim)
 
 (set wo.spell true)
 (let [width 2]
@@ -9,8 +10,8 @@
   (set bo.softtabstop width))
 
 (with-safely :now
-  (pack.add [{:src (gh :chomosuke/typst-preview.nvim)
-              :version (version.range "v1.*")}])
+  (packadd {:src (gh :chomosuke/typst-preview.nvim)
+            :version (version.range "v1.*")})
   (let [opts {:dependencies_bin {:websocat "websocat" :tinymist "tinymist"}}]
     (=> (require :typst-preview) (setup opts))))
 

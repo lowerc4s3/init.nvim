@@ -1,9 +1,9 @@
 (import-macros {: gh : with-safely : | : =>} :lib.macro)
 (local {: map : maplead : defgroup} (require :lib.map))
-(local {: pack} vim)
+(local {: packadd} (require :lib.nvim))
 
 (with-safely :now
-  (pack.add [(gh :stevearc/oil.nvim)])
+  (packadd (gh :stevearc/oil.nvim))
   (let [opts {:delete_to_trash true
               :watch_for_changes true
               :constrain_cursor :name
@@ -22,7 +22,7 @@
 ;; snacks initializes ridiculously fast
 ;; so there's no need to lazy-load it
 (with-safely :now
-  (pack.add [(gh :folke/snacks.nvim)])
+  (packadd (gh :folke/snacks.nvim))
   (let [opts {:layout {:preset :ivy_split}
               :ui_select false
               :win {:input {:keys {"<Esc>" (| :close {:mode [:n :i]})
@@ -52,7 +52,7 @@
 ;;;
 
 (with-safely :later
-  (pack.add [(gh :DrKJeff16/project.nvim)])
+  (packadd (gh :DrKJeff16/project.nvim))
   (let [(icon highlight) (_G.MiniIcons.get :default :directory)
         opts {:snacks {:enabled true
                        :opts {:show :names
@@ -72,7 +72,7 @@
   ;; NOTE: ahkohd/buffer-sticks.nvim 
   ;; is currently broken on nightly  
   ;; so we use a fork with a fix
-  (pack.add [(gh :JustBarnt/buffer-sticks.nvim)])
+  (packadd (gh :JustBarnt/buffer-sticks.nvim))
   (let [opts {:list {:keys {:close_buffer "<C-d>"
                             :move_up "<C-k>"
                             :move_down "<C-j>"}

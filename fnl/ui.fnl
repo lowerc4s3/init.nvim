@@ -1,9 +1,9 @@
 (import-macros {: gh : | : => : with-safely} :lib.macro)
 (local {: loadgroups} (require :lib.map))
-(local {: pack} vim)
+(local {: packadd} (require :lib.nvim))
 
 (with-safely :now
-  (pack.add [(gh :nyoom-engineering/oxocarbon.nvim)])
+  (packadd (gh :nyoom-engineering/oxocarbon.nvim))
   (vim.cmd.colorscheme :oxocarbon))
 
 ;;;
@@ -14,7 +14,7 @@
   (macro glyphs [table]
     (collect [pattern glyph (pairs table)]
       (values pattern {: glyph})))
-  (pack.add [(gh :nvim-mini/mini.icons)])
+  (packadd (gh :nvim-mini/mini.icons))
   (let [opts {:file (glyphs {"LICENSE" ""
                              "LICENSE.md" ""
                              "LICENSE.txt" ""})
@@ -40,7 +40,7 @@
 ;;;
 
 (with-safely :now
-  (pack.add [(gh :folke/which-key.nvim)])
+  (packadd (gh :folke/which-key.nvim))
   (let [opts {:preset :helix
               :show_help false
               :show_keys false
@@ -72,7 +72,7 @@
 ;;;
 
 (with-safely :now
-  (pack.add [(gh :nanozuki/tabby.nvim)])
+  (packadd (gh :nanozuki/tabby.nvim))
 
   (fn render [line]
     (let [theme {:active :Normal :inactive :LineNr :fill :LineNr}
@@ -96,7 +96,7 @@
 ;;;
 
 (with-safely :now
-  (pack.add [(gh :nvim-lualine/lualine.nvim)])
+  (packadd (gh :nvim-lualine/lualine.nvim))
   (let [colors {:primary :Normal :secondary :LineNr}
         options {:icons_enabled true
                  :component_separators {:left "" :right ""}
