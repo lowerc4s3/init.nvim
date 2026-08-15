@@ -33,6 +33,7 @@
 
         extraBinPath = with pkgs; [
           tree-sitter
+          stdenv.cc
         ];
 
         plugins.dev.nvx = {
