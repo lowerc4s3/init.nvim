@@ -19,7 +19,7 @@
 (fn vim-packadd [& plugins]
   (vim.pack.add plugins))
 
-(local packadd (if (not= _G.mnw nil) mnw-packadd vim-packadd))
+(local packadd (if _G.mnw? mnw-packadd vim-packadd))
 
 {: autocmd
  : augroup

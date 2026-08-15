@@ -3,7 +3,7 @@ vim.loader.enable()
 local autocmd = vim.api.nvim_create_autocmd
 local g = vim.g
 local version = vim.version
-local pack = vim.pack
+_G["mnw?"] = (_G.mnw ~= nil)
 do
   local builtins = {"gzip", "zip", "zipPlugin", "tar", "tarPlugin", "getscript", "getscriptPlugin", "vimball", "vimballPlugin", "2html_plugin", "logipat", "rrhelper", "spellfile_plugin", "matchit"}
   for _, plugin in ipairs(builtins) do
@@ -16,9 +16,7 @@ do
     g[("loaded_" .. provider .. "_provider")] = 0
   end
 end
-if (_G.mnw ~= nil) then
-  vim.cmd.packadd("hotpot.nvim")
-else
+if not _G["mnw?"] then
   local function build_parinfer(_1_)
     local kind = _1_.kind
     local path = _1_.path
@@ -37,9 +35,10 @@ else
     return build_parinfer(data)
   end
   autocmd("PackChanged", {desc = "build plugins", callback = build_hooks})
-  pack.add({{src = "https://github.com/rktjmp/hotpot.nvim", version = version.range("^2.0.0")}})
+  vim.pack.add({{src = "https://github.com/rktjmp/hotpot.nvim", version = version.range("^2.0.0")}})
+  require("hotpot")
+else
 end
-require("hotpot")
 require("startup")
 require("core")
 if g.neovide then

@@ -46,21 +46,9 @@
       "rev": "221ce6b2d999187044529f49da6554a92f740a96",
       "src": "https://github.com/nvim-lualine/lualine.nvim"
     },
-    "mini.icons": {
-      "rev": "98faae31e9be1cc054ae63485e58ceb185efcad0",
-      "src": "https://github.com/nvim-mini/mini.icons"
-    },
-    "mini.jump": {
-      "rev": "6a1688315d69e4f8428d529e194714447b0d4e82",
-      "src": "https://github.com/nvim-mini/mini.jump"
-    },
-    "mini.misc": {
-      "rev": "0524e8f7191782609374df6bcf9e607021ceccb1",
-      "src": "https://github.com/nvim-mini/mini.misc"
-    },
-    "mini.surround": {
-      "rev": "8d5d0c5aa92449368ac251e85451d79d8f69d296",
-      "src": "https://github.com/nvim-mini/mini.surround"
+    "mini.nvim": {
+      "rev": "f66a0ef2fd7cf7a018778d81066297b7f909aa4a",
+      "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "neogit": {
       "rev": "37e0f22a2345bad1bffe01b31970885882f46275",

@@ -14,7 +14,6 @@
   (macro glyphs [table]
     (collect [pattern glyph (pairs table)]
       (values pattern {: glyph})))
-  (packadd (gh :nvim-mini/mini.icons))
   (let [opts {:file (glyphs {"LICENSE" ""
                              "LICENSE.md" ""
                              "LICENSE.txt" ""})

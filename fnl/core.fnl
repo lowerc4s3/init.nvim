@@ -110,7 +110,7 @@
 (maplead "cD" vim.diagnostic.setqflist {:desc "code diagnostics (workspace)"})
 (maplead "ct" #(cmd "tab terminal") {:desc "create terminal tab"})
 
-(when (= _G.mnw nil)
+(when (not _G.mnw?)
   (defgroup "<Leader>p" "packages")
   (maplead "pl" #(pack.update nil {:offline true}) {:desc "list packages"})
   (maplead "pf" #(pack.update nil) {:desc "fetch updates"})

@@ -1,7 +1,7 @@
 (import-macros {: gh : => : with-safely} :lib.macro)
 (local {: packadd} (require :lib.nvim))
 
-(packadd (gh :nvim-mini/mini.misc))
+(packadd (gh :nvim-mini/mini.nvim))
 
 (with-safely :now
   (packadd (gh :Wansmer/langmapper.nvim))

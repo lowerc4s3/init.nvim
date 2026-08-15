@@ -22,7 +22,6 @@
 ;;;
 
 (with-safely :now
-  (packadd (gh :nvim-mini/mini.jump))
   (=> (require :mini.jump) (setup))
   (hi :MiniJump {:link :CurSearch}))
 
@@ -44,7 +43,6 @@
 ;;;
 
 (with-safely :now
-  (packadd (gh :nvim-mini/mini.surround))
   (let [opts {:mappings {:add :gs
                          :delete :gsd
                          :replace :gsr
