@@ -78,7 +78,6 @@
                             :move_down "<C-j>"}
                      :filter {:keys {:move_up "<C-k>" :move_down "<C-j>"}
                               :title "/"}}
-              :winblend 100
               :filter {:names ["^$"]} ; hide unnamed buffers
               :highlights {:active {:link :Normal}
                            :list_selected {:link "@function"}
